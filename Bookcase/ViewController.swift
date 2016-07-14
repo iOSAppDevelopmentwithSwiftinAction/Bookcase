@@ -17,7 +17,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -53,7 +52,18 @@ class ViewController: UIViewController {
             }
         }
         
-
+        let options = UIViewAnimationOptions(rawValue: curve)
+        UIView.animate(
+            withDuration: duration,
+            delay: 0,
+            options: options,
+            animations: {
+                self.topConstraint.constant = -offset
+                self.bottomConstraint.constant = offset
+                self.view.layoutIfNeeded()
+            },
+            completion: nil
+        )
         
         //------------------------------------
     }
@@ -65,7 +75,9 @@ class ViewController: UIViewController {
         super.touchesEnded(touches, with: event)
         guard let touch = touches.first else {return}
         if touch.view == book {
-            isbnStackView.isHidden = !isbnStackView.isHidden
+            UIView.animate(withDuration: 0.5, animations: {
+                self.isbnStackView.isHidden = !self.isbnStackView.isHidden
+            })
         }
         view.endEditing(true)
     }
