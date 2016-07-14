@@ -15,6 +15,7 @@
 		B9019F901CE229D500CAE744 /* BookcaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9019F8F1CE229D500CAE744 /* BookcaseTests.swift */; };
 		B9019F9B1CE229D500CAE744 /* BookcaseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9019F9A1CE229D500CAE744 /* BookcaseUITests.swift */; };
 		B9019FAE1CE22C3200CAE744 /* CosmosDistrib.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9019FAD1CE22C3200CAE744 /* CosmosDistrib.swift */; };
+		B9F91AB31D36EA4700B12709 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F91AB21D36EA4700B12709 /* UIViewExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		B9019F9A1CE229D500CAE744 /* BookcaseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookcaseUITests.swift; sourceTree = "<group>"; };
 		B9019F9C1CE229D500CAE744 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B9019FAD1CE22C3200CAE744 /* CosmosDistrib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosmosDistrib.swift; sourceTree = "<group>"; };
+		B9F91AB21D36EA4700B12709 /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				B9019F831CE229D500CAE744 /* LaunchScreen.storyboard */,
 				B9019F861CE229D500CAE744 /* Info.plist */,
 				B9019FAF1CE22C3500CAE744 /* Frameworks */,
+				B9F91AB21D36EA4700B12709 /* UIViewExtension.swift */,
 			);
 			path = Bookcase;
 			sourceTree = "<group>";
@@ -270,6 +273,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9F91AB31D36EA4700B12709 /* UIViewExtension.swift in Sources */,
 				B9019F7D1CE229D500CAE744 /* ViewController.swift in Sources */,
 				B9019F7B1CE229D500CAE744 /* AppDelegate.swift in Sources */,
 				B9019FAE1CE22C3200CAE744 /* CosmosDistrib.swift in Sources */,
