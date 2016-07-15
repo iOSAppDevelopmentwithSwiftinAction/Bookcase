@@ -12,11 +12,19 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var book: UIImageView!
     @IBOutlet weak var isbnStackView: UIStackView!
-    @IBOutlet weak var topConstraint: NSLayoutConstraint!
-    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var outerStackView: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        book.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    func handleTap(sender:UITapGestureRecognizer) {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.isbnStackView.isHidden = !self.isbnStackView.isHidden
+        })
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -35,53 +43,21 @@ class ViewController: UIViewController {
             else { return }
         keyboardFrame = self.view.convert(keyboardFrame, from: nil)
 
-        guard let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? Double
-            else { return }
+        let offset = self.view.frame.height - keyboardFrame.origin.y
         
-        guard let curve = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? UInt
-            else { return }
+        scrollView.contentInset.bottom = offset
+        scrollView.scrollIndicatorInsets.bottom = offset
         
-        
-        //get active field frame
-        var offset:CGFloat = 0
-        if let firstResponder = firstResponder {
-            let frFrame = self.view.convert(firstResponder.frame, from: firstResponder)
-            let frMaxY = frFrame.maxY - topConstraint.constant + 5
-            if frMaxY > keyboardFrame.origin.y {
-                offset = frMaxY - keyboardFrame.origin.y
-            }
+        if let textView = firstResponder as? UITextView,
+            textViewSuperview = textView.superview  {
+            let textViewFrame = outerStackView.convert(textView.frame, from: textViewSuperview)
+            scrollView.scrollRectToVisible(textViewFrame, animated: true)
         }
-        
-        let options = UIViewAnimationOptions(rawValue: curve)
-        UIView.animate(
-            withDuration: duration,
-            delay: 0,
-            options: options,
-            animations: {
-                self.topConstraint.constant = -offset
-                self.bottomConstraint.constant = offset
-                self.view.layoutIfNeeded()
-            },
-            completion: nil
-        )
-        
-        //------------------------------------
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesEnded(touches, with: event)
-        guard let touch = touches.first else {return}
-        if touch.view == book {
-            UIView.animate(withDuration: 0.5, animations: {
-                self.isbnStackView.isHidden = !self.isbnStackView.isHidden
-            })
-        }
-        view.endEditing(true)
-    }
-    
 }
 extension ViewController:UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
