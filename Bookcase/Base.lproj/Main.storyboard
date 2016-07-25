@@ -8,16 +8,16 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Book View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Bookcase" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="BookViewController" customModule="Bookcase" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="o4g-or-ufm" userLabel="Title Text Field">
@@ -34,7 +34,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" verticalCompressionResistancePriority="749" image="book" translatesAutoresizingMaskIntoConstraints="NO" id="7xl-eQ-ZGX"/>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" verticalCompressionResistancePriority="749" image="book" translatesAutoresizingMaskIntoConstraints="NO" id="7xl-eQ-ZGX" userLabel="bookCover"/>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ceM-L4-Xq8">
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -110,24 +110,25 @@
                                 <exclude reference="9ig-Hs-Xfd"/>
                                 <exclude reference="o1c-bf-ljX"/>
                                 <exclude reference="aPI-y2-zLb"/>
-                                <exclude reference="4Xj-u0-qMB"/>
+                                <exclude reference="6PH-wx-4fn"/>
+                                <exclude reference="9tG-HV-DLQ"/>
+                                <exclude reference="FCb-wn-VXV"/>
                                 <exclude reference="5QS-eu-fWo"/>
                                 <exclude reference="9Dn-7d-krX"/>
                                 <exclude reference="EZr-i9-L3a"/>
                                 <exclude reference="Wh9-g3-N4l"/>
                                 <exclude reference="iTL-lw-XIV"/>
-                                <exclude reference="Wwm-b4-pku"/>
                                 <exclude reference="iNQ-xb-mFD"/>
                                 <exclude reference="jNc-Ms-I3J"/>
                                 <exclude reference="ZsX-fS-Xho"/>
                                 <exclude reference="bcN-4f-kkd"/>
                                 <exclude reference="jGo-L5-lDj"/>
-                                <exclude reference="6PH-wx-4fn"/>
-                                <exclude reference="9tG-HV-DLQ"/>
-                                <exclude reference="FCb-wn-VXV"/>
+                                <exclude reference="Wwm-b4-pku"/>
                                 <exclude reference="92X-tg-fKH"/>
                                 <exclude reference="Vyx-Na-Ihw"/>
                                 <exclude reference="rQh-Wf-RJI"/>
+                                <exclude reference="4Xj-u0-qMB"/>
+                                <exclude reference="ObU-ry-uuu"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact">
@@ -141,8 +142,12 @@
                                 <exclude reference="GIg-7V-9j2"/>
                                 <exclude reference="Jm5-vy-tcp"/>
                                 <include reference="aPI-y2-zLb"/>
-                                <include reference="4Xj-u0-qMB"/>
-                                <exclude reference="Wh6-ry-efl"/>
+                                <exclude reference="1kf-LN-H8b"/>
+                                <include reference="6PH-wx-4fn"/>
+                                <include reference="9tG-HV-DLQ"/>
+                                <include reference="FCb-wn-VXV"/>
+                                <exclude reference="OjW-Il-5V9"/>
+                                <exclude reference="Pyg-j9-a7P"/>
                                 <include reference="5QS-eu-fWo"/>
                                 <include reference="9Dn-7d-krX"/>
                                 <include reference="EZr-i9-L3a"/>
@@ -151,10 +156,6 @@
                                 <exclude reference="aaq-5F-wsd"/>
                                 <include reference="iTL-lw-XIV"/>
                                 <exclude reference="zRf-a9-3ey"/>
-                                <exclude reference="2Po-tV-IbX"/>
-                                <exclude reference="Srm-1K-37h"/>
-                                <include reference="Wwm-b4-pku"/>
-                                <exclude reference="ez7-D2-Dgx"/>
                                 <exclude reference="Xrg-2v-Suu"/>
                                 <exclude reference="Zpw-3K-yAZ"/>
                                 <include reference="iNQ-xb-mFD"/>
@@ -165,18 +166,23 @@
                                 <include reference="bcN-4f-kkd"/>
                                 <include reference="jGo-L5-lDj"/>
                                 <exclude reference="kto-Uu-AF7"/>
-                                <exclude reference="1kf-LN-H8b"/>
-                                <include reference="6PH-wx-4fn"/>
-                                <include reference="9tG-HV-DLQ"/>
-                                <include reference="FCb-wn-VXV"/>
-                                <exclude reference="OjW-Il-5V9"/>
-                                <exclude reference="Pyg-j9-a7P"/>
+                                <exclude reference="2Po-tV-IbX"/>
+                                <exclude reference="Srm-1K-37h"/>
+                                <include reference="Wwm-b4-pku"/>
+                                <exclude reference="ez7-D2-Dgx"/>
                                 <include reference="92X-tg-fKH"/>
                                 <exclude reference="9S3-2Q-A0x"/>
                                 <exclude reference="LKn-K4-1YC"/>
                                 <exclude reference="St7-5K-KQc"/>
                                 <include reference="Vyx-Na-Ihw"/>
                                 <include reference="rQh-Wf-RJI"/>
+                                <include reference="4Xj-u0-qMB"/>
+                                <exclude reference="Wh6-ry-efl"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <mask key="constraints">
+                                <include reference="ObU-ry-uuu"/>
                             </mask>
                         </variation>
                     </view>
