@@ -8,20 +8,22 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class BookViewController: UIViewController {
 
-    @IBOutlet weak var book: UIImageView!
+    @IBOutlet weak var bookCover: UIImageView!
     @IBOutlet weak var isbnStackView: UIStackView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var outerStackView: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        book.addGestureRecognizer(tapGestureRecognizer)
+        
+        let infoButton = UIButton(type: .infoLight)
+        infoButton.addTarget(self, action: #selector(toggleISBN), for: .touchUpInside)
+        bookCover.addSubview(infoButton)
     }
     
-    func handleTap(sender:UITapGestureRecognizer) {
+    func toggleISBN() {
         UIView.animate(withDuration: 0.5, animations: {
             self.isbnStackView.isHidden = !self.isbnStackView.isHidden
         })
@@ -59,7 +61,7 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 }
-extension ViewController:UITextFieldDelegate {
+extension BookViewController:UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
