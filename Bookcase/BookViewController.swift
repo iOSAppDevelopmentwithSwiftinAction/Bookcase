@@ -8,15 +8,24 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class BookViewController: UIViewController {
 
-    @IBOutlet weak var book: UIImageView!
+    @IBOutlet weak var bookCover: UIImageView!
     @IBOutlet weak var isbnStackView: UIStackView!
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let infoButton = UIButton(type: .infoLight)
+        infoButton.addTarget(self, action: #selector(toggleISBN), for: .touchUpInside)
+        bookCover.addSubview(infoButton)
+    }
+    func toggleISBN() {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.isbnStackView.isHidden = !self.isbnStackView.isHidden
+        })
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -73,17 +82,10 @@ class ViewController: UIViewController {
     }
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
-        guard let touch = touches.first else {return}
-        if touch.view == book {
-            UIView.animate(withDuration: 0.5, animations: {
-                self.isbnStackView.isHidden = !self.isbnStackView.isHidden
-            })
-        }
         view.endEditing(true)
     }
-    
 }
-extension ViewController:UITextFieldDelegate {
+extension BookViewController:UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
