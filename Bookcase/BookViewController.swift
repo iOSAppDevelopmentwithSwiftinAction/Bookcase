@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol BookViewControllerDelegate {
+    func saveBook(book:Book)
+}
+
 class BookViewController: UIViewController {
 
     @IBOutlet weak var bookCover: UIImageView!
@@ -15,12 +19,27 @@ class BookViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var outerStackView: UIStackView!
     
+    @IBOutlet weak var starRatings: CosmosView!
+    @IBOutlet weak var titleTextField: UITextField!
+    @IBOutlet weak var authorTextField: UITextField!
+    @IBOutlet weak var isbnTextField: UITextField!
+    @IBOutlet weak var notesTextView: UITextView!
+    @IBOutlet weak var saveButton: UIBarButtonItem!
+    
+    var delegate:BookViewControllerDelegate?
+    var saveBook:((Book) -> Void)?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let infoButton = UIButton(type: .infoLight)
         infoButton.addTarget(self, action: #selector(toggleISBN), for: .touchUpInside)
         bookCover.addSubview(infoButton)
+        saveButton.isEnabled = !titleTextField.text!.isEmpty
+    }
+
+    @IBAction func titleDidChange(_ sender: AnyObject) {
+        saveButton.isEnabled = !titleTextField.text!.isEmpty
     }
     
     func toggleISBN() {
@@ -30,12 +49,12 @@ class BookViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        NotificationCenter.default().addObserver(self, selector: #selector(keyboardFrameChanges), name: Notification.Name.UIKeyboardWillChangeFrame, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardFrameChanges), name: Notification.Name.UIKeyboardWillChangeFrame, object: nil)
         
     }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        NotificationCenter.default().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     func keyboardFrameChanges(notification:Notification) {
         //get keyboard height
@@ -51,7 +70,7 @@ class BookViewController: UIViewController {
         scrollView.scrollIndicatorInsets.bottom = offset
         
         if let textView = firstResponder as? UITextView,
-            textViewSuperview = textView.superview  {
+            let textViewSuperview = textView.superview  {
             let textViewFrame = outerStackView.convert(textView.frame, from: textViewSuperview)
             scrollView.scrollRectToVisible(textViewFrame, animated: true)
         }
@@ -59,6 +78,24 @@ class BookViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    @IBAction func touchCancel(_ sender: AnyObject) {
+        dismissMe()
+    }
+    @IBAction func touchSave(_ sender: AnyObject) {
+        let bookToSave = Book(title: titleTextField.text!,
+                              author: authorTextField.text!,
+                              rating: starRatings.rating,
+                              isbn: isbnTextField.text!,
+                              notes: notesTextView.text!,
+                              cover: bookCover.image
+        )
+        //delegate?.saveBook(book: bookToSave)
+        saveBook?(bookToSave)
+        dismissMe()
+    }
+    func dismissMe() {
+        dismiss(animated: true, completion: nil)
     }
 }
 extension BookViewController:UITextFieldDelegate {
