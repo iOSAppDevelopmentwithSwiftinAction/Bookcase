@@ -51,14 +51,7 @@ class BooksTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
         if let navController = segue.destinationViewController as? UINavigationController {
             if let bookViewController = navController.topViewController as? BookViewController {
-                //bookViewController.delegate = self
-                bookViewController.saveBook = saveBook
-                    /*{ (book:Book) in
-                    self.booksManager.addBook(book: book)
-                    let numRows = self.tableView.numberOfRows(inSection: 0)
-                    let newIndexPath = IndexPath(row: numRows, section: 0)
-                    self.tableView.insertRows(at: [newIndexPath], with: .bottom)
-                }*/
+                bookViewController.delegate = self
             }
         }
     }

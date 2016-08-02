@@ -27,7 +27,6 @@ class BookViewController: UIViewController {
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
     var delegate:BookViewControllerDelegate?
-    var saveBook:((Book) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,8 +89,7 @@ class BookViewController: UIViewController {
                               notes: notesTextView.text!,
                               cover: bookCover.image
         )
-        //delegate?.saveBook(book: bookToSave)
-        saveBook?(bookToSave)
+        delegate?.saveBook(book: bookToSave)
         dismissMe()
     }
     func dismissMe() {
