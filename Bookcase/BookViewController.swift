@@ -27,6 +27,7 @@ class BookViewController: UIViewController {
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
     var delegate:BookViewControllerDelegate?
+    var book:Book?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +35,16 @@ class BookViewController: UIViewController {
         let infoButton = UIButton(type: .infoLight)
         infoButton.addTarget(self, action: #selector(toggleISBN), for: .touchUpInside)
         bookCover.addSubview(infoButton)
+        
+        if let book = book {
+            navigationItem.title = "Edit book"
+            bookCover.image = book.cover
+            starRatings.rating = book.rating
+            titleTextField.text = book.title
+            authorTextField.text = book.author
+            isbnTextField.text = book.isbn
+            notesTextView.text = book.notes
+        }
         saveButton.isEnabled = !titleTextField.text!.isEmpty
     }
 
@@ -93,7 +104,13 @@ class BookViewController: UIViewController {
         dismissMe()
     }
     func dismissMe() {
-        dismiss(animated: true, completion: nil)
+        if presentingViewController != nil {
+            //was presented via modal segue
+            dismiss(animated: true, completion: nil)
+        } else {
+            //was pushed onto navigation stack
+            navigationController!.popViewController(animated: true)
+        }
     }
 }
 extension BookViewController:UITextFieldDelegate {

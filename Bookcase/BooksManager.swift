@@ -12,9 +12,15 @@ class BooksManager {
     func loadBooks()->[Book] {
         return sampleBooks()
     }
-func addBook(book:Book) {
-    books.append(book)
-}
+    func addBook(book:Book) {
+        books.append(book)
+    }
+    func removeBook(at index:Int) {
+        books.remove(at: index)
+    }
+    func updateBook(at index:Int, with book:Book) {
+        books[index] = book
+    }
     func sampleBooks()->[Book] {
         return [
             Book(title: "Great Expectations", author: "Charles Dickens", rating: 5, isbn: "9780140817997", notes: "🎁 from Papa"),

@@ -40,19 +40,25 @@ class BooksTableViewController: UITableViewController {
         cell.imageView?.image = book.cover ?? (UIImage(named: "book.jpg")!)
         return cell
     }
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
+    //override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    //    return true
+    //}
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            booksManager.removeBook(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
     override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let navController = segue.destinationViewController as? UINavigationController {
-            if let bookViewController = navController.topViewController as? BookViewController {
-                bookViewController.delegate = self
-            }
+        if let selectedIndexPath = tableView.indexPathForSelectedRow,
+            let viewController = segue.destinationViewController as? BookViewController {
+            //Editing
+            viewController.book = booksManager.books[selectedIndexPath.row]
+            viewController.delegate = self
+        } else if let navController = segue.destinationViewController as? UINavigationController,
+            let viewController = navController.topViewController as? BookViewController {
+            //Adding
+            viewController.delegate = self
         }
     }
     /*
@@ -102,10 +108,17 @@ class BooksTableViewController: UITableViewController {
 
 }
 extension BooksTableViewController:BookViewControllerDelegate {
-    func saveBook(book:Book) {
+func saveBook(book:Book) {
+    if let selectedIndexPath = tableView.indexPathForSelectedRow {
+        //Update book
+        booksManager.updateBook(at: selectedIndexPath.row, with: book)
+        tableView.reloadRows(at: [selectedIndexPath], with: .none)
+    } else {
+        //Add book
         booksManager.addBook(book: book)
         let numRows = tableView.numberOfRows(inSection: 0)
         let newIndexPath = IndexPath(row: numRows, section: 0)
         tableView.insertRows(at: [newIndexPath], with: .bottom)
     }
+}
 }
