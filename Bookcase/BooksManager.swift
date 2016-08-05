@@ -9,20 +9,57 @@
 import Foundation
 class BooksManager {
     lazy var books:[Book] = self.loadBooks()
+    var filteredBooks:[Book] = []
+    var searchFilter:String = "" {
+        didSet {
+            filter()
+        }
+    }
+    var bookCount:Int {
+        let bookC = searchFilter.isEmpty ? books.count : filteredBooks.count
+        print("Count = \(bookC)")
+        return searchFilter.isEmpty ? books.count : filteredBooks.count
+    }
+    func getBook(at index:Int)->Book {
+        return searchFilter.isEmpty ? books[index] : filteredBooks[index]
+    }
     func loadBooks()->[Book] {
         return sampleBooks()
     }
     func addBook(book:Book) {
         books.append(book)
+        sort(books:&books)
     }
     func removeBook(at index:Int) {
-        books.remove(at: index)
+        if searchFilter.isEmpty {
+            books.remove(at: index)
+        } else {
+            //index is relevant to filteredBooks
+            let removedBook = filteredBooks.remove(at: index)
+            guard let bookIndex = books.index(of: removedBook) else {
+                print("Error: book not found")
+                return
+            }
+            books.remove(at: bookIndex)
+        }
     }
     func updateBook(at index:Int, with book:Book) {
-        books[index] = book
+        if searchFilter.isEmpty {
+            books[index] = book
+            sort(books:&books)
+        } else {
+            let bookToUpdate = filteredBooks[index]
+            guard let bookIndex = books.index(of: bookToUpdate) else {
+                print("Error: book not found")
+                return
+            }
+            books[bookIndex] = book
+            sort(books:&books)
+            filter()
+        }
     }
     func sampleBooks()->[Book] {
-        return [
+        var books = [
             Book(title: "Great Expectations", author: "Charles Dickens", rating: 5, isbn: "9780140817997", notes: "🎁 from Papa"),
             Book(title: "Don Quixote", author: "Miguel De Cervantes", rating: 4, isbn: "9788471890153", notes: ""),
             Book(title: "Robinson Crusoe", author: "Daniel Defoe", rating: 5, isbn: "", notes: ""),
@@ -38,8 +75,20 @@ class BooksManager {
             Book(title: "The Alchemist", author: "Paulo Coelho", rating: 5, isbn: "", notes: ""),
             Book(title: "Life of Pi", author: "Yann Martel", rating: 5, isbn: "", notes: ""),
             Book(title: "The Odyssey", author: "Homer", rating: 5, isbn: "", notes: ""),
-            
             //More books
         ]
+        sort(books: &books)
+        return books
+    }
+    func filter() {
+        filteredBooks = books.filter { book in
+            return book.title.localizedLowercase.contains(searchFilter.localizedLowercase) ||
+                book.author.localizedLowercase.contains(searchFilter.localizedLowercase)
+        }
+    }
+    func sort(books:inout [Book]) {
+        books.sort(isOrderedBefore: {
+            return ($0.title.localizedLowercase,$0.author.localizedLowercase) < ($1.title.localizedLowercase,$1.author.localizedLowercase)
+        })
     }
 }

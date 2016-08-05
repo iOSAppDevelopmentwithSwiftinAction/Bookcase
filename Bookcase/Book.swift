@@ -8,12 +8,18 @@
 
 import UIKit
 class Book {
+    static let defaultCover = UIImage(named: "book.jpg")!
     var title:String
     var author:String
     var rating:Double
     var isbn:String
     var notes:String
-    var cover:UIImage?
+    var cover:UIImage {
+    get {
+        return image ?? Book.defaultCover
+    }
+}
+private var image:UIImage?
     
     init(title:String,author:String,rating:Double,isbn:String,notes:String,cover:UIImage? = nil) {
         self.title = title
@@ -21,6 +27,17 @@ class Book {
         self.rating = rating
         self.isbn = isbn
         self.notes = notes
-        self.cover = cover
+        self.image = cover
     }
+}
+extension Book:Equatable {}
+func ==(lhs: Book, rhs: Book) -> Bool {
+    return (
+        lhs.title == rhs.title &&
+        lhs.author == rhs.author &&
+        lhs.rating == rhs.rating &&
+        lhs.isbn == rhs.isbn &&
+        lhs.notes == rhs.notes &&
+        lhs.cover == rhs.cover
+    )
 }

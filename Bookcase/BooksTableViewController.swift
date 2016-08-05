@@ -10,13 +10,14 @@ import UIKit
 
 class BooksTableViewController: UITableViewController {
     var booksManager:BooksManager = BooksManager()
+    let searchController = UISearchController(searchResultsController: nil)
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        //MARK: Search
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        tableView.tableHeaderView = searchController.searchBar
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,11 +31,11 @@ class BooksTableViewController: UITableViewController {
         return 1
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return booksManager.books.count
+        return booksManager.bookCount
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "bookCell", for: indexPath)
-        let book = booksManager.books[indexPath.row]
+        let book = booksManager.getBook(at: indexPath.row)
         cell.textLabel?.text = book.title
         cell.detailTextLabel?.text = book.author
         cell.imageView?.image = book.cover ?? (UIImage(named: "book.jpg")!)
@@ -53,7 +54,7 @@ class BooksTableViewController: UITableViewController {
         if let selectedIndexPath = tableView.indexPathForSelectedRow,
             let viewController = segue.destinationViewController as? BookViewController {
             //Editing
-            viewController.book = booksManager.books[selectedIndexPath.row]
+            viewController.book = booksManager.getBook(at: selectedIndexPath.row)
             viewController.delegate = self
         } else if let navController = segue.destinationViewController as? UINavigationController,
             let viewController = navController.topViewController as? BookViewController {
@@ -108,17 +109,21 @@ class BooksTableViewController: UITableViewController {
 
 }
 extension BooksTableViewController:BookViewControllerDelegate {
-func saveBook(book:Book) {
-    if let selectedIndexPath = tableView.indexPathForSelectedRow {
-        //Update book
-        booksManager.updateBook(at: selectedIndexPath.row, with: book)
-        tableView.reloadRows(at: [selectedIndexPath], with: .none)
-    } else {
-        //Add book
-        booksManager.addBook(book: book)
-        let numRows = tableView.numberOfRows(inSection: 0)
-        let newIndexPath = IndexPath(row: numRows, section: 0)
-        tableView.insertRows(at: [newIndexPath], with: .bottom)
+    func saveBook(book:Book) {
+        if let selectedIndexPath = tableView.indexPathForSelectedRow {
+            //Update book
+            booksManager.updateBook(at: selectedIndexPath.row, with: book)
+        } else {
+            //Add book
+            booksManager.addBook(book: book)
+        }
+        tableView.reloadData()
     }
 }
+extension BooksTableViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let searchText = searchController.searchBar.text else { return }
+        booksManager.searchFilter = searchText
+        tableView.reloadData()
+    }
 }
