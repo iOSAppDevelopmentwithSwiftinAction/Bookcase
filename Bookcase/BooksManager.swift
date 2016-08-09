@@ -7,9 +7,20 @@
 //
 
 import Foundation
+
+enum SortOrder:Int {
+    case title
+    case author
+}
+
 class BooksManager {
     lazy var books:[Book] = self.loadBooks()
     var filteredBooks:[Book] = []
+    var sortOrder:SortOrder = .title {
+        didSet {
+            sort(books:&books)
+        }
+    }
     var searchFilter:String = "" {
         didSet {
             filter()
@@ -87,8 +98,15 @@ class BooksManager {
         }
     }
     func sort(books:inout [Book]) {
-        books.sort(isOrderedBefore: {
-            return ($0.title.localizedLowercase,$0.author.localizedLowercase) < ($1.title.localizedLowercase,$1.author.localizedLowercase)
-        })
+        switch sortOrder {
+        case .title:
+            books.sort(by: {
+                return ($0.title.localizedLowercase,$0.author.localizedLowercase) < ($1.title.localizedLowercase,$1.author.localizedLowercase)
+            })
+        case .author:
+            books.sort(by: {
+                return ($0.author.localizedLowercase,$0.title.localizedLowercase) < ($1.author.localizedLowercase,$1.title.localizedLowercase)
+            })
+        }
     }
 }
