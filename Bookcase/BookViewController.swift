@@ -97,8 +97,7 @@ class BookViewController: UIViewController {
                               author: authorTextField.text!,
                               rating: starRatings.rating,
                               isbn: isbnTextField.text!,
-                              notes: notesTextView.text!,
-                              cover: bookCover.image
+                              notes: notesTextView.text!
         )
         delegate?.saveBook(book: bookToSave)
         dismissMe()

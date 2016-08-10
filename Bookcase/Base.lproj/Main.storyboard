@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11185.3" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="yCB-5y-Kwk">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11185.3" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="8Wq-Lb-LxR">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11151.4"/>
@@ -7,6 +7,89 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Covers-->
+        <scene sceneID="qzW-US-Jks">
+            <objects>
+                <collectionViewController id="FYg-ZN-64o" customClass="BooksCollectionViewController" customModule="Bookcase" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="xhy-v0-obd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="lnx-85-clR">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="50" height="50"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="20" minY="20" maxX="20" maxY="20"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="bookCollectionCell" id="kAo-SB-Wbo" customClass="BookCollectionViewCell" customModule="Bookcase" customModuleProvider="target">
+                                <frame key="frameInset" minX="20" minY="134" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uU0-D1-rXE"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xyf-nT-Lcu">
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </view>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="Xyf-nT-Lcu" firstAttribute="leading" secondItem="kAo-SB-Wbo" secondAttribute="leading" id="Ir8-zH-uOf"/>
+                                    <constraint firstAttribute="trailing" secondItem="Xyf-nT-Lcu" secondAttribute="trailing" id="NK9-NK-iRu"/>
+                                    <constraint firstAttribute="bottom" secondItem="Xyf-nT-Lcu" secondAttribute="bottom" id="NTd-0r-4Az"/>
+                                    <constraint firstItem="uU0-D1-rXE" firstAttribute="top" secondItem="kAo-SB-Wbo" secondAttribute="top" id="Nuo-bD-caq"/>
+                                    <constraint firstItem="Xyf-nT-Lcu" firstAttribute="top" secondItem="kAo-SB-Wbo" secondAttribute="top" id="SVc-Xw-wgD"/>
+                                    <constraint firstItem="uU0-D1-rXE" firstAttribute="leading" secondItem="kAo-SB-Wbo" secondAttribute="leading" id="V31-nD-11x"/>
+                                    <constraint firstAttribute="bottom" secondItem="uU0-D1-rXE" secondAttribute="bottom" id="biv-9d-Nib"/>
+                                    <constraint firstAttribute="trailing" secondItem="uU0-D1-rXE" secondAttribute="trailing" id="se4-Ih-McM"/>
+                                </constraints>
+                                <size key="customSize" width="50" height="50"/>
+                                <connections>
+                                    <outlet property="imageView" destination="uU0-D1-rXE" id="qfe-SS-9S4"/>
+                                    <outlet property="titleLabel" destination="Xyf-nT-Lcu" id="Rud-z5-3Hi"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" id="MRK-VF-90I"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collectionHeader" id="dTO-2j-mVc">
+                            <frame key="frameInset" minY="64" width="375" height="50"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </collectionReusableView>
+                        <connections>
+                            <outlet property="dataSource" destination="FYg-ZN-64o" id="np0-wr-Zvy"/>
+                            <outlet property="delegate" destination="FYg-ZN-64o" id="RPS-Kz-Oyq"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" title="Covers" id="a0P-GE-Ot6">
+                        <barButtonItem key="leftBarButtonItem" id="f9I-KV-5qP">
+                            <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="RP4-aa-CES">
+                                <rect key="frame" x="16" y="7" width="100" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="Title"/>
+                                    <segment title="Author"/>
+                                </segments>
+                                <connections>
+                                    <action selector="changedSegment:" destination="FYg-ZN-64o" eventType="valueChanged" id="N46-Xp-Q1m"/>
+                                </connections>
+                            </segmentedControl>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="upj-ph-jcf">
+                            <connections>
+                                <segue destination="xuQ-Ca-Iwz" kind="presentation" id="D0o-Lb-6ES"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OEl-cE-alQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2222" y="-300"/>
+        </scene>
         <!--Books-->
         <scene sceneID="cQV-mN-zbE">
             <objects>
@@ -72,7 +155,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0pg-Yd-9Bd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2203" y="358"/>
+            <point key="canvasLocation" x="2222" y="358"/>
         </scene>
         <!--Book View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -242,12 +325,30 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3881" y="358"/>
+            <point key="canvasLocation" x="4014" y="83"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Tab Bar Controller-->
+        <scene sceneID="WMu-rH-jbq">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YvN-e8-A5h" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tabBarController id="cdg-D8-bmj" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="d2U-O7-tuS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="yCB-5y-Kwk" kind="relationship" relationship="viewControllers" id="4Nh-h1-joA"/>
+                    </connections>
+                </tabBarController>
+            </objects>
+            <point key="canvasLocation" x="524" y="22"/>
+        </scene>
+        <!--Books-->
         <scene sceneID="XMd-qP-7Ji">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="yCB-5y-Kwk" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Books" image="literature" id="22R-vX-jUo"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="4eX-f3-5tA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -260,7 +361,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xoU-ic-ewP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1479.5" y="351.5"/>
+            <point key="canvasLocation" x="1442" y="358"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="PWi-eg-DdZ">
@@ -279,13 +380,34 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eDA-to-9e0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3036" y="687"/>
+            <point key="canvasLocation" x="3111" y="82"/>
+        </scene>
+        <!--Covers-->
+        <scene sceneID="s4D-Ma-Whs">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8Wq-Lb-LxR" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Covers" image="literature" id="uk1-dI-dQK"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="mBV-ix-jsN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="FYg-ZN-64o" kind="relationship" relationship="rootViewController" id="AVP-c8-IlM"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="r2m-cl-9ap" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1441" y="-300"/>
         </scene>
     </scenes>
     <resources>
         <image name="book" width="450" height="413"/>
+        <image name="literature" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="RVs-bi-Idz"/>
+        <segue reference="MRK-VF-90I"/>
+        <segue reference="D0o-Lb-6ES"/>
     </inferredMetricsTieBreakers>
 </document>

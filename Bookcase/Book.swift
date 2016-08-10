@@ -15,11 +15,14 @@ class Book {
     var isbn:String
     var notes:String
     var cover:UIImage {
-    get {
-        return image ?? Book.defaultCover
+        get {
+            return image ?? Book.defaultCover
+        }
     }
-}
-private var image:UIImage?
+    var hasCoverImage:Bool {
+        return image != nil
+    }
+    private var image:UIImage?
     
     init(title:String,author:String,rating:Double,isbn:String,notes:String,cover:UIImage? = nil) {
         self.title = title
