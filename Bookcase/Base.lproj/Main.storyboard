@@ -343,7 +343,7 @@
                     </connections>
                 </tabBarController>
             </objects>
-            <point key="canvasLocation" x="524" y="22"/>
+            <point key="canvasLocation" x="500" y="20"/>
         </scene>
         <!--Books-->
         <scene sceneID="XMd-qP-7Ji">
