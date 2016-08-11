@@ -330,7 +330,6 @@
         <!--Tab Bar Controller-->
         <scene sceneID="WMu-rH-jbq">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YvN-e8-A5h" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tabBarController id="cdg-D8-bmj" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="d2U-O7-tuS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
@@ -342,6 +341,7 @@
                         <segue destination="8Wq-Lb-LxR" kind="relationship" relationship="viewControllers" id="9bh-pE-dpc"/>
                     </connections>
                 </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YvN-e8-A5h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="500" y="20"/>
         </scene>
