@@ -51,11 +51,11 @@ class BooksTableViewController: UITableViewController {
     }
     override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
         if let selectedIndexPath = tableView.indexPathForSelectedRow,
-            let viewController = segue.destinationViewController as? BookViewController {
+            let viewController = segue.destination as? BookViewController {
             //Editing
             viewController.book = booksManager.books[selectedIndexPath.row]
             viewController.delegate = self
-        } else if let navController = segue.destinationViewController as? UINavigationController,
+        } else if let navController = segue.destination as? UINavigationController,
             let viewController = navController.topViewController as? BookViewController {
             //Adding
             viewController.delegate = self
