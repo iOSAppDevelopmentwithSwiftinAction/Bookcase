@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11185.3" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="cdg-D8-bmj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11185.3" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="8Wq-Lb-LxR">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11151.4"/>
@@ -327,24 +327,6 @@
             </objects>
             <point key="canvasLocation" x="4014" y="83"/>
         </scene>
-        <!--Tab Bar Controller-->
-        <scene sceneID="WMu-rH-jbq">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YvN-e8-A5h" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tabBarController id="cdg-D8-bmj" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="d2U-O7-tuS">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="yCB-5y-Kwk" kind="relationship" relationship="viewControllers" id="4Nh-h1-joA"/>
-                        <segue destination="8Wq-Lb-LxR" kind="relationship" relationship="viewControllers" id="9bh-pE-dpc"/>
-                    </connections>
-                </tabBarController>
-            </objects>
-            <point key="canvasLocation" x="524" y="22"/>
-        </scene>
         <!--Books-->
         <scene sceneID="XMd-qP-7Ji">
             <objects>
@@ -408,7 +390,7 @@
         <image name="literature" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="MRK-VF-90I"/>
-        <segue reference="D0o-Lb-6ES"/>
+        <segue reference="IV0-kP-1PU"/>
+        <segue reference="RVs-bi-Idz"/>
     </inferredMetricsTieBreakers>
 </document>
