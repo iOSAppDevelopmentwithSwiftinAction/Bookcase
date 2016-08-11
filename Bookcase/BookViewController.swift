@@ -59,7 +59,7 @@ class BookViewController: UIViewController {
         //get keyboard height
         guard let userInfo = notification.userInfo,
             var keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey]
-                as? NSValue)?.cgRectValue()
+                as? NSValue)?.cgRectValue
             else { return }
         keyboardFrame = self.view.convert(keyboardFrame, from: nil)
 

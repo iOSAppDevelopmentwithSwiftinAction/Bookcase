@@ -49,7 +49,7 @@ class BooksTableViewController: UITableViewController {
         }
     }
     override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let navController = segue.destinationViewController as? UINavigationController {
+        if let navController = segue.destination as? UINavigationController {
             if let bookViewController = navController.topViewController as? BookViewController {
                 bookViewController.delegate = self
             }
