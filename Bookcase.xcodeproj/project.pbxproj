@@ -112,18 +112,14 @@
 			isa = PBXGroup;
 			children = (
 				B9019F7A1CE229D500CAE744 /* AppDelegate.swift */,
-				B9EADEAF1D4AD04100F125F3 /* BooksManager.swift */,
 				B9019F7E1CE229D500CAE744 /* Main.storyboard */,
-				B9EADEAD1D4A7BE800F125F3 /* Book.swift */,
-				B9019F7C1CE229D500CAE744 /* BookViewController.swift */,
-				B9EADEAB1D49457300F125F3 /* BooksTableViewController.swift */,
-				B94892821D5A42D200BC9BEB /* BooksCollectionViewController.swift */,
-				B94892861D5AB2C400BC9BEB /* BookCollectionViewCell.swift */,
+				B948928F1D5CE61000BC9BEB /* Model */,
+				B94892901D5CE6B400BC9BEB /* View */,
+				B948928E1D5CE5E800BC9BEB /* Controller */,
 				B9019F811CE229D500CAE744 /* Assets.xcassets */,
 				B9019F831CE229D500CAE744 /* LaunchScreen.storyboard */,
 				B9019F861CE229D500CAE744 /* Info.plist */,
 				B9019FAF1CE22C3500CAE744 /* Frameworks */,
-				B9F91AB21D36EA4700B12709 /* UIViewExtension.swift */,
 			);
 			path = Bookcase;
 			sourceTree = "<group>";
@@ -152,6 +148,34 @@
 				B9019FAD1CE22C3200CAE744 /* CosmosDistrib.swift */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B948928E1D5CE5E800BC9BEB /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B9019F7C1CE229D500CAE744 /* BookViewController.swift */,
+				B9EADEAB1D49457300F125F3 /* BooksTableViewController.swift */,
+				B94892821D5A42D200BC9BEB /* BooksCollectionViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		B948928F1D5CE61000BC9BEB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B9EADEAF1D4AD04100F125F3 /* BooksManager.swift */,
+				B9EADEAD1D4A7BE800F125F3 /* Book.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		B94892901D5CE6B400BC9BEB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B94892861D5AB2C400BC9BEB /* BookCollectionViewCell.swift */,
+				B9F91AB21D36EA4700B12709 /* UIViewExtension.swift */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -19,13 +19,6 @@ class BooksCollectionViewController: UICollectionViewController {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         definesPresentationContext = true
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
-        //self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -92,8 +85,9 @@ extension BooksCollectionViewController:UICollectionViewDelegateFlowLayout {
                                layout collectionViewLayout: UICollectionViewLayout,
                                sizeForItemAt indexPath: IndexPath) -> CGSize {
         let book = booksManager.getBook(at: indexPath.row)
-        let size = CGSize(width: (book.cover.size.height / book.cover.size.width) * 90, height: 90)
-        return size
+        let itemHeight:CGFloat = 90
+        let itemWidth = (book.cover.size.height / book.cover.size.width) * itemHeight
+        return CGSize(width: itemWidth, height: itemHeight)
     }
 }
 extension BooksCollectionViewController:UISearchResultsUpdating {
