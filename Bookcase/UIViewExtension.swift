@@ -9,7 +9,7 @@
 import UIKit
 extension UIView {
     var firstResponder:UIView? {
-        if self.isFirstResponder() {
+        if self.isFirstResponder {
             return self
         }
         for view in self.subviews {

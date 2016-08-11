@@ -30,18 +30,18 @@ class BookViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        NotificationCenter.default().addObserver(self, selector: #selector(keyboardFrameChanges), name: Notification.Name.UIKeyboardWillChangeFrame, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardFrameChanges), name: Notification.Name.UIKeyboardWillChangeFrame, object: nil)
         
     }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        NotificationCenter.default().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     func keyboardFrameChanges(notification:Notification) {
         //get keyboard height
         guard let userInfo = notification.userInfo,
             var keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey]
-                as? NSValue)?.cgRectValue()
+                as? NSValue)?.cgRectValue
             else { return }
         keyboardFrame = self.view.convert(keyboardFrame, from: nil)
 
@@ -51,7 +51,7 @@ class BookViewController: UIViewController {
         scrollView.scrollIndicatorInsets.bottom = offset
         
         if let textView = firstResponder as? UITextView,
-            textViewSuperview = textView.superview  {
+            let textViewSuperview = textView.superview  {
             let textViewFrame = outerStackView.convert(textView.frame, from: textViewSuperview)
             scrollView.scrollRectToVisible(textViewFrame, animated: true)
         }
