@@ -8,8 +8,8 @@
 
 import UIKit
 
-class BooksTableViewController: UITableViewController {
-    var booksManager:BooksManager = BooksManager()
+class BooksTableViewController: UITableViewController,Injectable {
+    var booksManager:BooksManager!
     let searchController = UISearchController(searchResultsController: nil)
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +24,10 @@ class BooksTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    func inject(data:BooksManager) {
+        self.booksManager = data
+        tableView?.reloadData()
+    }
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
