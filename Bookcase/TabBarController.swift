@@ -12,21 +12,15 @@ protocol Injectable {
     func inject(data:BooksManager)
 }
 
-class TabBarController: UITabBarController, UITabBarControllerDelegate {
+class TabBarController: UITabBarController {
     var booksManager = BooksManager()
     override func viewDidLoad() {
         super.viewDidLoad()
-        delegate = self
-        if let navController = viewControllers?.first as? UINavigationController,
-            let viewController = navController.viewControllers.first as? Injectable {
-            viewController.inject(data: booksManager)
+        for navController in viewControllers! {
+            if let navController = navController as? UINavigationController,
+                let viewController = navController.viewControllers.first as? Injectable {
+                viewController.inject(data: booksManager)
+            }
         }
-    }
-    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-        if let navController = viewController as? UINavigationController,
-           let viewController = navController.viewControllers.first as? Injectable {
-            viewController.inject(data: booksManager)
-        }
-        return true
     }
 }
