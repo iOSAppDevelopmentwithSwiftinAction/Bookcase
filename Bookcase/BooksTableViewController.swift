@@ -19,14 +19,16 @@ class BooksTableViewController: UITableViewController,Injectable {
         definesPresentationContext = true
         tableView.tableHeaderView = searchController.searchBar
     }
-
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        tableView.reloadData()
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     func inject(data:BooksManager) {
         self.booksManager = data
-        tableView?.reloadData()
     }
     // MARK: - Table view data source
 

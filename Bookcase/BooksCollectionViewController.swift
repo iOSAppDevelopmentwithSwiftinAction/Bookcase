@@ -20,14 +20,15 @@ class BooksCollectionViewController: UICollectionViewController,Injectable {
         searchController.obscuresBackgroundDuringPresentation = false
         definesPresentationContext = true
     }
-
+    override func viewDidAppear(_ animated: Bool) {
+        collectionView?.reloadData()
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     func inject(data:BooksManager) {
         self.booksManager = data
-        collectionView?.reloadData()
     }
     // MARK: UICollectionViewDataSource
 
