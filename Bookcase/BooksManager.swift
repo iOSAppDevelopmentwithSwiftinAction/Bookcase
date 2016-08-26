@@ -127,13 +127,14 @@ class BooksManager {
             })
         }
     }
-    // MARK: Local storage
+    // MARK: NSCoding
     func storeBooks() {
-        //Store books array to disk here
+        let success = NSKeyedArchiver.archiveRootObject(books, toFile: booksFile.path)
+        print(success ? "Successful save" : "Save Failed")
     }
-    func retrieveBooks()->[Book]? {
-        //Retrieve books array from disk here
-        return nil
-    } 
+    
+    func retrieveBooks() -> [Book]? {
+        return NSKeyedUnarchiver.unarchiveObject(withFile: booksFile.path) as? [Book]
+    }
 
 }
