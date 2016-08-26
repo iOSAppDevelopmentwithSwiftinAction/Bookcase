@@ -8,9 +8,12 @@
 
 import UIKit
 
+private let sortOrderKey = "TableSortOrder"
+
 class BooksTableViewController: UITableViewController,Injectable {
     var booksManager:BooksManager!
     let searchController = UISearchController(searchResultsController: nil)
+    @IBOutlet weak var sortSegmentedControl: UISegmentedControl!
     override func viewDidLoad() {
         super.viewDidLoad()
         //MARK: Search
@@ -18,10 +21,26 @@ class BooksTableViewController: UITableViewController,Injectable {
         searchController.obscuresBackgroundDuringPresentation = false
         definesPresentationContext = true
         tableView.tableHeaderView = searchController.searchBar
+        
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        tableView.reloadData()
+        updateSortOrderFromKVS()
+        NotificationCenter.default.addObserver(self, selector: #selector(uKVSChanged), name: NSUbiquitousKeyValueStore.didChangeExternallyNotification, object: nil)
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
+    func uKVSChanged(notification:Notification) {
+        updateSortOrderFromKVS()
+    }
+    func updateSortOrderFromKVS() {
+        if let sortOrder = SortOrder(rawValue:Int(NSUbiquitousKeyValueStore.default().longLong(forKey: sortOrderKey))) {
+            booksManager.sortOrder = sortOrder
+            sortSegmentedControl.selectedSegmentIndex = booksManager.sortOrder.rawValue
+            tableView.reloadData()
+        }
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -67,6 +86,7 @@ class BooksTableViewController: UITableViewController,Injectable {
     @IBAction func changedSegment(_ sender: UISegmentedControl) {
         guard let sortOrder = SortOrder(rawValue:sender.selectedSegmentIndex) else {return}
         booksManager.sortOrder = sortOrder
+        NSUbiquitousKeyValueStore.default().set(sortOrder.rawValue, forKey: sortOrderKey)
         tableView.reloadData()
     }
 
