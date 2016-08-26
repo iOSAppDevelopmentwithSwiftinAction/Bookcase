@@ -129,11 +129,13 @@ class BooksManager {
     }
     // MARK: Local storage
     func storeBooks() {
-        //Store books array to disk here
+        (books.map( { $0.dictionary }) as NSArray).write(to: booksFile, atomically: true)
     }
     func retrieveBooks()->[Book]? {
-        //Retrieve books array from disk here
-        return nil
-    } 
+        guard let array = NSArray(contentsOf: booksFile) as? [[String:String]] else {return nil}
+        guard let books = array.map( { Book(book: $0) } ) as? [Book] else {return nil}
+        return books
+    }
+
 
 }

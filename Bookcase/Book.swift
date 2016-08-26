@@ -40,6 +40,33 @@ class Book {
         self.notes = notes
         self.image = cover
     }
+    //Property lists
+    convenience init?(book:[String:String]) {
+        guard let title = book[Key.title],
+            let author = book[Key.author],
+            let ratingString = book[Key.rating],
+            let rating = Double(ratingString),
+            let isbn = book[Key.isbn],
+            let notes = book[Key.notes]
+            else {
+                return nil
+        }
+        self.init(title:title,
+                  author:author,
+                  rating:rating,
+                  isbn:isbn,
+                  notes:notes
+        )
+    }
+    var dictionary:[String:String] {
+        return [
+            Key.title:title,
+            Key.author:author,
+            Key.rating:String(rating),
+            Key.isbn:isbn,
+            Key.notes:notes
+        ]
+    }
 }
 extension Book:Equatable {}
 func ==(lhs: Book, rhs: Book) -> Bool {
