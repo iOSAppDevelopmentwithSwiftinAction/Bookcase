@@ -52,7 +52,7 @@ class BooksTableViewController: UITableViewController,Injectable {
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
-    override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let selectedIndexPath = tableView.indexPathForSelectedRow,
             let viewController = segue.destination as? BookViewController {
             //Editing

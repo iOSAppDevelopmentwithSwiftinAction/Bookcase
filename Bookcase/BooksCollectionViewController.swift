@@ -48,7 +48,7 @@ class BooksCollectionViewController: UICollectionViewController,Injectable {
         cell.imageView.isHidden = !book.hasCoverImage
         return cell
     }
-    override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let selectedIndexPath = collectionView?.indexPathsForSelectedItems?.first,
             let viewController = segue.destination as? BookViewController {
             //Editing
