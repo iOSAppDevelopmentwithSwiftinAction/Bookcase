@@ -7,6 +7,14 @@
 //
 
 import UIKit
+internal struct Key {
+    static let title = "title"
+    static let author = "author"
+    static let rating = "rating"
+    static let isbn = "isbn"
+    static let notes = "notes"
+}
+
 class Book {
     static let defaultCover = UIImage(named: "book.jpg")!
     var title:String

@@ -12,6 +12,21 @@ enum SortOrder:Int {
     case title
     case author
 }
+// MARK: Paths
+private let appSupportDirectory:URL = {
+    let url = FileManager().urls(for:.applicationSupportDirectory,in: .userDomainMask).first!
+    if !FileManager().fileExists(atPath: url.path) {
+        do {
+            try FileManager().createDirectory(at: url,
+                                              withIntermediateDirectories: false)
+        } catch let error as NSError {
+            print("\(error.localizedDescription)")
+        }
+        
+    }
+    return url
+}()
+private let booksFile = appSupportDirectory.appendingPathComponent("Books")
 
 class BooksManager {
     lazy var books:[Book] = self.loadBooks()
@@ -35,11 +50,12 @@ class BooksManager {
         return searchFilter.isEmpty ? books[index] : filteredBooks[index]
     }
     func loadBooks()->[Book] {
-        return sampleBooks()
+        return retrieveBooks() ?? sampleBooks()
     }
     func addBook(book:Book) {
         books.append(book)
         sort(books:&books)
+        storeBooks()
     }
     func removeBook(at index:Int) {
         if searchFilter.isEmpty {
@@ -53,6 +69,7 @@ class BooksManager {
             }
             books.remove(at: bookIndex)
         }
+        storeBooks()
     }
     func updateBook(at index:Int, with book:Book) {
         if searchFilter.isEmpty {
@@ -68,6 +85,7 @@ class BooksManager {
             sort(books:&books)
             filter()
         }
+        storeBooks()
     }
     func sampleBooks()->[Book] {
         var books = [
@@ -109,4 +127,13 @@ class BooksManager {
             })
         }
     }
+    // MARK: Local storage
+    func storeBooks() {
+        //Store books array to disk here
+    }
+    func retrieveBooks()->[Book]? {
+        //Retrieve books array from disk here
+        return nil
+    } 
+
 }
