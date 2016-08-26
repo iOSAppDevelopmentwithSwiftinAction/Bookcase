@@ -22,6 +22,7 @@ class Book {
     var rating:Double
     var isbn:String
     var notes:String
+    var id:Int
     var cover:UIImage {
         get {
             return image ?? Book.defaultCover
@@ -32,13 +33,30 @@ class Book {
     }
     private var image:UIImage?
     
-    init(title:String,author:String,rating:Double,isbn:String,notes:String,cover:UIImage? = nil) {
+    init(title:String,author:String,rating:Double,isbn:String,notes:String,id:Int? = nil,cover:UIImage? = nil) {
         self.title = title
         self.author = author
         self.rating = rating
         self.isbn = isbn
         self.notes = notes
+        self.id = id ?? -1
         self.image = cover
+    }
+    convenience init?(rs:FMResultSet) {
+        let rating = rs.double(forColumn: Key.rating)
+        let id = rs.int(forColumn: "ROWID")
+        guard let title = rs.string(forColumn: Key.title),
+            let author = rs.string(forColumn: Key.author),
+            let isbn = rs.string(forColumn: Key.isbn),
+            let notes = rs.string(forColumn: Key.notes)
+            else { return nil }
+        self.init(title:title,
+                  author:author,
+                  rating:rating,
+                  isbn:isbn,
+                  notes:notes,
+                  id:Int(id)
+        )
     }
 }
 extension Book:Equatable {}
@@ -49,6 +67,7 @@ func ==(lhs: Book, rhs: Book) -> Bool {
         lhs.rating == rhs.rating &&
         lhs.isbn == rhs.isbn &&
         lhs.notes == rhs.notes &&
-        lhs.cover == rhs.cover
+        lhs.cover == rhs.cover &&
+        lhs.id == rhs.id
     )
 }

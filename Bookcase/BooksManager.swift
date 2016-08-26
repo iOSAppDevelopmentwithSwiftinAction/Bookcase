@@ -13,7 +13,7 @@ enum SortOrder:Int {
     case author
 }
 // MARK: Paths
-private let appSupportDirectory:URL = {
+private var appSupportDirectory:URL = {
     let url = FileManager().urls(for:.applicationSupportDirectory,in: .userDomainMask).first!
     if !FileManager().fileExists(atPath: url.path) {
         do {
@@ -26,7 +26,20 @@ private let appSupportDirectory:URL = {
     }
     return url
 }()
-private let booksFile = appSupportDirectory.appendingPathComponent("Books")
+private var booksFile:URL = {
+    let filePath = appSupportDirectory.appendingPathComponent("Books").appendingPathExtension("db")
+    if !FileManager().fileExists(atPath: filePath.path) {
+        if let bundleFilePath = Bundle.main.resourceURL?.appendingPathComponent("Books").appendingPathExtension("db") {
+            do {
+                try FileManager().copyItem(at: bundleFilePath, to: filePath)
+            } catch let error as NSError {
+                //fingers crossed
+                print("\(error.localizedDescription)")
+            }
+        }
+    }
+    return filePath
+}()
 
 class BooksManager {
     lazy var books:[Book] = self.loadBooks()
@@ -50,16 +63,17 @@ class BooksManager {
         return searchFilter.isEmpty ? books[index] : filteredBooks[index]
     }
     func loadBooks()->[Book] {
-        return retrieveBooks() ?? sampleBooks()
+        return retrieveBooks() ?? []
     }
     func addBook(book:Book) {
         books.append(book)
         sort(books:&books)
-        storeBooks()
+        SQLAddBook(book: book)
     }
     func removeBook(at index:Int) {
+        var bookToRemove:Book
         if searchFilter.isEmpty {
-            books.remove(at: index)
+            bookToRemove = books.remove(at: index)
         } else {
             //index is relevant to filteredBooks
             let removedBook = filteredBooks.remove(at: index)
@@ -67,9 +81,9 @@ class BooksManager {
                 print("Error: book not found")
                 return
             }
-            books.remove(at: bookIndex)
+            bookToRemove = books.remove(at: bookIndex)
         }
-        storeBooks()
+        SQLRemoveBook(book: bookToRemove)
     }
     func updateBook(at index:Int, with book:Book) {
         if searchFilter.isEmpty {
@@ -85,29 +99,7 @@ class BooksManager {
             sort(books:&books)
             filter()
         }
-        storeBooks()
-    }
-    func sampleBooks()->[Book] {
-        var books = [
-            Book(title: "Great Expectations", author: "Charles Dickens", rating: 5, isbn: "9780140817997", notes: "🎁 from Papa"),
-            Book(title: "Don Quixote", author: "Miguel De Cervantes", rating: 4, isbn: "9788471890153", notes: ""),
-            Book(title: "Robinson Crusoe", author: "Daniel Defoe", rating: 5, isbn: "", notes: ""),
-            Book(title: "Gulliver's Travels", author: "Jonathan Swift", rating: 5, isbn: "", notes: ""),
-            Book(title: "Emma", author: "Jane Austen", rating: 5, isbn: "", notes: ""),
-            Book(title: "To Kill a Mockingbird", author: "Harper Lee", rating: 5, isbn: "", notes: ""),
-            Book(title: "Animal Farm", author: "George Orwell", rating: 4, isbn: "", notes: ""),
-            Book(title: "Gone with the Wind", author: "Margaret Mitchell", rating: 5, isbn: "", notes: ""),
-            Book(title: "The Fault in Our Stars", author: "John Green", rating: 5, isbn: "", notes: ""),
-            Book(title: "The Da Vinci Code", author: "Dan Brown", rating: 5, isbn: "", notes: ""),
-            Book(title: "Les Misérables ", author: "Victor Hugo", rating: 5, isbn: "", notes: ""),
-            Book(title: "Lord of the Flies ", author: "William Golding", rating: 5, isbn: "", notes: ""),
-            Book(title: "The Alchemist", author: "Paulo Coelho", rating: 5, isbn: "", notes: ""),
-            Book(title: "Life of Pi", author: "Yann Martel", rating: 5, isbn: "", notes: ""),
-            Book(title: "The Odyssey", author: "Homer", rating: 5, isbn: "", notes: ""),
-            //More books
-        ]
-        sort(books: &books)
-        return books
+        SQLUpdateBook(book: book)
     }
     func filter() {
         filteredBooks = books.filter { book in
@@ -127,13 +119,71 @@ class BooksManager {
             })
         }
     }
-    // MARK: Local storage
-    func storeBooks() {
-        //Store books array to disk here
+    //MARK: SQLite
+    func retrieveBooks() -> [Book]? {
+        guard let db = getOpenDB() else { return nil }
+        var books:[Book] = []
+        do {
+            let rs = try db.executeQuery(
+                "SELECT *, ROWID FROM Books", values: nil)
+            while rs.next() {
+                if let book = Book(rs: rs) {
+                    books.append(book)
+                }
+            }
+        } catch {
+            print("failed: \(error.localizedDescription)")
+        }
+        db.close()
+        return books
     }
-    func retrieveBooks()->[Book]? {
-        //Retrieve books array from disk here
-        return nil
-    } 
+    func SQLAddBook(book:Book) {
+        guard let db = getOpenDB() else { return  }
+        do {
+            try db.executeUpdate(
+                "insert into Books (title, author, rating, isbn, notes) values (?, ?, ?, ?, ?)",
+                values: [book.title, book.author, book.rating, book.isbn, book.notes]
+            )
+            book.id = Int(db.lastInsertRowId())
+        } catch {
+            print("failed: \(error.localizedDescription)")
+        }
+        db.close()
+    }
+    func SQLRemoveBook(book:Book) {
+        guard let db = getOpenDB() else { return  }
+        do {
+            try db.executeUpdate(
+                "delete from Books where ROWID = ?",
+                values: [book.id]
+            )
+        } catch {
+            print("failed: \(error.localizedDescription)")
+        }
+        db.close()
+    }
+    func SQLUpdateBook(book:Book) {
+        guard let db = getOpenDB() else { return  }
+        do {
+            try db.executeUpdate(
+                "update Books SET title = ?, author = ?, rating = ?, isbn = ?, notes = ? WHERE ROWID = ?", values: [book.title, book.author, book.rating, book.isbn, book.notes, book.id]
+            )
+        } catch {
+            print("failed: \(error.localizedDescription)")
+        }
+        db.close()
+    }
+    func getOpenDB()->FMDatabase? {
+        guard let db = FMDatabase(path: booksFile.path) else {
+            print("unable to create database")
+            return nil
+        }
+        guard db.open() else {
+            print("Unable to open database")
+            return nil
+        }
+        return db
+    }
+
 
 }
