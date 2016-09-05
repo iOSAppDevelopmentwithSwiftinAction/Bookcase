@@ -7,10 +7,15 @@
 //
 
 import Foundation
+import CloudKit
+
 
 enum SortOrder:Int {
     case title
     case author
+}
+struct Notifications {
+    static let CloudKitReceived = Notification.Name("CloudKitReceived")
 }
 // MARK: Paths
 private var appSupportDirectory:URL = {
@@ -42,7 +47,8 @@ private var booksFile:URL = {
 }()
 
 class BooksManager {
-    lazy var books:[Book] = self.loadBooks()
+    var books:[Book] = []
+    var booksRequireLoading = true
     var filteredBooks:[Book] = []
     var sortOrder:SortOrder = .title {
         didSet {
@@ -59,21 +65,28 @@ class BooksManager {
         print("Count = \(bookC)")
         return searchFilter.isEmpty ? books.count : filteredBooks.count
     }
+    let db = CKContainer.default().privateCloudDatabase
+    init() {
+        subscribe()
+        NotificationCenter.default.addObserver(
+            forName: Notifications.CloudKitReceived,
+            object: nil,
+            queue: OperationQueue.main,
+            using: { notification in
+                self.booksRequireLoading = true
+            }
+        )
+    }
     func getBook(at index:Int)->Book {
         return searchFilter.isEmpty ? books[index] : filteredBooks[index]
-    }
-    func loadBooks()->[Book] {
-        return retrieveBooks() ?? []
     }
     func addBook(book:Book) {
         books.append(book)
         sort(books:&books)
-        SQLAddBook(book: book)
     }
     func removeBook(at index:Int) {
-        var bookToRemove:Book
         if searchFilter.isEmpty {
-            bookToRemove = books.remove(at: index)
+            books.remove(at: index)
         } else {
             //index is relevant to filteredBooks
             let removedBook = filteredBooks.remove(at: index)
@@ -81,9 +94,8 @@ class BooksManager {
                 print("Error: book not found")
                 return
             }
-            bookToRemove = books.remove(at: bookIndex)
+            books.remove(at: bookIndex)
         }
-        SQLRemoveBook(book: bookToRemove)
     }
     func updateBook(at index:Int, with book:Book) {
         if searchFilter.isEmpty {
@@ -99,7 +111,6 @@ class BooksManager {
             sort(books:&books)
             filter()
         }
-        SQLUpdateBook(book: book)
     }
     func filter() {
         filteredBooks = books.filter { book in
@@ -119,71 +130,132 @@ class BooksManager {
             })
         }
     }
-    //MARK: SQLite
-    func retrieveBooks() -> [Book]? {
-        guard let db = getOpenDB() else { return nil }
-        var books:[Book] = []
-        do {
-            let rs = try db.executeQuery(
-                "SELECT *, ROWID FROM Books", values: nil)
-            while rs.next() {
-                if let book = Book(rs: rs) {
-                    books.append(book)
+    //MARK: CloudKit
+    //List of error codes: 
+    //https://developer.apple.com/library/ios/documentation/CloudKit/Reference/CloudKit_constants/#//apple_ref/c/tdef/CKErrorCode
+/*    func addBookCloudKit(book:Book, completion: @escaping (_ success:Bool,_ error:Error?)->Void) {
+        db.save(book.record) { (record, error) in
+            DispatchQueue.main.async {
+                if let error = error as? CKError {
+                     else if error.code == .serverRecordChanged {
+                        print("-------optimistic locking failed, ignore")
+                        print("Retry - \(error.userInfo[CKErrorRetryAfterKey])")
+                    }
+                    completion(false, error)
+                } else if let record = record {
+                    self.addBook(book: book)
+                    completion(true, nil)
+                }
+                
+            }
+        }
+    }*/
+    func addBookCloudKit(book:Book, completion: @escaping (_ error:CKError?)->Void) {
+        db.save(book.record) { (record, error) in
+            DispatchQueue.main.async {
+                if let error = error as? CKError {
+                    if let retryInterval = error.userInfo[CKErrorRetryAfterKey] as? TimeInterval {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + retryInterval) {
+                            self.addBookCloudKit(book:book, completion:completion)
+                        }
+                        return
+                    }
+                    //Error occurred
+                    completion(error)
+                } else {
+                    //Record saved to iCloud
+                    self.addBook(book: book)
+                    completion(nil)
                 }
             }
-        } catch {
-            print("failed: \(error.localizedDescription)")
         }
-        db.close()
-        return books
     }
-    func SQLAddBook(book:Book) {
-        guard let db = getOpenDB() else { return  }
-        do {
-            try db.executeUpdate(
-                "insert into Books (title, author, rating, isbn, notes) values (?, ?, ?, ?, ?)",
-                values: [book.title, book.author, book.rating, book.isbn, book.notes]
-            )
-            book.id = Int(db.lastInsertRowId())
-        } catch {
-            print("failed: \(error.localizedDescription)")
-        }
-        db.close()
-    }
-    func SQLRemoveBook(book:Book) {
-        guard let db = getOpenDB() else { return  }
-        do {
-            try db.executeUpdate(
-                "delete from Books where ROWID = ?",
-                values: [book.id]
-            )
-        } catch {
-            print("failed: \(error.localizedDescription)")
-        }
-        db.close()
-    }
-    func SQLUpdateBook(book:Book) {
-        guard let db = getOpenDB() else { return  }
-        do {
-            try db.executeUpdate(
-                "update Books SET title = ?, author = ?, rating = ?, isbn = ?, notes = ? WHERE ROWID = ?", values: [book.title, book.author, book.rating, book.isbn, book.notes, book.id]
-            )
-        } catch {
-            print("failed: \(error.localizedDescription)")
-        }
-        db.close()
-    }
-    func getOpenDB()->FMDatabase? {
-        guard let db = FMDatabase(path: booksFile.path) else {
-            print("unable to create database")
-            return nil
-        }
-        guard db.open() else {
-            print("Unable to open database")
-            return nil
-        }
-        return db
-    }
+    func updateBookCloudKit(at index:Int, with book:Book, completion: @escaping (_ error:Error?)->Void) {
+        db.save(book.record) { (record, error) in
+            DispatchQueue.main.async {
+                if let error = error as? CKError {
+                    //Error occurred
+                    if error.code == .serverRecordChanged {
+                        if let serverRecord = error.userInfo[CKRecordChangedErrorServerRecordKey] as? CKRecord {
+                            book.record = serverRecord
+                            self.updateBook(at: index, with: book)
+                        }
+                    } else if let retryInterval = error.userInfo[CKErrorRetryAfterKey] as? TimeInterval {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + retryInterval) {
+                            self.updateBookCloudKit(at:index, with:book, completion:completion)
+                        }
+                        return
+                    }
 
+                    completion(error)
+                } else {
+                    self.updateBook(at: index, with: book)
+                    completion(nil)
+                }
+                
+            }
+        }
+    }
+    func deleteBookCloudKit(at index:Int, book:Book, completion: @escaping (_ error:Error?)->Void) {
+        let record = book.record
+        db.delete(withRecordID: record.recordID, completionHandler: { (recordID, error) -> Void in
+            DispatchQueue.main.async {
+                if let error = error as? CKError {
+                    if let retryInterval = error.userInfo[CKErrorRetryAfterKey] as? TimeInterval {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + retryInterval) {
+                            self.deleteBookCloudKit(at:index,book:book,completion:completion)
+                        }
+                        return
+                    }
+                    completion(error)
+                } else {
+                    self.removeBook(at: index)
+                    completion(nil)
+                }
+            }
+        })
+    }
+    
 
+    func loadBooksCloudKit(completion: @escaping (_ error:Error?)->Void) {
+        let query = CKQuery(recordType: Book.recordType, predicate: NSPredicate(value: true))
+        db.perform(query, inZoneWith: nil) { (records, error) in
+            DispatchQueue.main.async {
+                if let error = error as? CKError {
+                    //Error occurred
+                    completion(error)
+                } else if let records = records {
+                    self.books = records.map { Book(record: $0) }
+                    self.booksRequireLoading = false
+                    completion(nil)
+                }
+            }
+        }
+    }
+    //MARK: Subscription
+    
+    func subscribe() {
+        let alreadySubscribed = "alreadySubscribed"
+        if !UserDefaults.standard.bool(forKey: alreadySubscribed) {
+            let subscription = CKSubscription(
+                recordType: Book.recordType,
+                predicate: NSPredicate(value: true),
+                subscriptionID: "All Book updates",
+                options: [.firesOnRecordCreation,
+                          .firesOnRecordDeletion,
+                          .firesOnRecordUpdate]
+            )
+            let notificationInfo = CKNotificationInfo()
+            notificationInfo.shouldSendContentAvailable = true
+            //notificationInfo.shouldBadge = true
+            //notificationInfo.alertBody = "Your books have changed!"
+            //notificationInfo.soundName = "default"
+            subscription.notificationInfo = notificationInfo
+            db.save(subscription) { (subscription, error) in
+                if error == nil {
+                    UserDefaults.standard.set(true, forKey: alreadySubscribed)
+                }
+            }
+        }
+    }
 }

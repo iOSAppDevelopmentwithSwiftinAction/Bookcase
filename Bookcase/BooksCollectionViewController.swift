@@ -14,9 +14,13 @@ private let sortOrderKey = "CollectionSortOrder"
 class BooksCollectionViewController: UICollectionViewController,Injectable {
     var booksManager:BooksManager!
     let searchController = UISearchController(searchResultsController: nil)
-    
+    lazy var activityIndicator:UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        indicator.center = self.view.center
+        self.view.addSubview(indicator)
+        return indicator
+    }()
     @IBOutlet weak var sortSegmentedControl: UISegmentedControl!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +32,22 @@ class BooksCollectionViewController: UICollectionViewController,Injectable {
     override func viewDidAppear(_ animated: Bool) {
         updateSortOrderFromKVS()
         NotificationCenter.default.addObserver(self, selector: #selector(uKVSChanged), name: NSUbiquitousKeyValueStore.didChangeExternallyNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(loadCloud), name: Notifications.CloudKitReceived,
+            object: nil)
+    }
+    
+    func loadCloud(reload:Bool = false) {
+        cloudOperation(waiting: true)
+        booksManager.loadBooksCloudKit(completion: { (error) in
+            self.cloudErrors(error: error,buttonTitle:"Try again") {
+                self.loadCloud()
+                return
+            }
+            self.cloudOperation(waiting: false)
+            self.updateSortOrderFromKVS()
+            self.collectionView?.reloadData()
+        })
     }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
@@ -91,6 +111,27 @@ class BooksCollectionViewController: UICollectionViewController,Injectable {
         let reusableView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "collectionHeader", for: indexPath)
         reusableView.addSubview(searchController.searchBar)
         return reusableView
+    }
+    //MARK: Cloudkit
+    func cloudErrors(error: Error?, buttonTitle:String = "OK", completion:(()->Void)? = nil) {
+        if let error = error {
+            let alertController = UIAlertController(title: "CloudKit error", message: error.localizedDescription, preferredStyle: .actionSheet)
+            let okAction = UIAlertAction(title: buttonTitle, style: .default) { (action) in
+                completion?()
+            }
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true)
+        }
+    }
+    func cloudOperation(waiting: Bool) {
+        if waiting {
+            activityIndicator.startAnimating()
+        } else {
+            activityIndicator.stopAnimating()
+        }
+        collectionView?.isUserInteractionEnabled = !waiting
+        navigationController?.navigationBar.isUserInteractionEnabled = !waiting
+        tabBarController?.tabBar.isUserInteractionEnabled = !waiting
     }
 }
 extension BooksCollectionViewController:BookViewControllerDelegate {

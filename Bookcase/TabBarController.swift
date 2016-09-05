@@ -9,9 +9,9 @@
 import UIKit
 
 protocol Injectable {
+    
     func inject(data:BooksManager)
 }
-
 class TabBarController: UITabBarController {
     var booksManager = BooksManager()
     override func viewDidLoad() {

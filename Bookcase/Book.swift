@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import CloudKit
+
 internal struct Key {
     static let title = "title"
     static let author = "author"
@@ -17,12 +19,29 @@ internal struct Key {
 
 class Book {
     static let defaultCover = UIImage(named: "book.jpg")!
-    var title:String
-    var author:String
-    var rating:Double
-    var isbn:String
-    var notes:String
-    var id:Int
+    var record:CKRecord
+    static let recordType = "Books"
+    var title:String {
+        get { return record[Key.title] as! String }
+        set { record[Key.title] = newValue as NSString }
+    }
+    var author:String {
+        get { return record[Key.author] as! String }
+        set { record[Key.author] = newValue as NSString }
+    }
+    var rating:Double {
+        get { return record[Key.rating] as! Double }
+        set { record[Key.rating] = newValue as NSNumber }
+    }
+    var isbn:String {
+        get { return record[Key.isbn] as! String }
+        set { record[Key.isbn] = newValue as NSString }
+    }
+    var notes:String {
+        get { return record[Key.notes] as! String }
+        set { record[Key.notes] = newValue as NSString }
+    }
+    
     var cover:UIImage {
         get {
             return image ?? Book.defaultCover
@@ -33,31 +52,23 @@ class Book {
     }
     private var image:UIImage?
     
-    init(title:String,author:String,rating:Double,isbn:String,notes:String,id:Int? = nil,cover:UIImage? = nil) {
+    init(record:CKRecord? = nil,title:String,author:String,rating:Double,isbn:String,notes:String,cover:UIImage? = nil) {
+        if let record = record {
+            self.record = record
+        } else {
+            self.record = CKRecord(recordType: Book.recordType)
+        }
         self.title = title
         self.author = author
         self.rating = rating
         self.isbn = isbn
         self.notes = notes
-        self.id = id ?? -1
         self.image = cover
     }
-    convenience init?(rs:FMResultSet) {
-        let rating = rs.double(forColumn: Key.rating)
-        let id = rs.int(forColumn: "ROWID")
-        guard let title = rs.string(forColumn: Key.title),
-            let author = rs.string(forColumn: Key.author),
-            let isbn = rs.string(forColumn: Key.isbn),
-            let notes = rs.string(forColumn: Key.notes)
-            else { return nil }
-        self.init(title:title,
-                  author:author,
-                  rating:rating,
-                  isbn:isbn,
-                  notes:notes,
-                  id:Int(id)
-        )
+    init(record:CKRecord) {
+        self.record = record
     }
+    
 }
 extension Book:Equatable {}
 func ==(lhs: Book, rhs: Book) -> Bool {
@@ -67,7 +78,6 @@ func ==(lhs: Book, rhs: Book) -> Bool {
         lhs.rating == rhs.rating &&
         lhs.isbn == rhs.isbn &&
         lhs.notes == rhs.notes &&
-        lhs.cover == rhs.cover &&
-        lhs.id == rhs.id
+        lhs.cover == rhs.cover
     )
 }

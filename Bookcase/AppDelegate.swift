@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CloudKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,10 +15,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
-        // Override point for customization after application launch.
+        //application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.alert,.badge,.sound], categories: nil))
+        application.registerForRemoteNotifications()
         return true
     }
-
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
+        /*
+         // Can get data regarding subscription here.
+        guard let userInfo = userInfo as NSDictionary as? [String:NSObject] else {return}
+        let queryNotification = CKQueryNotification(fromRemoteNotificationDictionary: userInfo)
+        let recordID = queryNotification.recordID
+        let reason = queryNotification.queryNotificationReason
+        let subscriptionID = queryNotification.subscriptionID
+        */
+        //Broadcast Notification
+        let notification = Notification(
+            name: Notifications.CloudKitReceived,
+            object: nil
+        )
+        NotificationCenter.default.post(notification)
+    }
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.

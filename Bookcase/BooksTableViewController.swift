@@ -7,12 +7,20 @@
 //
 
 import UIKit
+import CloudKit
 
 private let sortOrderKey = "TableSortOrder"
 
-class BooksTableViewController: UITableViewController,Injectable {
+class BooksTableViewController: UITableViewController, Injectable {
     var booksManager:BooksManager!
     let searchController = UISearchController(searchResultsController: nil)
+
+    lazy var activityIndicator:UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+            indicator.center = self.view.center
+            self.view.addSubview(indicator)
+        return indicator
+    }()
     @IBOutlet weak var sortSegmentedControl: UISegmentedControl!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,17 +29,44 @@ class BooksTableViewController: UITableViewController,Injectable {
         searchController.obscuresBackgroundDuringPresentation = false
         definesPresentationContext = true
         tableView.tableHeaderView = searchController.searchBar
-        
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         updateSortOrderFromKVS()
         NotificationCenter.default.addObserver(self, selector: #selector(uKVSChanged), name: NSUbiquitousKeyValueStore.didChangeExternallyNotification, object: nil)
+        if booksManager.booksRequireLoading {
+            loadCloud()
+        }
+        
+        refreshControl = UIRefreshControl()
+        refreshControl?.attributedTitle =
+            NSAttributedString(string: "Reload Books")
+        refreshControl?.addTarget(self, action: #selector(loadCloud), for: .valueChanged)
+        
+        NotificationCenter.default.addObserver(self,
+            selector: #selector(loadCloud),
+            name: Notifications.CloudKitReceived,
+            object: nil)
+    }
+    
+    func loadCloud(reload:Bool = false) {
+        cloudOperation(waiting: true)
+        booksManager.loadBooksCloudKit(completion: { (error) in
+            self.cloudErrors(error: error,buttonTitle:"Try again") {
+                self.loadCloud()
+                return
+            }
+            self.cloudOperation(waiting: false)
+            self.updateSortOrderFromKVS()
+            self.tableView?.reloadData()
+            self.refreshControl?.endRefreshing()
+        })
     }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         NotificationCenter.default.removeObserver(self)
     }
+
     func uKVSChanged(notification:Notification) {
         updateSortOrderFromKVS()
     }
@@ -67,8 +102,13 @@ class BooksTableViewController: UITableViewController,Injectable {
     }
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            booksManager.removeBook(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            let book = booksManager.getBook(at: indexPath.row)
+            cloudOperation(waiting:true)
+            booksManager.deleteBookCloudKit(at: indexPath.row, book: book, completion: { (error) in
+                self.cloudOperation(waiting:false)
+                self.cloudErrors(error: error)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            })
         }
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -89,18 +129,47 @@ class BooksTableViewController: UITableViewController,Injectable {
         NSUbiquitousKeyValueStore.default().set(sortOrder.rawValue, forKey: sortOrderKey)
         tableView.reloadData()
     }
-
+    //MARK: Cloudkit
+    func cloudErrors(error: Error?, buttonTitle:String = "OK", completion:(()->Void)? = nil) {
+        if let error = error {
+            let alertController = UIAlertController(title: "CloudKit error", message: error.localizedDescription, preferredStyle: .actionSheet)
+            let okAction = UIAlertAction(title: buttonTitle, style: .default) { (action) in
+                completion?()
+            }
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true)
+        }
+    }
+    func cloudOperation(waiting: Bool) {
+        if waiting {
+            activityIndicator.startAnimating()
+        } else {
+            activityIndicator.stopAnimating()
+        }
+        tableView?.isUserInteractionEnabled = !waiting
+        navigationController?.navigationBar.isUserInteractionEnabled = !waiting
+        tabBarController?.tabBar.isUserInteractionEnabled = !waiting
+    }
 }
 extension BooksTableViewController:BookViewControllerDelegate {
     func saveBook(book:Book) {
         if let selectedIndexPath = tableView.indexPathForSelectedRow {
             //Update book
-            booksManager.updateBook(at: selectedIndexPath.row, with: book)
+            cloudOperation(waiting:true)
+            booksManager.updateBookCloudKit(at: selectedIndexPath.row, with: book, completion: { (error) in
+                self.cloudOperation(waiting:false)
+                self.cloudErrors(error: error)
+                self.tableView.reloadData()
+            })
         } else {
             //Add book
-            booksManager.addBook(book: book)
+            cloudOperation(waiting:true)
+            booksManager.addBookCloudKit(book: book, completion: { (error) in
+                self.cloudOperation(waiting:false)
+                self.cloudErrors(error: error)
+                self.tableView.reloadData()
+            })
         }
-        tableView.reloadData()
     }
 }
 extension BooksTableViewController: UISearchResultsUpdating {
@@ -110,3 +179,4 @@ extension BooksTableViewController: UISearchResultsUpdating {
         tableView.reloadData()
     }
 }
+

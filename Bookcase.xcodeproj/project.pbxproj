@@ -30,6 +30,7 @@
 		B96AFC501D70E7D800BE7A09 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = B96AFC471D70E7D800BE7A09 /* FMDatabasePool.m */; };
 		B96AFC511D70E7D800BE7A09 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = B96AFC471D70E7D800BE7A09 /* FMDatabasePool.m */; };
 		B96AFC541D70E9C100BE7A09 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B96AFC531D70E9C100BE7A09 /* libsqlite3.tbd */; };
+		B96AFC901D70FEEE00BE7A09 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B96AFC8F1D70FEEE00BE7A09 /* CloudKit.framework */; };
 		B99AC7171D5E57C300AE5861 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99AC7161D5E57C300AE5861 /* TabBarController.swift */; };
 		B9EADEAC1D49457300F125F3 /* BooksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EADEAB1D49457300F125F3 /* BooksTableViewController.swift */; };
 		B9EADEAE1D4A7BE800F125F3 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EADEAD1D4A7BE800F125F3 /* Book.swift */; };
@@ -87,6 +88,7 @@
 		B96AFC461D70E7D800BE7A09 /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
 		B96AFC471D70E7D800BE7A09 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
 		B96AFC531D70E9C100BE7A09 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		B96AFC8F1D70FEEE00BE7A09 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		B99AC7161D5E57C300AE5861 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		B9EADEAB1D49457300F125F3 /* BooksTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BooksTableViewController.swift; sourceTree = "<group>"; };
 		B9EADEAD1D4A7BE800F125F3 /* Book.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B96AFC541D70E9C100BE7A09 /* libsqlite3.tbd in Frameworks */,
+				B96AFC901D70FEEE00BE7A09 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,6 +241,7 @@
 		B96AFC521D70E9C100BE7A09 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B96AFC8F1D70FEEE00BE7A09 /* CloudKit.framework */,
 				B96AFC531D70E9C100BE7A09 /* libsqlite3.tbd */,
 			);
 			name = Frameworks;
@@ -314,6 +318,12 @@
 						DevelopmentTeam = 5M6U4VTSB8;
 						LastSwiftMigration = 0800;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
 							com.apple.iCloud = {
 								enabled = 1;
 							};

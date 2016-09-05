@@ -100,12 +100,12 @@ class BookViewController: UIViewController {
         dismissMe()
     }
     @IBAction func touchSave(_ sender: AnyObject) {
-        let bookToSave = Book(title: titleTextField.text!,
+        let bookToSave = Book(record: book?.record,
+                              title: titleTextField.text!,
                               author: authorTextField.text!,
                               rating: starRatings.rating,
                               isbn: isbnTextField.text!,
-                              notes: notesTextView.text!,
-                              id: book?.id
+                              notes: notesTextView.text!
         )
         delegate?.saveBook(book: bookToSave)
         dismissMe()
