@@ -25,22 +25,11 @@ class BooksTableViewController: UITableViewController,Injectable {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        updateSortOrderFromKVS()
-        NotificationCenter.default.addObserver(self, selector: #selector(uKVSChanged), name: NSUbiquitousKeyValueStore.didChangeExternallyNotification, object: nil)
-    }
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        NotificationCenter.default.removeObserver(self)
-    }
-    func uKVSChanged(notification:Notification) {
-        updateSortOrderFromKVS()
-    }
-    func updateSortOrderFromKVS() {
-        if let sortOrder = SortOrder(rawValue:Int(NSUbiquitousKeyValueStore.default().longLong(forKey: sortOrderKey))) {
+        if let sortOrder = SortOrder(rawValue:UserDefaults.standard.integer(forKey: sortOrderKey)) {
             booksManager.sortOrder = sortOrder
             sortSegmentedControl.selectedSegmentIndex = booksManager.sortOrder.rawValue
-            tableView.reloadData()
         }
+        tableView.reloadData()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -86,7 +75,7 @@ class BooksTableViewController: UITableViewController,Injectable {
     @IBAction func changedSegment(_ sender: UISegmentedControl) {
         guard let sortOrder = SortOrder(rawValue:sender.selectedSegmentIndex) else {return}
         booksManager.sortOrder = sortOrder
-        NSUbiquitousKeyValueStore.default().set(sortOrder.rawValue, forKey: sortOrderKey)
+        UserDefaults.standard.set(sortOrder.rawValue, forKey: sortOrderKey)
         tableView.reloadData()
     }
 

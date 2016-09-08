@@ -14,7 +14,6 @@ private let sortOrderKey = "CollectionSortOrder"
 class BooksCollectionViewController: UICollectionViewController,Injectable {
     var booksManager:BooksManager!
     let searchController = UISearchController(searchResultsController: nil)
-    
     @IBOutlet weak var sortSegmentedControl: UISegmentedControl!
     
     
@@ -26,22 +25,16 @@ class BooksCollectionViewController: UICollectionViewController,Injectable {
         definesPresentationContext = true
     }
     override func viewDidAppear(_ animated: Bool) {
-        updateSortOrderFromKVS()
-        NotificationCenter.default.addObserver(self, selector: #selector(uKVSChanged), name: NSUbiquitousKeyValueStore.didChangeExternallyNotification, object: nil)
+        super.viewDidAppear(animated)
+        if let sortOrder = SortOrder(rawValue:UserDefaults.standard.integer(forKey: sortOrderKey)) {
+            booksManager.sortOrder = sortOrder
+            sortSegmentedControl.selectedSegmentIndex = booksManager.sortOrder.rawValue
+        }
+        collectionView?.reloadData()
     }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         NotificationCenter.default.removeObserver(self)
-    }
-    func uKVSChanged(notification:Notification) {
-        updateSortOrderFromKVS()
-    }
-    func updateSortOrderFromKVS() {
-        if let sortOrder = SortOrder(rawValue:Int(NSUbiquitousKeyValueStore.default().longLong(forKey: sortOrderKey))) {
-            booksManager.sortOrder = sortOrder
-            sortSegmentedControl.selectedSegmentIndex = booksManager.sortOrder.rawValue
-            collectionView?.reloadData()
-        }
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -83,7 +76,7 @@ class BooksCollectionViewController: UICollectionViewController,Injectable {
     @IBAction func changedSegment(_ sender: UISegmentedControl) {
         guard let sortOrder = SortOrder(rawValue:sender.selectedSegmentIndex) else {return}
         booksManager.sortOrder = sortOrder
-        NSUbiquitousKeyValueStore.default().set(sortOrder.rawValue, forKey: sortOrderKey)
+        UserDefaults.standard.set(sortOrder.rawValue, forKey: sortOrderKey)
         collectionView?.reloadData()
     }
     //MARK: Header
