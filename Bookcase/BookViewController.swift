@@ -48,7 +48,7 @@ class BookViewController: UIViewController {
             notesTextView.text = book.notes
         }
         saveButton.isEnabled = !titleTextField.text!.isEmpty
-        isbnStackView.isHidden = NSUbiquitousKeyValueStore.default().bool(forKey: isbnKey)
+        isbnStackView.isHidden = UserDefaults.standard.bool(forKey: isbnKey)
     }
 
     @IBAction func titleDidChange(_ sender: AnyObject) {
@@ -59,7 +59,7 @@ class BookViewController: UIViewController {
         UIView.animate(withDuration: 0.5, animations: {
             self.isbnStackView.isHidden = !self.isbnStackView.isHidden
         })
-        NSUbiquitousKeyValueStore.default().set(isbnStackView.isHidden, forKey: isbnKey)
+        UserDefaults.standard.set(isbnStackView.isHidden, forKey: isbnKey)
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
