@@ -71,7 +71,6 @@
 		B9019FAD1CE22C3200CAE744 /* CosmosDistrib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosmosDistrib.swift; sourceTree = "<group>"; };
 		B94892821D5A42D200BC9BEB /* BooksCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BooksCollectionViewController.swift; sourceTree = "<group>"; };
 		B94892861D5AB2C400BC9BEB /* BookCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookCollectionViewCell.swift; sourceTree = "<group>"; };
-		B96AFC341D70A3E500BE7A09 /* Bookcase.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Bookcase.entitlements; sourceTree = "<group>"; };
 		B96AFC371D70E71D00BE7A09 /* Books.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = Books.db; sourceTree = "<group>"; };
 		B96AFC3B1D70E7D700BE7A09 /* Bookcase-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bookcase-Bridging-Header.h"; sourceTree = "<group>"; };
 		B96AFC3C1D70E7D700BE7A09 /* BookcaseTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BookcaseTests-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -145,7 +144,6 @@
 			isa = PBXGroup;
 			children = (
 				B96AFC371D70E71D00BE7A09 /* Books.db */,
-				B96AFC341D70A3E500BE7A09 /* Bookcase.entitlements */,
 				B9019F7A1CE229D500CAE744 /* AppDelegate.swift */,
 				B9019F7E1CE229D500CAE744 /* Main.storyboard */,
 				B948928F1D5CE61000BC9BEB /* Model */,
@@ -315,7 +313,7 @@
 						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.iCloud = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -549,7 +547,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Bookcase/Bookcase.entitlements;
 				DEVELOPMENT_TEAM = 5M6U4VTSB8;
 				INFOPLIST_FILE = Bookcase/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -566,7 +563,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Bookcase/Bookcase.entitlements;
 				DEVELOPMENT_TEAM = 5M6U4VTSB8;
 				INFOPLIST_FILE = Bookcase/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
