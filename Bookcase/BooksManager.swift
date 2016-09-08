@@ -129,13 +129,26 @@ class BooksManager {
     }
     // MARK: Local storage
     func storeBooks() {
-        (books.map( { $0.dictionary }) as NSArray).write(to: booksFile, atomically: true)
+        let booksXML = XMLNode()
+        for book in books {
+            booksXML.addChild(book.xml)
+        }
+        do {
+            try booksXML.description.write(
+                to: booksFile,
+                atomically: false,
+                encoding: String.Encoding.utf8)
+        } catch {
+            print("\(error)")
+        }
     }
-    func retrieveBooks()->[Book]? {
-        guard let array = NSArray(contentsOf: booksFile) as? [[String:String]] else {return nil}
-        guard let books = array.map( { Book(book: $0) } ) as? [Book] else {return nil}
+    func retrieveBooks() -> [Book]? {
+        guard let xml = XML(contentsOf: booksFile) 	//#1
+            else { return nil }
+        guard let books = xml[0].children.map(		//#2
+            { Book(book: $0)}) as? [Book] 		//#3
+            else {return nil}
         return books
     }
-
 
 }

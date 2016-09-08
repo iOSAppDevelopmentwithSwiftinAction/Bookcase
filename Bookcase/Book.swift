@@ -40,32 +40,30 @@ class Book {
         self.notes = notes
         self.image = cover
     }
-    //Property lists
-    convenience init?(book:[String:String]) {
-        guard let title = book[Key.title],
-            let author = book[Key.author],
-            let ratingString = book[Key.rating],
-            let rating = Double(ratingString),
-            let isbn = book[Key.isbn],
-            let notes = book[Key.notes]
-            else {
-                return nil
-        }
-        self.init(title:title,
-                  author:author,
-                  rating:rating,
-                  isbn:isbn,
-                  notes:notes
-        )
+    //XML
+    var xml:XMLNode {
+        let bookNode = XMLNode(name: "book")
+        bookNode.addChild(name: Key.title, value: self.title)
+        bookNode.addChild(name: Key.author, value: self.author)
+        bookNode.addChild(name: Key.rating, value: String(self.rating))
+        bookNode.addChild(name: Key.isbn, value: self.isbn)
+        bookNode.addChild(name: Key.notes, value: self.notes)
+        return bookNode
     }
-    var dictionary:[String:String] {
-        return [
-            Key.title:title,
-            Key.author:author,
-            Key.rating:String(rating),
-            Key.isbn:isbn,
-            Key.notes:notes
-        ]
+    convenience init?(book:XMLNode) {
+        guard let title = book[Key.title]?.text,
+            let author = book[Key.author]?.text,
+            let ratingString = book[Key.rating]?.text,
+            let rating = Double(ratingString),
+            let isbn = book[Key.isbn]?.text,
+            let notes = book[Key.notes]?.text
+            else {return nil}
+        self.init(title:title,
+            author:author,
+            rating:rating,
+            isbn:isbn,
+            notes:notes
+        )
     }
 }
 extension Book:Equatable {}
