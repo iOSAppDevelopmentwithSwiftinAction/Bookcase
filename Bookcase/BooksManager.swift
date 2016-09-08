@@ -133,23 +133,6 @@ class BooksManager {
     //MARK: CloudKit
     //List of error codes: 
     //https://developer.apple.com/library/ios/documentation/CloudKit/Reference/CloudKit_constants/#//apple_ref/c/tdef/CKErrorCode
-/*    func addBookCloudKit(book:Book, completion: @escaping (_ success:Bool,_ error:Error?)->Void) {
-        db.save(book.record) { (record, error) in
-            DispatchQueue.main.async {
-                if let error = error as? CKError {
-                     else if error.code == .serverRecordChanged {
-                        print("-------optimistic locking failed, ignore")
-                        print("Retry - \(error.userInfo[CKErrorRetryAfterKey])")
-                    }
-                    completion(false, error)
-                } else if let record = record {
-                    self.addBook(book: book)
-                    completion(true, nil)
-                }
-                
-            }
-        }
-    }*/
     func addBookCloudKit(book:Book, completion: @escaping (_ error:CKError?)->Void) {
         db.save(book.record) { (record, error) in
             DispatchQueue.main.async {

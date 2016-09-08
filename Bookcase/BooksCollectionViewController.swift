@@ -33,8 +33,7 @@ class BooksCollectionViewController: UICollectionViewController,Injectable {
         updateSortOrderFromKVS()
         NotificationCenter.default.addObserver(self, selector: #selector(uKVSChanged), name: NSUbiquitousKeyValueStore.didChangeExternallyNotification, object: nil)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(loadCloud), name: Notifications.CloudKitReceived,
-            object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(loadCloud), name: Notifications.CloudKitReceived, object: nil)
     }
     
     func loadCloud(reload:Bool = false) {
