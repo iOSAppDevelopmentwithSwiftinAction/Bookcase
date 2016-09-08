@@ -64,14 +64,10 @@ class BookViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardFrameChanges), name: Notification.Name.UIKeyboardWillChangeFrame, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(uKVSChanged), name: NSUbiquitousKeyValueStore.didChangeExternallyNotification, object: nil)
     }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         NotificationCenter.default.removeObserver(self)
-    }
-    func uKVSChanged(notification:Notification) {
-        isbnStackView.isHidden = NSUbiquitousKeyValueStore.default().bool(forKey: isbnKey)
     }
     func keyboardFrameChanges(notification:Notification) {
         //get keyboard height
