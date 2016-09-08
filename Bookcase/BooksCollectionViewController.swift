@@ -7,11 +7,17 @@
 //
 
 import UIKit
+import CoreData
 
 private let reuseIdentifier = "bookCollectionCell"
+private let sortOrderKey = "CollectionSortOrder"
 
-class BooksCollectionViewController: UICollectionViewController,Injectable {
-    var booksManager:BooksManager!
+class BooksCollectionViewController: UICollectionViewController {
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
+    lazy var context:NSManagedObjectContext = {
+        return self.appDelegate.persistentContainer.viewContext
+    }()
     let searchController = UISearchController(searchResultsController: nil)
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,14 +26,17 @@ class BooksCollectionViewController: UICollectionViewController,Injectable {
         searchController.obscuresBackgroundDuringPresentation = false
         definesPresentationContext = true
     }
-
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if let sortOrder = SortOrder(rawValue:UserDefaults.standard.integer(forKey: sortOrderKey)) {
+            segmentedControl.selectedSegmentIndex = sortOrder.rawValue
+            fetchedResultsController = getFetch()
+        }
+        collectionView?.reloadData()
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    func inject(data:BooksManager) {
-        self.booksManager = data
-        collectionView?.reloadData()
     }
     // MARK: UICollectionViewDataSource
 
@@ -36,32 +45,34 @@ class BooksCollectionViewController: UICollectionViewController,Injectable {
         return 1
     }
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return booksManager.bookCount
+        let sectionInfo = self.fetchedResultsController.sections![section]
+        return sectionInfo.numberOfObjects
     }
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! BookCollectionViewCell
-        let book = booksManager.getBook(at: indexPath.row)
-        cell.imageView.image = book.cover
-        cell.titleLabel.text = book.hasCoverImage ? "" : book.title
-        cell.imageView.isHidden = !book.hasCoverImage
+        let book = self.fetchedResultsController.object(at: indexPath)
+        cell.imageView?.isHidden = true
+        cell.titleLabel.text = book.title
         return cell
     }
-    override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let selectedIndexPath = collectionView?.indexPathsForSelectedItems?.first,
             let viewController = segue.destination as? BookViewController {
             //Editing
-            viewController.book = booksManager.getBook(at: selectedIndexPath.row)
+            viewController.book = self.fetchedResultsController.object(at: selectedIndexPath)
+            viewController.context = context
             viewController.delegate = self
         } else if let navController = segue.destination as? UINavigationController,
             let viewController = navController.topViewController as? BookViewController {
             //Adding
             viewController.delegate = self
+            viewController.context = context
         }
     }
     @IBAction func changedSegment(_ sender: UISegmentedControl) {
         guard let sortOrder = SortOrder(rawValue:sender.selectedSegmentIndex) else {return}
-        booksManager.sortOrder = sortOrder
+        fetchedResultsController = getFetch()
+        UserDefaults.standard.set(sortOrder.rawValue, forKey: sortOrderKey)
         collectionView?.reloadData()
     }
     //MARK: Header
@@ -70,33 +81,89 @@ class BooksCollectionViewController: UICollectionViewController,Injectable {
         reusableView.addSubview(searchController.searchBar)
         return reusableView
     }
+    //MARK: FetchedResultsController
+    lazy var fetchedResultsController : NSFetchedResultsController<Book> = self.getFetch()
+    func getFetch()->NSFetchedResultsController<Book> {
+        let fetchRequest: NSFetchRequest<Book> = Book.fetchRequest()
+        fetchRequest.fetchBatchSize = 20
+        //sort
+        let segmentIndex = segmentedControl.selectedSegmentIndex
+        guard let sortOrder = SortOrder(rawValue:segmentIndex) else {fatalError("Segment error")}
+        let titleDescriptor = NSSortDescriptor(key: "title", ascending: true,
+                                               selector:#selector(NSString.localizedCaseInsensitiveCompare(_:)))
+        let authorDescriptor = NSSortDescriptor(key: "author", ascending: true,
+                                                selector:#selector(NSString.localizedCaseInsensitiveCompare(_:)))
+        if sortOrder == .title {
+            fetchRequest.sortDescriptors = [titleDescriptor,authorDescriptor]
+        } else {
+            fetchRequest.sortDescriptors = [authorDescriptor,titleDescriptor]
+        }
+        //search
+        guard let searchText = searchController.searchBar.text else { fatalError("No search bar") }
+        if searchText != "" {
+            fetchRequest.predicate = NSPredicate(format: "(title CONTAINS[CD] '\(searchText)') OR (author contains[cd] '\(searchText)')")
+        }
+        fetchedResultsController = NSFetchedResultsController(
+            fetchRequest:fetchRequest,
+            managedObjectContext:self.context,
+            sectionNameKeyPath:nil,
+            cacheName:nil
+        )
+        fetchedResultsController.delegate = self
+        
+        do {
+            try fetchedResultsController.performFetch()
+            return fetchedResultsController
+        } catch {
+            fatalError("Error \(error)")
+        }
+    }
 }
+extension BooksCollectionViewController:NSFetchedResultsControllerDelegate {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        self.collectionView?.reloadData()
+    }
+    //Alternatively, you can perform the specific updates with the following:
+    /*
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        self.tableView.beginUpdates()
+    }
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        self.tableView.endUpdates()
+    }
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            tableView.insertRows(at: [newIndexPath!], with: .fade)
+        case .delete:
+            tableView.deleteRows(at: [indexPath!], with: .fade)
+        case .update:
+            self.configureCell(tableView.cellForRow(at: indexPath!)!, with: anObject as! Book)
+        case .move:
+            tableView.moveRow(at: indexPath!, to: newIndexPath!)
+        }
+    }
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+        //no sections in this project
+    }
+    */
+}
+
 extension BooksCollectionViewController:BookViewControllerDelegate {
     func saveBook(book:Book) {
-        if let selectedIndexPath = collectionView?.indexPathsForSelectedItems?.first {
-            //Update book
-            booksManager.updateBook(at: selectedIndexPath.row, with: book)
-        } else {
-            //Add book
-            booksManager.addBook(book: book)
-        }
-        collectionView?.reloadData()
+        appDelegate.saveContext()
     }
 }
 extension BooksCollectionViewController:UICollectionViewDelegateFlowLayout {
     public func collectionView(_ collectionView: UICollectionView,
                                layout collectionViewLayout: UICollectionViewLayout,
                                sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let book = booksManager.getBook(at: indexPath.row)
-        let itemHeight:CGFloat = 90
-        let itemWidth = (book.cover.size.height / book.cover.size.width) * itemHeight
-        return CGSize(width: itemWidth, height: itemHeight)
+        return CGSize(width: 80, height: 90)
     }
 }
 extension BooksCollectionViewController:UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        guard let searchText = searchController.searchBar.text else { return }
-        booksManager.searchFilter = searchText
+        fetchedResultsController = getFetch()
         collectionView?.reloadData()
     }
 }

@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import CoreData
 
 protocol BookViewControllerDelegate {
     func saveBook(book:Book)
 }
+
+private let isbnKey = "ISBN"
 
 class BookViewController: UIViewController {
 
@@ -28,6 +31,7 @@ class BookViewController: UIViewController {
     
     var delegate:BookViewControllerDelegate?
     var book:Book?
+    var context:NSManagedObjectContext!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +42,6 @@ class BookViewController: UIViewController {
         
         if let book = book {
             navigationItem.title = "Edit book"
-            bookCover.image = book.cover
             starRatings.rating = book.rating
             titleTextField.text = book.title
             authorTextField.text = book.author
@@ -46,6 +49,7 @@ class BookViewController: UIViewController {
             notesTextView.text = book.notes
         }
         saveButton.isEnabled = !titleTextField.text!.isEmpty
+        isbnStackView.isHidden = UserDefaults.standard.bool(forKey: isbnKey)
     }
 
     @IBAction func titleDidChange(_ sender: AnyObject) {
@@ -56,6 +60,7 @@ class BookViewController: UIViewController {
         UIView.animate(withDuration: 0.5, animations: {
             self.isbnStackView.isHidden = !self.isbnStackView.isHidden
         })
+        UserDefaults.standard.set(isbnStackView.isHidden, forKey: isbnKey)
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -93,15 +98,21 @@ class BookViewController: UIViewController {
         dismissMe()
     }
     @IBAction func touchSave(_ sender: AnyObject) {
-        let bookToSave = Book(title: titleTextField.text!,
-                              author: authorTextField.text!,
-                              rating: starRatings.rating,
-                              isbn: isbnTextField.text!,
-                              notes: notesTextView.text!
-        )
+        let bookToSave:Book
+        if let book = book {
+            bookToSave = book
+        } else {
+            bookToSave = Book(context: context)
+        }
+        bookToSave.title = titleTextField.text!
+        bookToSave.author = authorTextField.text!
+        bookToSave.rating = starRatings.rating
+        bookToSave.isbn = isbnTextField.text!
+        bookToSave.notes = notesTextView.text!
         delegate?.saveBook(book: bookToSave)
         dismissMe()
     }
+    
     func dismissMe() {
         if presentingViewController != nil {
             //was presented via modal segue
