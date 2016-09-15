@@ -38,7 +38,7 @@ class BooksTableViewController: UITableViewController {
         let book = booksManager.getBook(at: indexPath.row)
         cell.textLabel?.text = book.title
         cell.detailTextLabel?.text = book.author
-        cell.imageView?.image = book.cover ?? (UIImage(named: "book.jpg")!)
+        cell.imageView?.image = book.cover
         return cell
     }
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
@@ -47,7 +47,7 @@ class BooksTableViewController: UITableViewController {
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
-    override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let selectedIndexPath = tableView.indexPathForSelectedRow,
             let viewController = segue.destination as? BookViewController {
             //Editing
