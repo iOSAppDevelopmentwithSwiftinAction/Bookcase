@@ -21,7 +21,10 @@ class BookViewController: UIViewController {
         bookCover.addSubview(infoButton)
     }
     func toggleISBN() {
-        self.isbnStackView.isHidden = !self.isbnStackView.isHidden
+        UIView.animate(withDuration: 0.5, animations: {
+            self.isbnStackView.isHidden = !self.isbnStackView.isHidden
+        })
+
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
