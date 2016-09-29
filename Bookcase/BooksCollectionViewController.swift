@@ -101,7 +101,7 @@ extension BooksCollectionViewController:UICollectionViewDelegateFlowLayout {
                                sizeForItemAt indexPath: IndexPath) -> CGSize {
         let book = booksManager.getBook(at: indexPath.row)
         let itemHeight:CGFloat = 90
-        let itemWidth = (book.cover.size.height / book.cover.size.width) * itemHeight
+        let itemWidth = (book.cover.size.width / book.cover.size.height) * itemHeight
         return CGSize(width: itemWidth, height: itemHeight)
     }
 }

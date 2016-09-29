@@ -27,9 +27,11 @@ class BookViewController: UIViewController {
     @IBOutlet weak var isbnTextField: UITextField!
     @IBOutlet weak var notesTextView: UITextView!
     @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBOutlet weak var cameraButton: UIBarButtonItem!
     
     var delegate:BookViewControllerDelegate?
     var book:Book?
+    var coverToSave:UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +51,9 @@ class BookViewController: UIViewController {
         }
         saveButton.isEnabled = !titleTextField.text!.isEmpty
         isbnStackView.isHidden = UserDefaults.standard.bool(forKey: isbnKey)
+        if !UIImagePickerController.isSourceTypeAvailable(.camera) {
+            cameraButton.isEnabled = false
+        }
     }
 
     @IBAction func titleDidChange(_ sender: AnyObject) {
@@ -100,11 +105,28 @@ class BookViewController: UIViewController {
                               author: authorTextField.text!,
                               rating: starRatings.rating,
                               isbn: isbnTextField.text!,
-                              notes: notesTextView.text!
+                              notes: notesTextView.text!,
+                              cover: coverToSave
         )
         delegate?.saveBook(book: bookToSave)
         dismissMe()
     }
+    @IBAction func takePhoto(_ sender: AnyObject) {
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = .camera
+        present(imagePicker, animated: true, completion: nil)
+        
+        imagePicker.delegate = self
+    }
+    @IBAction func getPhotoFromLibrary(_ sender: AnyObject) {
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = .photoLibrary
+        present(imagePicker, animated: true, completion: nil)
+        
+        imagePicker.delegate = self
+    }
+    
+    
     func dismissMe() {
         if presentingViewController != nil {
             //was presented via modal segue
@@ -119,5 +141,14 @@ extension BookViewController:UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+}
+extension BookViewController:UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        dismiss(animated: true, completion: nil)
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            bookCover.image = image
+            coverToSave = image
+        }
     }
 }

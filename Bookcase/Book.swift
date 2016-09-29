@@ -13,6 +13,7 @@ internal struct Key {
     static let rating = "rating"
     static let isbn = "isbn"
     static let notes = "notes"
+    static let cover = "cover"
 }
 
 class Book: NSObject, NSCoding {
@@ -24,6 +25,11 @@ class Book: NSObject, NSCoding {
     var notes:String
     var cover:UIImage {
         get {
+            if image == nil {
+                print ("image nil")
+            } else {
+                print ("image not nil")
+            }
             return image ?? Book.defaultCover
         }
     }
@@ -48,21 +54,25 @@ class Book: NSObject, NSCoding {
             let isbn = aDecoder.decodeObject(forKey:Key.isbn) as? String,
             let notes = aDecoder.decodeObject(forKey:Key.notes) as? String
             else { return nil }
-        
+        let cover = aDecoder.decodeObject(forKey:Key.cover) as? UIImage
         self.init(
             title: title,
             author: author,
             rating: rating,
             isbn: isbn,
-            notes: notes
+            notes: notes,
+            cover: cover
         )
     }
     func encode(with aCoder: NSCoder) {
-        aCoder.encode(self.title, forKey: Key.title)
-        aCoder.encode(self.author, forKey: Key.author)
-        aCoder.encode(self.rating, forKey: Key.rating)
-        aCoder.encode(self.isbn, forKey: Key.isbn)
-        aCoder.encode(self.notes, forKey: Key.notes)
+        aCoder.encode(title, forKey: Key.title)
+        aCoder.encode(author, forKey: Key.author)
+        aCoder.encode(rating, forKey: Key.rating)
+        aCoder.encode(isbn, forKey: Key.isbn)
+        aCoder.encode(notes, forKey: Key.notes)
+        if let image = image {
+            aCoder.encode(image, forKey: Key.cover)
+        }
     }
 
 }
