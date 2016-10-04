@@ -28,6 +28,7 @@ class BookViewController: UIViewController {
     @IBOutlet weak var notesTextView: UITextView!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
+    @IBOutlet weak var galleryButton: UIBarButtonItem!
     
     var delegate:BookViewControllerDelegate?
     var book:Book?
@@ -121,6 +122,11 @@ class BookViewController: UIViewController {
     @IBAction func getPhotoFromLibrary(_ sender: AnyObject) {
         let imagePicker = UIImagePickerController()
         imagePicker.sourceType = .photoLibrary
+        
+        //Display in popover
+        imagePicker.modalPresentationStyle = .popover
+        imagePicker.popoverPresentationController?.barButtonItem = galleryButton
+        
         present(imagePicker, animated: true, completion: nil)
         
         imagePicker.delegate = self
@@ -134,6 +140,13 @@ class BookViewController: UIViewController {
         } else {
             //was pushed onto navigation stack
             navigationController!.popViewController(animated: true)
+        }
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let navigationController = segue.destination as? UINavigationController,
+            let barcodeViewController = navigationController.topViewController as? BarcodeViewController {
+            
+            barcodeViewController.delegate = self
         }
     }
 }
@@ -150,5 +163,13 @@ extension BookViewController:UIImagePickerControllerDelegate, UINavigationContro
             bookCover.image = image
             coverToSave = image
         }
+    }
+    func navigationControllerPreferredInterfaceOrientationForPresentation(_ navigationController: UINavigationController) -> UIInterfaceOrientation {
+        return UIInterfaceOrientation.landscapeLeft
+    }
+}
+extension BookViewController:BarcodeViewControllerDelegate {
+    func foundBarcode(barcode:String) {
+        isbnTextField.text = barcode
     }
 }

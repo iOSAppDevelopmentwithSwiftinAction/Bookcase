@@ -107,18 +107,18 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6Dt-AU-wvL" id="0MO-aQ-KCw">
-                                    <frame key="frameInset" width="375" height="43.5"/>
+                                    <frame key="frameInset" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mRP-4Q-iCn">
-                                            <frame key="frameInset" minX="15" minY="5" width="33.5" height="20.5"/>
+                                            <frame key="frameInset" minX="15" minY="4" width="34" height="21"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="x3I-uJ-lFi">
-                                            <frame key="frameInset" minX="15" minY="25.5" width="44" height="14.5"/>
+                                            <frame key="frameInset" minX="15" minY="25" width="44" height="15"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -328,12 +328,21 @@
                                     <action selector="getPhotoFromLibrary:" destination="BYZ-38-t0r" id="yg8-dK-Yhi"/>
                                 </connections>
                             </barButtonItem>
+                            <barButtonItem image="barcode" id="X82-2O-Nvh">
+                                <connections>
+                                    <action selector="getPhotoFromLibrary:" destination="BYZ-38-t0r" id="aQG-OV-vPK"/>
+                                    <segue destination="0hJ-bE-Ztk" kind="popoverPresentation" popoverAnchorBarButtonItem="X82-2O-Nvh" id="d4i-l3-qdN">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                    </segue>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="authorTextField" destination="K59-gg-5ay" id="rqE-OS-Eca"/>
                         <outlet property="bookCover" destination="7xl-eQ-ZGX" id="GMh-dN-Jqw"/>
                         <outlet property="cameraButton" destination="NcL-pd-Do8" id="bWq-u4-cfJ"/>
+                        <outlet property="galleryButton" destination="hSM-vI-rga" id="hHY-2m-UTZ"/>
                         <outlet property="isbnStackView" destination="aOw-Pk-i0O" id="mzV-10-Fpc"/>
                         <outlet property="isbnTextField" destination="GaW-ni-xJJ" id="ZOr-B8-ES7"/>
                         <outlet property="notesTextView" destination="vSH-XD-HqM" id="Wa5-oI-NHz"/>
@@ -347,6 +356,31 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4014" y="83"/>
+        </scene>
+        <!--Detect barcode-->
+        <scene sceneID="F7s-d2-mVy">
+            <objects>
+                <viewController id="OdN-af-brI" customClass="BarcodeViewController" customModule="Bookcase" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gI3-QX-Sw5"/>
+                        <viewControllerLayoutGuide type="bottom" id="eNK-wH-G06"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mGA-nQ-7VB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Detect barcode" id="dWq-xb-h6g">
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="Cnj-Kj-eUr">
+                            <connections>
+                                <action selector="touchCancel:" destination="OdN-af-brI" id="FaJ-jL-K92"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rjR-A3-Atw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5609" y="82"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="WMu-rH-jbq">
@@ -423,8 +457,27 @@
             </objects>
             <point key="canvasLocation" x="1441" y="358"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="aET-t3-OCw">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0hJ-bE-Ztk" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Whv-Sj-bWA">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="OdN-af-brI" kind="relationship" relationship="rootViewController" id="xEM-4d-Ly6"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="C1p-He-D9T" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4829.6000000000004" y="81.409295352323838"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="barcode" width="22" height="22"/>
         <image name="book" width="450" height="413"/>
         <image name="cover" width="25" height="25"/>
         <image name="gallery" width="22" height="22"/>
