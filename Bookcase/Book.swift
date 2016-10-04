@@ -25,11 +25,6 @@ class Book: NSObject, NSCoding {
     var notes:String
     var cover:UIImage {
         get {
-            if image == nil {
-                print ("image nil")
-            } else {
-                print ("image not nil")
-            }
             return image ?? Book.defaultCover
         }
     }
