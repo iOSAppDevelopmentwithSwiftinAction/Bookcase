@@ -13,14 +13,16 @@ import UIKit
             setNeedsDisplay()
         }
     }
+    let star = CAShapeLayer()
     override func draw(_ rect: CGRect) {
+        star.path = getStarPath().cgPath
         if fill {
-            UIColor.orange.setFill()
-            getStarPath().fill()
+            star.fillColor = UIColor.orange.cgColor
         } else {
-            UIColor.orange.setStroke()
-            getStarPath().stroke()
+            star.fillColor = UIColor.clear.cgColor
+            star.strokeColor = UIColor.orange.cgColor
         }
+        self.layer.addSublayer(star)
     }
     func getStarPath()->UIBezierPath {
         let path = UIBezierPath()
