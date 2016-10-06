@@ -14,15 +14,13 @@ import UIKit
         }
     }
     override func draw(_ rect: CGRect) {
-        let path = getStarPath()
         if fill {
             UIColor.orange.setFill()
-            path.fill()
+            getStarPath().fill()
         } else {
             UIColor.orange.setStroke()
-            path.stroke()
+            getStarPath().stroke()
         }
-
     }
     func getStarPath()->UIBezierPath {
         let path = UIBezierPath()
@@ -39,11 +37,4 @@ import UIKit
         path.close()
         return path
     }
-    /*override func layoutSubviews() {
-        super.layoutSubviews()
-        self.backgroundColor = UIColor.clear
-    }
-    override var intrinsicContentSize: CGSize {
-        return CGSize(width: 44, height: 44)
-    }*/
 }

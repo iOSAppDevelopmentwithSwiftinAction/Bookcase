@@ -11,23 +11,21 @@ import UIKit
     @IBInspectable var rating:Double = 3 {
         didSet {setNeedsDisplay()}
     }
-    @IBInspectable var numberOfStars:Int = 5 {
-        didSet {setNeedsDisplay()}
-    }
-    
     var stars:[Star] = []
     
+    let numberOfStars = 5
     override func draw(_ rect: CGRect) {
-        //remove all views
-        stars.forEach { $0.removeFromSuperview() }
-        stars = []
-        //add stars
-        for i in 0..<numberOfStars {
-            let star = Star(frame: CGRect(x: CGFloat(30 * i), y: 0, width: 25, height: 25))
+        if stars.count == 0 {
+            //add stars
+            for i in 0..<numberOfStars {
+                let star = Star(frame: CGRect(x: CGFloat(30 * i), y: 0, width: 25, height: 25))
+                star.backgroundColor = UIColor.clear
+                self.addSubview(star)
+                stars.append(star)
+            }
+        }
+        for (i,star) in stars.enumerated() {
             star.fill = Double(i)<rating
-            star.backgroundColor = UIColor.clear
-            self.addSubview(star)
-            stars.append(star)
         }
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
