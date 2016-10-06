@@ -21,7 +21,7 @@ class BookViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var outerStackView: UIStackView!
     
-    @IBOutlet weak var starRatings: CosmosView!
+    @IBOutlet weak var starRatings: Rating!
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var authorTextField: UITextField!
     @IBOutlet weak var isbnTextField: UITextField!
