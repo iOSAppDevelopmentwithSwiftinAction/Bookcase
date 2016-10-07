@@ -13,7 +13,7 @@
             <objects>
                 <collectionViewController id="FYg-ZN-64o" customClass="BooksCollectionViewController" customModule="Bookcase" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="xhy-v0-obd">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="lnx-85-clR">
@@ -58,7 +58,7 @@
                             </collectionViewCell>
                         </cells>
                         <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collectionHeader" id="2WF-D6-vah">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </collectionReusableView>
                         <connections>
@@ -99,15 +99,15 @@
             <objects>
                 <tableViewController id="SYg-hS-8r6" customClass="BooksTableViewController" customModule="Bookcase" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="7XT-Ll-5Zw">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="bookCell" textLabel="mRP-4Q-iCn" detailTextLabel="x3I-uJ-lFi" style="IBUITableViewCellStyleSubtitle" id="6Dt-AU-wvL">
-                                <rect key="frame" x="0.0" y="92" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="92" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6Dt-AU-wvL" id="0MO-aQ-KCw">
-                                    <frame key="frameInset" width="375" height="43"/>
+                                    <frame key="frameInset" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mRP-4Q-iCn">
@@ -173,7 +173,7 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" delaysContentTouches="NO" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="9VK-99-pTo">
@@ -185,7 +185,7 @@
                                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" verticalCompressionResistancePriority="749" image="book" translatesAutoresizingMaskIntoConstraints="NO" id="7xl-eQ-ZGX" userLabel="Book Cover"/>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="3DS-rT-AiX" userLabel="Main Star Stack View">
                                                         <subviews>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CtG-Dh-lkq" userLabel="Star ratings" customClass="CosmosView" customModule="Bookcase" customModuleProvider="target">
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CtG-Dh-lkq" userLabel="Star ratings" customClass="Rating" customModule="Bookcase" customModuleProvider="target">
                                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </view>
                                                         </subviews>
@@ -349,7 +349,7 @@
                         <outlet property="outerStackView" destination="aea-kD-AKh" id="uqf-SM-vta"/>
                         <outlet property="saveButton" destination="z1w-BJ-J9w" id="u4X-Ba-Tou"/>
                         <outlet property="scrollView" destination="9VK-99-pTo" id="l0G-lu-iUX"/>
-                        <outlet property="starRatings" destination="CtG-Dh-lkq" id="fW9-kW-aew"/>
+                        <outlet property="starRatings" destination="CtG-Dh-lkq" id="D51-vk-16J"/>
                         <outlet property="titleTextField" destination="o4g-or-ufm" id="oaj-br-Skz"/>
                     </connections>
                 </viewController>
@@ -366,7 +366,7 @@
                         <viewControllerLayoutGuide type="bottom" id="eNK-wH-G06"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="mGA-nQ-7VB">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
