@@ -9,12 +9,13 @@
 import UIKit
 @IBDesignable class Rating: UIView {
     @IBInspectable var rating:Double = 3 {
-        didSet {setNeedsDisplay()}
+        didSet {setNeedsLayout()}
     }
     var stars:[Star] = []
     
     let numberOfStars = 5
-    override func draw(_ rect: CGRect) {
+
+    override func layoutSubviews() {
         if stars.count == 0 {
             //add stars
             for i in 0..<numberOfStars {
