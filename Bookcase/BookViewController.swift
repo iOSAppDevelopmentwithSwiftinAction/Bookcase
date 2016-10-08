@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 protocol BookViewControllerDelegate {
     func saveBook(book:Book)
@@ -33,6 +34,7 @@ class BookViewController: UIViewController {
     var delegate:BookViewControllerDelegate?
     var book:Book?
     var coverToSave:UIImage?
+    var barcodeAudio: AVAudioPlayer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -149,6 +151,13 @@ class BookViewController: UIViewController {
             barcodeViewController.delegate = self
         }
     }
+    
+    func playBarcodeSound() {
+        guard let url = Bundle.main.url(forResource: "scanner", withExtension:"aiff") else {return}
+        //play Sound
+        barcodeAudio = try? AVAudioPlayer(contentsOf: url)
+        barcodeAudio?.play()
+    }
 }
 extension BookViewController:UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -171,5 +180,6 @@ extension BookViewController:UIImagePickerControllerDelegate, UINavigationContro
 extension BookViewController:BarcodeViewControllerDelegate {
     func foundBarcode(barcode:String) {
         isbnTextField.text = barcode
+        playBarcodeSound()
     }
 }
