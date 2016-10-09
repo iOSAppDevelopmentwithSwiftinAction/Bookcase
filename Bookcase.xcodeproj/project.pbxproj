@@ -14,21 +14,10 @@
 		B9019F851CE229D500CAE744 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9019F831CE229D500CAE744 /* LaunchScreen.storyboard */; };
 		B9019F901CE229D500CAE744 /* BookcaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9019F8F1CE229D500CAE744 /* BookcaseTests.swift */; };
 		B9019F9B1CE229D500CAE744 /* BookcaseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9019F9A1CE229D500CAE744 /* BookcaseUITests.swift */; };
-		B9019FAE1CE22C3200CAE744 /* CosmosDistrib.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9019FAD1CE22C3200CAE744 /* CosmosDistrib.swift */; };
 		B94892831D5A42D200BC9BEB /* BooksCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B94892821D5A42D200BC9BEB /* BooksCollectionViewController.swift */; };
 		B94892871D5AB2C400BC9BEB /* BookCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B94892861D5AB2C400BC9BEB /* BookCollectionViewCell.swift */; };
 		B96AFC381D70E71D00BE7A09 /* Books.db in Resources */ = {isa = PBXBuildFile; fileRef = B96AFC371D70E71D00BE7A09 /* Books.db */; };
 		B96AFC391D70E71D00BE7A09 /* Books.db in Resources */ = {isa = PBXBuildFile; fileRef = B96AFC371D70E71D00BE7A09 /* Books.db */; };
-		B96AFC481D70E7D800BE7A09 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = B96AFC3F1D70E7D800BE7A09 /* FMDatabase.m */; };
-		B96AFC491D70E7D800BE7A09 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = B96AFC3F1D70E7D800BE7A09 /* FMDatabase.m */; };
-		B96AFC4A1D70E7D800BE7A09 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = B96AFC411D70E7D800BE7A09 /* FMResultSet.m */; };
-		B96AFC4B1D70E7D800BE7A09 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = B96AFC411D70E7D800BE7A09 /* FMResultSet.m */; };
-		B96AFC4C1D70E7D800BE7A09 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = B96AFC431D70E7D800BE7A09 /* FMDatabaseQueue.m */; };
-		B96AFC4D1D70E7D800BE7A09 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = B96AFC431D70E7D800BE7A09 /* FMDatabaseQueue.m */; };
-		B96AFC4E1D70E7D800BE7A09 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B96AFC451D70E7D800BE7A09 /* FMDatabaseAdditions.m */; };
-		B96AFC4F1D70E7D800BE7A09 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B96AFC451D70E7D800BE7A09 /* FMDatabaseAdditions.m */; };
-		B96AFC501D70E7D800BE7A09 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = B96AFC471D70E7D800BE7A09 /* FMDatabasePool.m */; };
-		B96AFC511D70E7D800BE7A09 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = B96AFC471D70E7D800BE7A09 /* FMDatabasePool.m */; };
 		B96AFC541D70E9C100BE7A09 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B96AFC531D70E9C100BE7A09 /* libsqlite3.tbd */; };
 		B96AFC901D70FEEE00BE7A09 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B96AFC8F1D70FEEE00BE7A09 /* CloudKit.framework */; };
 		B99AC7171D5E57C300AE5861 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99AC7161D5E57C300AE5861 /* TabBarController.swift */; };
@@ -69,24 +58,10 @@
 		B9019F961CE229D500CAE744 /* BookcaseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BookcaseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9019F9A1CE229D500CAE744 /* BookcaseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookcaseUITests.swift; sourceTree = "<group>"; };
 		B9019F9C1CE229D500CAE744 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B9019FAD1CE22C3200CAE744 /* CosmosDistrib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosmosDistrib.swift; sourceTree = "<group>"; };
 		B94892821D5A42D200BC9BEB /* BooksCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BooksCollectionViewController.swift; sourceTree = "<group>"; };
 		B94892861D5AB2C400BC9BEB /* BookCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookCollectionViewCell.swift; sourceTree = "<group>"; };
 		B96AFC341D70A3E500BE7A09 /* Bookcase.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Bookcase.entitlements; sourceTree = "<group>"; };
 		B96AFC371D70E71D00BE7A09 /* Books.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = Books.db; sourceTree = "<group>"; };
-		B96AFC3B1D70E7D700BE7A09 /* Bookcase-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bookcase-Bridging-Header.h"; sourceTree = "<group>"; };
-		B96AFC3C1D70E7D700BE7A09 /* BookcaseTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BookcaseTests-Bridging-Header.h"; sourceTree = "<group>"; };
-		B96AFC3D1D70E7D800BE7A09 /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
-		B96AFC3E1D70E7D800BE7A09 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
-		B96AFC3F1D70E7D800BE7A09 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
-		B96AFC401D70E7D800BE7A09 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
-		B96AFC411D70E7D800BE7A09 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
-		B96AFC421D70E7D800BE7A09 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
-		B96AFC431D70E7D800BE7A09 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
-		B96AFC441D70E7D800BE7A09 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
-		B96AFC451D70E7D800BE7A09 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
-		B96AFC461D70E7D800BE7A09 /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
-		B96AFC471D70E7D800BE7A09 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
 		B96AFC531D70E9C100BE7A09 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		B96AFC8F1D70FEEE00BE7A09 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		B99AC7161D5E57C300AE5861 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
@@ -157,7 +132,6 @@
 				B9019F811CE229D500CAE744 /* Assets.xcassets */,
 				B9019F831CE229D500CAE744 /* LaunchScreen.storyboard */,
 				B9019F861CE229D500CAE744 /* Info.plist */,
-				B9019FAF1CE22C3500CAE744 /* Frameworks */,
 			);
 			path = Bookcase;
 			sourceTree = "<group>";
@@ -178,15 +152,6 @@
 				B9019F9C1CE229D500CAE744 /* Info.plist */,
 			);
 			path = BookcaseUITests;
-			sourceTree = "<group>";
-		};
-		B9019FAF1CE22C3500CAE744 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				B96AFC3A1D70E7CD00BE7A09 /* fmdb */,
-				B9019FAD1CE22C3200CAE744 /* CosmosDistrib.swift */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		B948928E1D5CE5E800BC9BEB /* Controller */ = {
@@ -216,26 +181,6 @@
 				B9F91AB21D36EA4700B12709 /* UIViewExtension.swift */,
 			);
 			name = View;
-			sourceTree = "<group>";
-		};
-		B96AFC3A1D70E7CD00BE7A09 /* fmdb */ = {
-			isa = PBXGroup;
-			children = (
-				B96AFC3D1D70E7D800BE7A09 /* FMDB.h */,
-				B96AFC3E1D70E7D800BE7A09 /* FMDatabase.h */,
-				B96AFC3F1D70E7D800BE7A09 /* FMDatabase.m */,
-				B96AFC401D70E7D800BE7A09 /* FMResultSet.h */,
-				B96AFC411D70E7D800BE7A09 /* FMResultSet.m */,
-				B96AFC421D70E7D800BE7A09 /* FMDatabaseQueue.h */,
-				B96AFC431D70E7D800BE7A09 /* FMDatabaseQueue.m */,
-				B96AFC441D70E7D800BE7A09 /* FMDatabaseAdditions.h */,
-				B96AFC451D70E7D800BE7A09 /* FMDatabaseAdditions.m */,
-				B96AFC461D70E7D800BE7A09 /* FMDatabasePool.h */,
-				B96AFC471D70E7D800BE7A09 /* FMDatabasePool.m */,
-				B96AFC3B1D70E7D700BE7A09 /* Bookcase-Bridging-Header.h */,
-				B96AFC3C1D70E7D700BE7A09 /* BookcaseTests-Bridging-Header.h */,
-			);
-			name = fmdb;
 			sourceTree = "<group>";
 		};
 		B96AFC521D70E9C100BE7A09 /* Frameworks */ = {
@@ -398,18 +343,12 @@
 				B9F91AB31D36EA4700B12709 /* UIViewExtension.swift in Sources */,
 				B9EADEAC1D49457300F125F3 /* BooksTableViewController.swift in Sources */,
 				B9EADEAE1D4A7BE800F125F3 /* Book.swift in Sources */,
-				B96AFC4C1D70E7D800BE7A09 /* FMDatabaseQueue.m in Sources */,
-				B96AFC481D70E7D800BE7A09 /* FMDatabase.m in Sources */,
 				B99AC7171D5E57C300AE5861 /* TabBarController.swift in Sources */,
 				B94892871D5AB2C400BC9BEB /* BookCollectionViewCell.swift in Sources */,
-				B96AFC4A1D70E7D800BE7A09 /* FMResultSet.m in Sources */,
 				B9019F7D1CE229D500CAE744 /* BookViewController.swift in Sources */,
 				B9019F7B1CE229D500CAE744 /* AppDelegate.swift in Sources */,
-				B9019FAE1CE22C3200CAE744 /* CosmosDistrib.swift in Sources */,
 				B9EADEB01D4AD04100F125F3 /* BooksManager.swift in Sources */,
-				B96AFC501D70E7D800BE7A09 /* FMDatabasePool.m in Sources */,
 				B94892831D5A42D200BC9BEB /* BooksCollectionViewController.swift in Sources */,
-				B96AFC4E1D70E7D800BE7A09 /* FMDatabaseAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,12 +356,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B96AFC4B1D70E7D800BE7A09 /* FMResultSet.m in Sources */,
-				B96AFC511D70E7D800BE7A09 /* FMDatabasePool.m in Sources */,
-				B96AFC4D1D70E7D800BE7A09 /* FMDatabaseQueue.m in Sources */,
 				B9019F901CE229D500CAE744 /* BookcaseTests.swift in Sources */,
-				B96AFC491D70E7D800BE7A09 /* FMDatabase.m in Sources */,
-				B96AFC4F1D70E7D800BE7A09 /* FMDatabaseAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

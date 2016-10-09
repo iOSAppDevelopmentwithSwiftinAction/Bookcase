@@ -21,7 +21,6 @@ class BookViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var outerStackView: UIStackView!
     
-    @IBOutlet weak var starRatings: CosmosView!
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var authorTextField: UITextField!
     @IBOutlet weak var isbnTextField: UITextField!
@@ -41,7 +40,6 @@ class BookViewController: UIViewController {
         if let book = book {
             navigationItem.title = "Edit book"
             bookCover.image = book.cover
-            starRatings.rating = book.rating
             titleTextField.text = book.title
             authorTextField.text = book.author
             isbnTextField.text = book.isbn
@@ -103,7 +101,7 @@ class BookViewController: UIViewController {
         let bookToSave = Book(record: book?.record,
                               title: titleTextField.text!,
                               author: authorTextField.text!,
-                              rating: starRatings.rating,
+                              rating: 3,
                               isbn: isbnTextField.text!,
                               notes: notesTextView.text!
         )
