@@ -22,7 +22,6 @@ class BookViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var outerStackView: UIStackView!
     
-    @IBOutlet weak var starRatings: CosmosView!
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var authorTextField: UITextField!
     @IBOutlet weak var isbnTextField: UITextField!
@@ -42,7 +41,6 @@ class BookViewController: UIViewController {
         
         if let book = book {
             navigationItem.title = "Edit book"
-            starRatings.rating = book.rating
             titleTextField.text = book.title
             authorTextField.text = book.author
             isbnTextField.text = book.isbn
@@ -106,7 +104,7 @@ class BookViewController: UIViewController {
         }
         bookToSave.title = titleTextField.text!
         bookToSave.author = authorTextField.text!
-        bookToSave.rating = starRatings.rating
+        bookToSave.rating = 3
         bookToSave.isbn = isbnTextField.text!
         bookToSave.notes = notesTextView.text!
         delegate?.saveBook(book: bookToSave)
