@@ -35,6 +35,7 @@ class BookViewController: UIViewController {
     var book:Book?
     var coverToSave:UIImage?
     var barcodeAudio: AVAudioPlayer!
+    var booksService:BooksService = GoogleBooksService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,6 +77,7 @@ class BookViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         NotificationCenter.default.removeObserver(self)
+        booksService.cancel()
     }
     func keyboardFrameChanges(notification:Notification) {
         //get keyboard height
@@ -147,7 +149,6 @@ class BookViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let navigationController = segue.destination as? UINavigationController,
             let barcodeViewController = navigationController.topViewController as? BarcodeViewController {
-            
             barcodeViewController.delegate = self
         }
     }
@@ -181,5 +182,16 @@ extension BookViewController:BarcodeViewControllerDelegate {
     func foundBarcode(barcode:String) {
         isbnTextField.text = barcode
         playBarcodeSound()
+        booksService.getBook(with: barcode) { (scannedBook, error) in
+            if let error = error {
+                //deal with error
+                return
+            } else if let scannedBook = scannedBook {
+                self.bookCover.image = scannedBook.cover
+                self.coverToSave = scannedBook.cover
+                self.titleTextField.text = scannedBook.title
+                self.authorTextField.text = scannedBook.author
+            }
+        }
     }
 }

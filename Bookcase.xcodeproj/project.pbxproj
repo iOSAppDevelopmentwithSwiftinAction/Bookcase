@@ -18,6 +18,8 @@
 		B94892871D5AB2C400BC9BEB /* BookCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B94892861D5AB2C400BC9BEB /* BookCollectionViewCell.swift */; };
 		B975A6571D9D79B800791C42 /* BarcodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B975A6561D9D79B800791C42 /* BarcodeViewController.swift */; };
 		B99AC7171D5E57C300AE5861 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99AC7161D5E57C300AE5861 /* TabBarController.swift */; };
+		B9C0DD851DB03BCD002720BD /* GoogleBooksService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C0DD841DB03BCD002720BD /* GoogleBooksService.swift */; };
+		B9CB2CDA1DB6EEB2007CEFFD /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9CB2CD61DB6EE12007CEFFD /* SwiftyJSON.framework */; };
 		B9E07F371DA7FAC8002D782C /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E07F351DA7FAC8002D782C /* Rating.swift */; };
 		B9E07F381DA7FAC8002D782C /* Star.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E07F361DA7FAC8002D782C /* Star.swift */; };
 		B9E07F461DA87C94002D782C /* scanner.aiff in Resources */ = {isa = PBXBuildFile; fileRef = B9E07F451DA87C94002D782C /* scanner.aiff */; };
@@ -62,6 +64,8 @@
 		B94892861D5AB2C400BC9BEB /* BookCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookCollectionViewCell.swift; sourceTree = "<group>"; };
 		B975A6561D9D79B800791C42 /* BarcodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeViewController.swift; sourceTree = "<group>"; };
 		B99AC7161D5E57C300AE5861 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		B9C0DD841DB03BCD002720BD /* GoogleBooksService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleBooksService.swift; sourceTree = "<group>"; };
+		B9CB2CD61DB6EE12007CEFFD /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 		B9E07F351DA7FAC8002D782C /* Rating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
 		B9E07F361DA7FAC8002D782C /* Star.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Star.swift; sourceTree = "<group>"; };
 		B9E07F451DA87C94002D782C /* scanner.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = scanner.aiff; sourceTree = "<group>"; };
@@ -76,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9CB2CDA1DB6EEB2007CEFFD /* SwiftyJSON.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,6 +108,7 @@
 				B9019F8E1CE229D500CAE744 /* BookcaseTests */,
 				B9019F991CE229D500CAE744 /* BookcaseUITests */,
 				B9019F781CE229D500CAE744 /* Products */,
+				B9CB2CD51DB6EE11007CEFFD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -166,6 +172,7 @@
 			children = (
 				B9EADEAF1D4AD04100F125F3 /* BooksManager.swift */,
 				B9EADEAD1D4A7BE800F125F3 /* Book.swift */,
+				B9C0DD841DB03BCD002720BD /* GoogleBooksService.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -178,6 +185,14 @@
 				B9F91AB21D36EA4700B12709 /* UIViewExtension.swift */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		B9CB2CD51DB6EE11007CEFFD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B9CB2CD61DB6EE12007CEFFD /* SwiftyJSON.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		B9E07F391DA7FACD002D782C /* StarRatings */ = {
@@ -208,6 +223,8 @@
 				B9019F731CE229D500CAE744 /* Sources */,
 				B9019F741CE229D500CAE744 /* Frameworks */,
 				B9019F751CE229D500CAE744 /* Resources */,
+				B9C0DD861DB04183002720BD /* ShellScript */,
+				B9CB2CDB1DB7D50B007CEFFD /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -334,6 +351,37 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		B9C0DD861DB04183002720BD /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+		B9CB2CDB1DB7D50B007CEFFD /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/myfile",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		B9019F731CE229D500CAE744 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -341,6 +389,7 @@
 			files = (
 				B9F91AB31D36EA4700B12709 /* UIViewExtension.swift in Sources */,
 				B9EADEAC1D49457300F125F3 /* BooksTableViewController.swift in Sources */,
+				B9C0DD851DB03BCD002720BD /* GoogleBooksService.swift in Sources */,
 				B9EADEAE1D4A7BE800F125F3 /* Book.swift in Sources */,
 				B9E07F381DA7FAC8002D782C /* Star.swift in Sources */,
 				B99AC7171D5E57C300AE5861 /* TabBarController.swift in Sources */,
@@ -495,6 +544,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 5M6U4VTSB8;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Bookcase",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Bookcase/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.interactivecoconut.Bookcase;
@@ -508,6 +562,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 5M6U4VTSB8;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Bookcase",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Bookcase/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.interactivecoconut.Bookcase;
