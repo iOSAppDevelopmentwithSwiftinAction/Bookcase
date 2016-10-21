@@ -182,15 +182,18 @@ extension BookViewController:BarcodeViewControllerDelegate {
     func foundBarcode(barcode:String) {
         isbnTextField.text = barcode
         playBarcodeSound()
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         booksService.getBook(with: barcode) { (scannedBook, error) in
             if let error = error {
                 //deal with error
                 return
             } else if let scannedBook = scannedBook {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
                 self.bookCover.image = scannedBook.cover
                 self.coverToSave = scannedBook.cover
                 self.titleTextField.text = scannedBook.title
                 self.authorTextField.text = scannedBook.author
+                self.saveButton.isEnabled = true
             }
         }
     }

@@ -6,7 +6,7 @@
 //  Copyright © 2016 Craig Grummitt. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import SwiftyJSON
 
 protocol BooksService {
@@ -75,16 +75,32 @@ class GoogleBooksService:NSObject, BooksService, URLSessionDelegate {
                 if id["type"].string == "ISBN_13",
                     id["identifier"].string == barcode,
                     let title = item["volumeInfo"]["title"].string,
-                    let authors = item["volumeInfo"]["authors"].array?.map({$0.string}) as? [String] {
+                    let authors = item["volumeInfo"]["authors"].array?.map({$0.string}) as? [String],
+                    let thumbnailURL = item["volumeInfo"]["imageLinks"]["thumbnail"].string {
                     let book = Book(title: title,
                                     author: authors.joined(separator: ","),
                                     rating: 0, isbn: "0", notes: "")
-                    completionHandler(book,nil)
+                    loadCover(book: book,
+                              thumbnailURL: thumbnailURL,
+                              completionHandler: completionHandler)
                     return
                 }
             }
         }
         completionHandler(nil, nil)
+    }
+    //Download book cover image
+    func loadCover(book:Book,thumbnailURL:String, completionHandler: @escaping (Book?, Error?) -> Void) {
+        guard let url = URL(string: thumbnailURL) else {return}
+        task = session.downloadTask(with: url) { (tempURL, response, error) in
+            if let tempURL = tempURL,
+                let data = try? Data(contentsOf: tempURL),
+                let image = UIImage(data: data) {
+                book.cover = image
+            }
+            completionHandler(book,error)
+        }
+        task?.resume()
     }
 }
 
