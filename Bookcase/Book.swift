@@ -18,6 +18,9 @@ class Book {
         get {
             return image ?? Book.defaultCover
         }
+        set {
+            image = newValue
+        }
     }
     private var image:UIImage?
 
