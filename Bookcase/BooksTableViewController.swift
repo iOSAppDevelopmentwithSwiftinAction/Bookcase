@@ -37,7 +37,7 @@ class BooksTableViewController: UITableViewController {
         let book = booksManager.books[indexPath.row]
         cell.textLabel?.text = book.title
         cell.detailTextLabel?.text = book.author
-        cell.imageView?.image = book.cover ?? (UIImage(named: "book.jpg")!)
+        cell.imageView?.image = book.cover
         return cell
     }
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
