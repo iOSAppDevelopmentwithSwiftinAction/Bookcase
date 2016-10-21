@@ -27,6 +27,9 @@ class Book: NSObject, NSCoding {
         get {
             return image ?? Book.defaultCover
         }
+        set {
+            image = newValue
+        }
     }
     var hasCoverImage:Bool {
         return image != nil
