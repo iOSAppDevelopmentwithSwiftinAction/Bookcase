@@ -1,0 +1,10 @@
+framework module UIImageColors {
+  umbrella header "UIImageColors.h"
+
+  export *
+  module * { export * }
+}
+
+module UIImageColors.Swift {
+    header "UIImageColors-Swift.h"
+}

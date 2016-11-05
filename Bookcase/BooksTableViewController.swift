@@ -9,6 +9,7 @@
 import UIKit
 
 private let sortOrderKey = "TableSortOrder"
+let beenHereBefore = "BeenHereBefore"
 
 class BooksTableViewController: UITableViewController,Injectable {
     var booksManager:BooksManager!
@@ -21,10 +22,12 @@ class BooksTableViewController: UITableViewController,Injectable {
         searchController.obscuresBackgroundDuringPresentation = false
         definesPresentationContext = true
         tableView.tableHeaderView = searchController.searchBar
-        
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        if !UserDefaults.standard.bool(forKey: beenHereBefore) {
+            self.performSegue(withIdentifier: "helpSegue", sender: self)
+        }
         if let sortOrder = SortOrder(rawValue:UserDefaults.standard.integer(forKey: sortOrderKey)) {
             booksManager.sortOrder = sortOrder
             sortSegmentedControl.selectedSegmentIndex = booksManager.sortOrder.rawValue
@@ -52,6 +55,9 @@ class BooksTableViewController: UITableViewController,Injectable {
         cell.textLabel?.text = book.title
         cell.detailTextLabel?.text = book.author
         cell.imageView?.image = book.cover
+        cell.backgroundColor = book.backgroundColor
+        cell.textLabel?.textColor = book.primaryColor
+        cell.detailTextLabel?.textColor = book.detailColor
         return cell
     }
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {

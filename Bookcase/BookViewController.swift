@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import UIImageColors
 
 protocol BookViewControllerDelegate {
     func saveBook(book:Book)
@@ -31,10 +32,16 @@ class BookViewController: UIViewController {
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var galleryButton: UIBarButtonItem!
     
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var authorLabel: UILabel!
+    @IBOutlet weak var isbnLabel: UILabel!
+    @IBOutlet weak var notesLabel: UILabel!
+    
     var delegate:BookViewControllerDelegate?
     var book:Book?
     var coverToSave:UIImage?
     var barcodeAudio: AVAudioPlayer!
+    var detailColor:UIColor?
     var booksService:BooksService = GoogleBooksService()
     
     override func viewDidLoad() {
@@ -52,6 +59,7 @@ class BookViewController: UIViewController {
             authorTextField.text = book.author
             isbnTextField.text = book.isbn
             notesTextView.text = book.notes
+            drawColorsToView(backgroundColor: book.backgroundColor, primaryColor: book.primaryColor)
         }
         saveButton.isEnabled = !titleTextField.text!.isEmpty
         isbnStackView.isHidden = UserDefaults.standard.bool(forKey: isbnKey)
@@ -102,16 +110,28 @@ class BookViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    @IBAction func touchCancel(_ sender: AnyObject) {
+    //MARK:Actions
+    @IBAction func touchCancelzzzz(_ sender: AnyObject) {
         dismissMe()
     }
     @IBAction func touchSave(_ sender: AnyObject) {
+        var backgroundColor = UIColor.white
+        var primaryColor = UIColor.black
+        var detailColor = UIColor.black
+        if let book = book {
+            backgroundColor = book.backgroundColor
+            primaryColor = book.primaryColor
+            detailColor = book.detailColor
+        }
         let bookToSave = Book(title: titleTextField.text!,
                               author: authorTextField.text!,
                               rating: starRatings.rating,
                               isbn: isbnTextField.text!,
                               notes: notesTextView.text!,
-                              cover: coverToSave
+                              cover: coverToSave,
+                              backgroundColor: backgroundColor,
+                              primaryColor: primaryColor,
+                              detailColor: detailColor
         )
         delegate?.saveBook(book: bookToSave)
         dismissMe()
@@ -152,7 +172,25 @@ class BookViewController: UIViewController {
             barcodeViewController.delegate = self
         }
     }
-    
+    //MARK:Colors
+    func receiveColors(colors:UIImageColors) {
+        detailColor = colors.detailColor
+        book?.detailColor = colors.detailColor
+        book?.primaryColor = colors.primaryColor
+        book?.backgroundColor = colors.backgroundColor
+        drawColorsToView(backgroundColor: colors.backgroundColor, primaryColor: colors.primaryColor)
+    }
+    func drawColorsToView(backgroundColor:UIColor,primaryColor:UIColor) {
+        UIView.animate(withDuration: 1) {
+            self.view.backgroundColor = backgroundColor
+            self.titleLabel.textColor = primaryColor
+            self.authorLabel.textColor = primaryColor
+            self.isbnLabel.textColor = primaryColor
+            self.notesLabel.textColor = primaryColor
+            self.notesTextView.textColor = primaryColor
+        }
+    }
+    //MARK:Sound
     func playBarcodeSound() {
         guard let url = Bundle.main.url(forResource: "scanner", withExtension:"aiff") else {return}
         //play Sound
@@ -172,6 +210,8 @@ extension BookViewController:UIImagePickerControllerDelegate, UINavigationContro
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             bookCover.image = image
             coverToSave = image
+            let colors = image.getColors()
+            self.receiveColors(colors:colors)
         }
     }
     func navigationControllerPreferredInterfaceOrientationForPresentation(_ navigationController: UINavigationController) -> UIInterfaceOrientation {

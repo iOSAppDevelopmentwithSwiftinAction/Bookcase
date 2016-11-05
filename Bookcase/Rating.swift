@@ -16,6 +16,7 @@ import UIKit
     let numberOfStars = 5
 
     override func layoutSubviews() {
+        self.backgroundColor = UIColor.clear
         if stars.count == 0 {
             //add stars
             for i in 0..<numberOfStars {
