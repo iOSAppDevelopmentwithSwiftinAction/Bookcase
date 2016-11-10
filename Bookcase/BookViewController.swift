@@ -190,6 +190,13 @@ class BookViewController: UIViewController {
             self.notesTextView.textColor = primaryColor
         }
     }
+    //MARK:Image
+    func receiveImage(image:UIImage) {
+        bookCover.image = image
+        coverToSave = image
+        let colors = image.getColors()
+        self.receiveColors(colors:colors)
+    }
     //MARK:Sound
     func playBarcodeSound() {
         guard let url = Bundle.main.url(forResource: "scanner", withExtension:"aiff") else {return}
@@ -208,10 +215,7 @@ extension BookViewController:UIImagePickerControllerDelegate, UINavigationContro
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         dismiss(animated: true, completion: nil)
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            bookCover.image = image
-            coverToSave = image
-            let colors = image.getColors()
-            self.receiveColors(colors:colors)
+            receiveImage(image: image)
         }
     }
     func navigationControllerPreferredInterfaceOrientationForPresentation(_ navigationController: UINavigationController) -> UIInterfaceOrientation {
@@ -229,8 +233,7 @@ extension BookViewController:BarcodeViewControllerDelegate {
                 return
             } else if let scannedBook = scannedBook {
                 UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                self.bookCover.image = scannedBook.cover
-                self.coverToSave = scannedBook.cover
+                self.receiveImage(image: scannedBook.cover)
                 self.titleTextField.text = scannedBook.title
                 self.authorTextField.text = scannedBook.author
                 self.saveButton.isEnabled = true
