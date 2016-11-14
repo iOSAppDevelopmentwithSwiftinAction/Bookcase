@@ -54,6 +54,9 @@ class BookViewController: UIViewController {
         if let book = book {
             navigationItem.title = "Edit book"
             bookCover.image = book.cover
+            if book.hasCoverImage {
+                coverToSave = book.cover
+            }
             starRatings.rating = book.rating
             titleTextField.text = book.title
             authorTextField.text = book.author
@@ -67,6 +70,7 @@ class BookViewController: UIViewController {
             cameraButton.isEnabled = false
         }
     }
+    
 
     @IBAction func titleDidChange(_ sender: AnyObject) {
         saveButton.isEnabled = !titleTextField.text!.isEmpty
@@ -111,7 +115,7 @@ class BookViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     //MARK:Actions
-    @IBAction func touchCancelzzzz(_ sender: AnyObject) {
+    @IBAction func touchCancel(_ sender: AnyObject) {
         dismissMe()
     }
     @IBAction func touchSave(_ sender: AnyObject) {
@@ -194,8 +198,12 @@ class BookViewController: UIViewController {
     func receiveImage(image:UIImage) {
         bookCover.image = image
         coverToSave = image
-        let colors = image.getColors()
-        self.receiveColors(colors:colors)
+        DispatchQueue.global().async {
+            let colors = image.getColors()
+            DispatchQueue.main.async {
+                self.receiveColors(colors:colors)
+            }
+        }
     }
     //MARK:Sound
     func playBarcodeSound() {

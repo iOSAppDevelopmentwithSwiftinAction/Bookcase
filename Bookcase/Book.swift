@@ -90,6 +90,9 @@ class Book: NSObject, NSCoding {
             aCoder.encode(image, forKey: Key.cover)
         }
     }
+    override var description: String {
+        return "\(title) by \(author) : \(hasCoverImage ? "Has" : "No") cover image"
+    }
     
 }
 //extension Book:Equatable {}

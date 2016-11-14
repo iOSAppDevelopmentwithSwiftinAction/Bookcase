@@ -23,9 +23,12 @@ struct ContentLayoutMachine {
             constraints += [view.leadingAnchor.constraint(equalTo: rootView.leadingAnchor, constant: margin),
                             rootView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: margin)]
             heightTally += view.frame.height + margin
+            previousView = view
         }
         let topMargin = (rootView.frame.height - heightTally - margin) / 2
         constraints += [views.first!.topAnchor.constraint(equalTo: rootView.topAnchor, constant: topMargin)]
         NSLayoutConstraint.activate(constraints)
+        
     }
 }
+
