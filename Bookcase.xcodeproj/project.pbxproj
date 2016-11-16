@@ -34,6 +34,8 @@
 		B9EADEAC1D49457300F125F3 /* BooksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EADEAB1D49457300F125F3 /* BooksTableViewController.swift */; };
 		B9EADEAE1D4A7BE800F125F3 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EADEAD1D4A7BE800F125F3 /* Book.swift */; };
 		B9EADEB01D4AD04100F125F3 /* BooksManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EADEAF1D4AD04100F125F3 /* BooksManager.swift */; };
+		B9F21A521DDA3AEC00AA13AA /* BooksManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F21A511DDA3AEC00AA13AA /* BooksManagerTests.swift */; };
+		B9F21A971DDA849000AA13AA /* UIImageColorDetectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F21A961DDA849000AA13AA /* UIImageColorDetectionTests.swift */; };
 		B9F91AB31D36EA4700B12709 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F91AB21D36EA4700B12709 /* UIViewExtension.swift */; };
 /* End PBXBuildFile section */
 
@@ -101,6 +103,8 @@
 		B9EADEAB1D49457300F125F3 /* BooksTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BooksTableViewController.swift; sourceTree = "<group>"; };
 		B9EADEAD1D4A7BE800F125F3 /* Book.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		B9EADEAF1D4AD04100F125F3 /* BooksManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BooksManager.swift; sourceTree = "<group>"; };
+		B9F21A511DDA3AEC00AA13AA /* BooksManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BooksManagerTests.swift; sourceTree = "<group>"; };
+		B9F21A961DDA849000AA13AA /* UIImageColorDetectionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageColorDetectionTests.swift; sourceTree = "<group>"; };
 		B9F91AB21D36EA4700B12709 /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -170,6 +174,8 @@
 		B9019F8E1CE229D500CAE744 /* BookcaseTests */ = {
 			isa = PBXGroup;
 			children = (
+				B9F21A961DDA849000AA13AA /* UIImageColorDetectionTests.swift */,
+				B9F21A511DDA3AEC00AA13AA /* BooksManagerTests.swift */,
 				B9019F8F1CE229D500CAE744 /* BookcaseTests.swift */,
 				B9019F911CE229D500CAE744 /* Info.plist */,
 			);
@@ -445,6 +451,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9F21A971DDA849000AA13AA /* UIImageColorDetectionTests.swift in Sources */,
+				B9F21A521DDA3AEC00AA13AA /* BooksManagerTests.swift in Sources */,
 				B9019F901CE229D500CAE744 /* BookcaseTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -622,6 +630,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = BookcaseTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.interactivecoconut.BookcaseTests;
@@ -635,6 +647,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = BookcaseTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.interactivecoconut.BookcaseTests;

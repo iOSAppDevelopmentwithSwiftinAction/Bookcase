@@ -27,10 +27,17 @@ class BookcaseUITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
-    
-    func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+
+    func testToggleISBN() {
+        
+        let app = XCUIApplication()
+        app.navigationBars["Books"].buttons["Add"].tap()
+        
+        let elementsQuery = app.scrollViews.otherElements
+        let isbnExists = elementsQuery.staticTexts["ISBN:"].exists
+        elementsQuery.buttons["More Info"].tap()
+        XCTAssertNotEqual(elementsQuery.staticTexts["ISBN:"].exists, isbnExists)
+        
     }
     
 }

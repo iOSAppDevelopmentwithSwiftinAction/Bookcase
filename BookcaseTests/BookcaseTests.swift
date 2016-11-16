@@ -21,6 +21,19 @@ class BookcaseTests: XCTestCase {
         super.tearDown()
     }
     
+    func testSortBooksTitle() {
+        let booksManager = BooksManager()
+        
+        let bookDaVinci = Book(title: "The Da Vinci Code", author: "Dan Brown", rating: 5, isbn: "", notes: "")
+        let bookGulliver = Book(title: "Gulliver's Travels", author: "Jonathan Swift", rating: 5, isbn: "", notes: "")
+        let bookOdyssey = Book(title: "The Odyssey", author: "Homer", rating: 5, isbn: "", notes: "")
+        
+        booksManager.books = [bookDaVinci,bookGulliver,bookOdyssey]
+        booksManager.sortOrder = .title
+        XCTAssertEqual(booksManager.books, [bookGulliver,bookDaVinci,bookOdyssey])
+    }
+    
+    
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
