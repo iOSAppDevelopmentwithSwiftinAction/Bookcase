@@ -114,7 +114,7 @@ class BooksCollectionViewController: UICollectionViewController,Injectable {
     //MARK: Cloudkit
     func cloudErrors(error: Error?, buttonTitle:String = "OK", completion:(()->Void)? = nil) {
         if let error = error {
-            let alertController = UIAlertController(title: "CloudKit error", message: error.localizedDescription, preferredStyle: .actionSheet)
+            let alertController = UIAlertController(title: "CloudKit error", message: error.localizedDescription, preferredStyle: .alert)
             let okAction = UIAlertAction(title: buttonTitle, style: .default) { (action) in
                 completion?()
             }
