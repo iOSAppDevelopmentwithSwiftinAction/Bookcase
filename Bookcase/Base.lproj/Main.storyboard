@@ -174,7 +174,7 @@
                             </barButtonItem>
                             <barButtonItem title="Help" id="Lgm-xY-4QT">
                                 <connections>
-                                    <segue destination="9h2-gx-wYH" kind="presentation" id="pqu-FS-O3T"/>
+                                    <segue destination="9h2-gx-wYH" kind="presentation" identifier="helpSegue" id="pqu-FS-O3T"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
