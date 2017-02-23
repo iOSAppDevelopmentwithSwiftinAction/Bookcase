@@ -273,7 +273,6 @@
 				B9019F731CE229D500CAE744 /* Sources */,
 				B9019F741CE229D500CAE744 /* Frameworks */,
 				B9019F751CE229D500CAE744 /* Resources */,
-				B9C0DD861DB04183002720BD /* ShellScript */,
 				B99E972E1DCD35D9009DB968 /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -400,24 +399,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		B9C0DD861DB04183002720BD /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/UIImageColors.framework",
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B9019F731CE229D500CAE744 /* Sources */ = {
