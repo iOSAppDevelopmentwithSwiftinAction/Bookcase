@@ -30,11 +30,11 @@ class BooksTableViewController: UITableViewController {
         return 1
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return booksManager.books.count
+        return booksManager.bookCount
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "bookCell", for: indexPath)
-        let book = booksManager.books[indexPath.row]
+        let book = booksManager.getBook(at:indexPath.row)
         cell.textLabel?.text = book.title
         cell.detailTextLabel?.text = book.author
         cell.imageView?.image = book.cover
@@ -53,7 +53,7 @@ class BooksTableViewController: UITableViewController {
         if let selectedIndexPath = tableView.indexPathForSelectedRow,
             let viewController = segue.destination as? BookViewController {
             //Editing
-            viewController.book = booksManager.books[selectedIndexPath.row]
+            viewController.book = booksManager.getBook(at:selectedIndexPath.row)
             viewController.delegate = self
         } else if let navController = segue.destination as? UINavigationController,
             let viewController = navController.topViewController as? BookViewController {
