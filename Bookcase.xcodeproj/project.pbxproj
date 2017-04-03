@@ -14,6 +14,7 @@
 		B9019F851CE229D500CAE744 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9019F831CE229D500CAE744 /* LaunchScreen.storyboard */; };
 		B9019F901CE229D500CAE744 /* BookcaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9019F8F1CE229D500CAE744 /* BookcaseTests.swift */; };
 		B9019F9B1CE229D500CAE744 /* BookcaseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9019F9A1CE229D500CAE744 /* BookcaseUITests.swift */; };
+		B943580F1E92CC6600BC1E09 /* BooksCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B943580E1E92CC6600BC1E09 /* BooksCollectionViewController.swift */; };
 		B9EADEAC1D49457300F125F3 /* BooksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EADEAB1D49457300F125F3 /* BooksTableViewController.swift */; };
 		B9EADEAE1D4A7BE800F125F3 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EADEAD1D4A7BE800F125F3 /* Book.swift */; };
 		B9EADEB01D4AD04100F125F3 /* BooksManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EADEAF1D4AD04100F125F3 /* BooksManager.swift */; };
@@ -51,6 +52,7 @@
 		B9019F961CE229D500CAE744 /* BookcaseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BookcaseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9019F9A1CE229D500CAE744 /* BookcaseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookcaseUITests.swift; sourceTree = "<group>"; };
 		B9019F9C1CE229D500CAE744 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B943580E1E92CC6600BC1E09 /* BooksCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BooksCollectionViewController.swift; sourceTree = "<group>"; };
 		B9EADEAB1D49457300F125F3 /* BooksTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BooksTableViewController.swift; sourceTree = "<group>"; };
 		B9EADEAD1D4A7BE800F125F3 /* Book.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		B9EADEAF1D4AD04100F125F3 /* BooksManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BooksManager.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				B9019F831CE229D500CAE744 /* LaunchScreen.storyboard */,
 				B9019F861CE229D500CAE744 /* Info.plist */,
 				B9F91AB21D36EA4700B12709 /* UIViewExtension.swift */,
+				B943580E1E92CC6600BC1E09 /* BooksCollectionViewController.swift */,
 			);
 			path = Bookcase;
 			sourceTree = "<group>";
@@ -200,7 +203,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "Craig Grummitt";
 				TargetAttributes = {
 					B9019F761CE229D500CAE744 = {
@@ -278,6 +281,7 @@
 				B9019F7D1CE229D500CAE744 /* BookViewController.swift in Sources */,
 				B9019F7B1CE229D500CAE744 /* AppDelegate.swift in Sources */,
 				B9EADEB01D4AD04100F125F3 /* BooksManager.swift in Sources */,
+				B943580F1E92CC6600BC1E09 /* BooksCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,8 +350,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -392,8 +398,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

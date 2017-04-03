@@ -34,3 +34,14 @@ class Book {
         self.image = cover
     }
 }
+extension Book: Equatable {}
+func ==(lhs: Book, rhs: Book) -> Bool {
+  return (
+    lhs.title == rhs.title &&
+      lhs.author == rhs.author &&
+      lhs.rating == rhs.rating &&
+      lhs.isbn == rhs.isbn &&
+      lhs.notes == rhs.notes &&
+      lhs.cover == rhs.cover
+  )
+}
