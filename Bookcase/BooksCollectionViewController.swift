@@ -11,9 +11,17 @@ import UIKit
 private let reuseIdentifier = "bookCollectionCell"
 
 class BooksCollectionViewController: UICollectionViewController {
+  let searchController = UISearchController(searchResultsController: nil)
   var booksManager:BooksManager = BooksManager()
+  var editingSearch = false
+  
   override func viewDidLoad() {
     super.viewDidLoad()
+    searchController.obscuresBackgroundDuringPresentation = false
+    searchController.searchResultsUpdater = self
+    searchController.isActive = true
+    definesPresentationContext = true
+    
   }
   
   override func didReceiveMemoryWarning() {
@@ -21,66 +29,61 @@ class BooksCollectionViewController: UICollectionViewController {
     // Dispose of any resources that can be recreated.
   }
   
-  /*
-   // MARK: - Navigation
-   
-   // In a storyboard-based application, you will often want to do a little preparation before navigation
-   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-   // Get the new view controller using [segue destinationViewController].
-   // Pass the selected object to the new view controller.
-   }
-   */
-  
   // MARK: UICollectionViewDataSource
-  
   override func numberOfSections(in collectionView: UICollectionView) -> Int {
-    // #warning Incomplete implementation, return the number of sections
-    return 1
+    return 2
   }
-  
-  
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    // #warning Incomplete implementation, return the number of items
-    return booksManager.bookCount
+    return section == 0 ? 0 : booksManager.bookCount
   }
-  
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    
-    // Configure the cell
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! BookCollectionViewCell
+    let book = booksManager.getBook(at: indexPath.row)
+    cell.imageView.image = book.cover
+    cell.titleLabel.text = book.hasCoverImage ? "" : book.title
+    cell.imageView.isHidden = !book.hasCoverImage
     
     return cell
   }
   
-  // MARK: UICollectionViewDelegate
-  
-  /*
-   // Uncomment this method to specify if the specified item should be highlighted during tracking
-   override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-   return true
-   }
-   */
-  
-  /*
-   // Uncomment this method to specify if the specified item should be selected
-   override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-   return true
-   }
-   */
-  
-  /*
-   // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-   override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-   return false
-   }
-   
-   override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-   return false
-   }
-   
-   override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-   
-   }
-   */
-  
+  // MARK: Header
+  override func collectionView(_ collectionView: UICollectionView,
+                               viewForSupplementaryElementOfKind kind: String,
+                               at indexPath: IndexPath) -> UICollectionReusableView {
+    let reusableView =
+      collectionView.dequeueReusableSupplementaryView(ofKind: kind,
+                                                      withReuseIdentifier: "collectionHeader", for: indexPath)
+    if indexPath.section == 0 {
+      reusableView.addSubview(searchController.searchBar)
+    }
+    
+    return reusableView
+  }
+}
+extension BooksCollectionViewController: UISearchResultsUpdating {
+  func updateSearchResults(for searchController: UISearchController) {
+    guard let searchText = searchController.searchBar.text else { return }
+    booksManager.searchFilter = searchText
+   collectionView?.reloadSections(NSIndexSet(index: 1) as IndexSet)
+  }
+}
+
+extension BooksCollectionViewController: UICollectionViewDelegateFlowLayout {
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+    if section == 0 {
+      return searchController.searchBar.bounds.size
+    } else {
+      return CGSize.zero
+    }
+  }
+  func collectionView(_ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    sizeForItemAt indexPath: IndexPath) -> CGSize {
+    let book = booksManager.getBook(at: indexPath.row)
+    let itemHeight:CGFloat = 90
+    let itemWidth = (book.cover.size.width /
+      book.cover.size.height) * itemHeight
+    return CGSize(width: itemWidth, height: itemHeight)
+  }
+
 }

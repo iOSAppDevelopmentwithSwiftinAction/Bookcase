@@ -8,31 +8,34 @@
 
 import UIKit
 class Book {
-    static let defaultCover = UIImage(named: "book.jpg")!
-    var title:String
-    var author:String
-    var rating:Double
-    var isbn:String
-    var notes:String
-    var cover:UIImage {
-        get {
-            return image ?? Book.defaultCover
-        }
-        set {
-            image = newValue
-        }
+  static let defaultCover = UIImage(named: "book.jpg")!
+  var title:String
+  var author:String
+  var rating:Double
+  var isbn:String
+  var notes:String
+  var cover:UIImage {
+    get {
+      return image ?? Book.defaultCover
     }
-    private var image:UIImage?
-
-    
-    init(title:String,author:String,rating:Double,isbn:String,notes:String,cover:UIImage? = nil) {
-        self.title = title
-        self.author = author
-        self.rating = rating
-        self.isbn = isbn
-        self.notes = notes
-        self.image = cover
+    set {
+      image = newValue
     }
+  }
+  private var image:UIImage?
+  
+  var hasCoverImage: Bool {
+    return image != nil
+  }
+  
+  init(title:String,author:String,rating:Double,isbn:String,notes:String,cover:UIImage? = nil) {
+    self.title = title
+    self.author = author
+    self.rating = rating
+    self.isbn = isbn
+    self.notes = notes
+    self.image = cover
+  }
 }
 extension Book: Equatable {}
 func ==(lhs: Book, rhs: Book) -> Bool {
