@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="8Wq-Lb-LxR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Rug-kn-4rC">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -94,7 +94,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OEl-cE-alQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3161" y="380"/>
+            <point key="canvasLocation" x="4100" y="398"/>
         </scene>
         <!--Books-->
         <scene sceneID="cQV-mN-zbE">
@@ -161,7 +161,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0pg-Yd-9Bd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3160.8000000000002" y="-300"/>
+            <point key="canvasLocation" x="4100" y="-300"/>
         </scene>
         <!--Book View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -344,13 +344,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4952.8000000000002" y="82.3088455772114"/>
+            <point key="canvasLocation" x="5892" y="82.3088455772114"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Books-->
         <scene sceneID="XMd-qP-7Ji">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="yCB-5y-Kwk" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" id="22R-vX-jUo"/>
+                    <tabBarItem key="tabBarItem" title="Books" id="22R-vX-jUo"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="4eX-f3-5tA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -363,7 +363,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xoU-ic-ewP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2380" y="-300"/>
+            <point key="canvasLocation" x="3319.1999999999998" y="-300"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="PWi-eg-DdZ">
@@ -382,13 +382,13 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eDA-to-9e0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4048.8000000000002" y="81.409295352323838"/>
+            <point key="canvasLocation" x="4988" y="81.409295352323838"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Covers-->
         <scene sceneID="s4D-Ma-Whs">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8Wq-Lb-LxR" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" id="uk1-dI-dQK"/>
+                    <tabBarItem key="tabBarItem" title="Covers" id="uk1-dI-dQK"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="mBV-ix-jsN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -401,7 +401,25 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r2m-cl-9ap" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2380" y="380"/>
+            <point key="canvasLocation" x="3319" y="398"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="VQz-QP-dfg">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Rug-kn-4rC" customClass="TabBarController" customModule="Bookcase" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="ruf-QW-pEV">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="yCB-5y-Kwk" kind="relationship" relationship="viewControllers" id="Pcj-so-DQh"/>
+                        <segue destination="8Wq-Lb-LxR" kind="relationship" relationship="viewControllers" id="D7h-xJ-Cy6"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="76O-qb-N8h" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2388" y="51"/>
         </scene>
     </scenes>
     <resources>

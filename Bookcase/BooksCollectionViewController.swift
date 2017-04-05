@@ -10,8 +10,8 @@ import UIKit
 
 private let reuseIdentifier = "bookCollectionCell"
 
-class BooksCollectionViewController: UICollectionViewController {
-  var booksManager:BooksManager = BooksManager()
+class BooksCollectionViewController: UICollectionViewController,Injectable {
+  var booksManager:BooksManager!
   let searchController = UISearchController(searchResultsController: nil)
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -21,6 +21,12 @@ class BooksCollectionViewController: UICollectionViewController {
     definesPresentationContext = true
   }
   
+  override func viewDidAppear(_ animated: Bool) {
+    collectionView?.reloadData()
+  }
+  func inject(data: BooksManager) {
+    self.booksManager = data
+  }
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
