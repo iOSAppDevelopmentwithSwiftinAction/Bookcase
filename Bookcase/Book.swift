@@ -8,47 +8,47 @@
 
 import UIKit
 internal struct Key {
-    static let title = "title"
-    static let author = "author"
-    static let rating = "rating"
-    static let isbn = "isbn"
-    static let notes = "notes"
+  static let title = "title"
+  static let author = "author"
+  static let rating = "rating"
+  static let isbn = "isbn"
+  static let notes = "notes"
 }
 
 class Book {
-    static let defaultCover = UIImage(named: "book.jpg")!
-    var title:String
-    var author:String
-    var rating:Double
-    var isbn:String
-    var notes:String
-    var cover:UIImage {
-        get {
-            return image ?? Book.defaultCover
-        }
+  static let defaultCover = UIImage(named: "book.jpg")!
+  var title:String
+  var author:String
+  var rating:Double
+  var isbn:String
+  var notes:String
+  var cover:UIImage {
+    get {
+      return image ?? Book.defaultCover
     }
-    var hasCoverImage:Bool {
-        return image != nil
-    }
-    private var image:UIImage?
-    
-    init(title:String,author:String,rating:Double,isbn:String,notes:String,cover:UIImage? = nil) {
-        self.title = title
-        self.author = author
-        self.rating = rating
-        self.isbn = isbn
-        self.notes = notes
-        self.image = cover
-    }
+  }
+  var hasCoverImage:Bool {
+    return image != nil
+  }
+  private var image:UIImage?
+  
+  init(title:String,author:String,rating:Double,isbn:String,notes:String,cover:UIImage? = nil) {
+    self.title = title
+    self.author = author
+    self.rating = rating
+    self.isbn = isbn
+    self.notes = notes
+    self.image = cover
+  }
 }
 extension Book:Equatable {}
 func ==(lhs: Book, rhs: Book) -> Bool {
-    return (
-        lhs.title == rhs.title &&
-        lhs.author == rhs.author &&
-        lhs.rating == rhs.rating &&
-        lhs.isbn == rhs.isbn &&
-        lhs.notes == rhs.notes &&
-        lhs.cover == rhs.cover
-    )
+  return (
+    lhs.title == rhs.title &&
+      lhs.author == rhs.author &&
+      lhs.rating == rhs.rating &&
+      lhs.isbn == rhs.isbn &&
+      lhs.notes == rhs.notes &&
+      lhs.cover == rhs.cover
+  )
 }
