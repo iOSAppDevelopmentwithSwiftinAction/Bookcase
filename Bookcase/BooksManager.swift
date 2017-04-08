@@ -125,7 +125,7 @@ class BooksManager {
         var books:[Book] = []
         do {
             let rs = try db.executeQuery(
-                "SELECT *, ROWID FROM Books", values: nil)
+                "SELECT * FROM Books", values: nil)
             while rs.next() {
                 if let book = Book(rs: rs) {
                     books.append(book)
