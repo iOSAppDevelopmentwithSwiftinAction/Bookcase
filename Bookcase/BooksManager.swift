@@ -143,11 +143,11 @@ class BooksManager {
         }
     }
     func retrieveBooks() -> [Book]? {
-        guard let xml = XML(contentsOf: booksFile) 	//#1
+        guard let xml = XML(contentsOf: booksFile)
             else { return nil }
-        guard let books = xml[0].children.map(		//#2
-            { Book(book: $0)}) as? [Book] 		//#3
-            else {return nil}
+        guard let books = xml[0].children.map(
+            { Book(book: $0)}) as? [Book]     
+            else { return nil }
         return books
     }
 

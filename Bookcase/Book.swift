@@ -50,15 +50,15 @@ class Book {
         bookNode.addChild(name: Key.notes, value: self.notes)
         return bookNode
     }
-    convenience init?(book:XMLNode) {
-        guard let title = book[Key.title]?.text,
+  convenience init?(book:XMLNode) {
+    guard let title = book[Key.title]?.text,
             let author = book[Key.author]?.text,
             let ratingString = book[Key.rating]?.text,
             let rating = Double(ratingString),
             let isbn = book[Key.isbn]?.text,
             let notes = book[Key.notes]?.text
             else {return nil}
-        self.init(title:title,
+    self.init(title:title,
             author:author,
             rating:rating,
             isbn:isbn,
