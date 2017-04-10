@@ -31,10 +31,10 @@ class BooksCollectionViewController: UICollectionViewController {
   
   // MARK: UICollectionViewDataSource
   override func numberOfSections(in collectionView: UICollectionView) -> Int {
-    return 2
+    return 1
   }
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return section == 0 ? 0 : booksManager.bookCount
+    return booksManager.bookCount
   }
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! BookCollectionViewCell
@@ -53,10 +53,7 @@ class BooksCollectionViewController: UICollectionViewController {
     let reusableView =
       collectionView.dequeueReusableSupplementaryView(ofKind: kind,
                                                       withReuseIdentifier: "collectionHeader", for: indexPath)
-    if indexPath.section == 0 {
       reusableView.addSubview(searchController.searchBar)
-    }
-    
     return reusableView
   }
 }
@@ -64,26 +61,6 @@ extension BooksCollectionViewController: UISearchResultsUpdating {
   func updateSearchResults(for searchController: UISearchController) {
     guard let searchText = searchController.searchBar.text else { return }
     booksManager.searchFilter = searchText
-   collectionView?.reloadSections(NSIndexSet(index: 1) as IndexSet)
+   collectionView?.reloadData()
   }
-}
-
-extension BooksCollectionViewController: UICollectionViewDelegateFlowLayout {
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-    if section == 0 {
-      return searchController.searchBar.bounds.size
-    } else {
-      return CGSize.zero
-    }
-  }
-  func collectionView(_ collectionView: UICollectionView,
-    layout collectionViewLayout: UICollectionViewLayout,
-    sizeForItemAt indexPath: IndexPath) -> CGSize {
-    let book = booksManager.getBook(at: indexPath.row)
-    let itemHeight:CGFloat = 90
-    let itemWidth = (book.cover.size.width /
-      book.cover.size.height) * itemHeight
-    return CGSize(width: itemWidth, height: itemHeight)
-  }
-
 }
