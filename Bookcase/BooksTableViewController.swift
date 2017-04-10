@@ -13,7 +13,7 @@ private let sortOrderKey = "TableSortOrder"
 
 class BooksTableViewController: UITableViewController {
     static let defaultCover = UIImage(named: "book.jpg")!
-    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    @IBOutlet weak var sortSegmentedControl: UISegmentedControl!
     let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
     lazy var context:NSManagedObjectContext = {
         return self.appDelegate.persistentContainer.viewContext
@@ -31,7 +31,7 @@ class BooksTableViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if let sortOrder = SortOrder(rawValue:UserDefaults.standard.integer(forKey: sortOrderKey)) {
-            segmentedControl.selectedSegmentIndex = sortOrder.rawValue
+            sortSegmentedControl.selectedSegmentIndex = sortOrder.rawValue
             fetchedResultsController = getFetch()
         }
         tableView.reloadData()
@@ -88,7 +88,7 @@ class BooksTableViewController: UITableViewController {
         let fetchRequest: NSFetchRequest<Book> = Book.fetchRequest()
         fetchRequest.fetchBatchSize = 20
         //sort
-        let segmentIndex = segmentedControl.selectedSegmentIndex
+        let segmentIndex = sortSegmentedControl.selectedSegmentIndex
         guard let sortOrder = SortOrder(rawValue:segmentIndex) else {fatalError("Segment error")}
         let titleDescriptor = NSSortDescriptor(key: "title", ascending: true,
             selector:#selector(NSString.localizedCaseInsensitiveCompare(_:)))
