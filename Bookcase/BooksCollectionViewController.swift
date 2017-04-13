@@ -70,6 +70,7 @@ class BooksCollectionViewController: UICollectionViewController,Injectable {
   @IBAction func changedSegment(_ sender: UISegmentedControl) {
     guard let sortOrder = SortOrder(rawValue:sender.selectedSegmentIndex) else {return}
     booksManager.sortOrder = sortOrder
+    UserDefaults.standard.set(sortOrder.rawValue, forKey: sortOrderKey)
     collectionView?.reloadData()
   }
   //MARK: Header
