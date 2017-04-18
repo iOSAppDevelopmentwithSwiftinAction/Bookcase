@@ -77,7 +77,6 @@ class BookViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         NotificationCenter.default.removeObserver(self)
-        booksService.cancel()
     }
     func keyboardFrameChanges(notification:Notification) {
         //get keyboard height
