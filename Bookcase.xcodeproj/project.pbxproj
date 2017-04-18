@@ -17,8 +17,8 @@
 		B94892831D5A42D200BC9BEB /* BooksCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B94892821D5A42D200BC9BEB /* BooksCollectionViewController.swift */; };
 		B94892871D5AB2C400BC9BEB /* BookCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B94892861D5AB2C400BC9BEB /* BookCollectionViewCell.swift */; };
 		B975A6571D9D79B800791C42 /* BarcodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B975A6561D9D79B800791C42 /* BarcodeViewController.swift */; };
+		B97F26291EA67FA500672718 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B97F26281EA67FA500672718 /* SwiftyJSON.framework */; };
 		B99AC7171D5E57C300AE5861 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99AC7161D5E57C300AE5861 /* TabBarController.swift */; };
-		B99E971D1DCD1AF3009DB968 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99E971C1DCD1AF3009DB968 /* SwiftyJSON.swift */; };
 		B99E972C1DCD35D9009DB968 /* UIImageColors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B99E972B1DCD35D9009DB968 /* UIImageColors.framework */; };
 		B99E972D1DCD35D9009DB968 /* UIImageColors.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B99E972B1DCD35D9009DB968 /* UIImageColors.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B9C0DD851DB03BCD002720BD /* GoogleBooksService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C0DD841DB03BCD002720BD /* GoogleBooksService.swift */; };
@@ -85,8 +85,8 @@
 		B94892821D5A42D200BC9BEB /* BooksCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BooksCollectionViewController.swift; sourceTree = "<group>"; };
 		B94892861D5AB2C400BC9BEB /* BookCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookCollectionViewCell.swift; sourceTree = "<group>"; };
 		B975A6561D9D79B800791C42 /* BarcodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeViewController.swift; sourceTree = "<group>"; };
+		B97F26281EA67FA500672718 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 		B99AC7161D5E57C300AE5861 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
-		B99E971C1DCD1AF3009DB968 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		B99E972B1DCD35D9009DB968 /* UIImageColors.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIImageColors.framework; path = Carthage/Build/iOS/UIImageColors.framework; sourceTree = "<group>"; };
 		B9C0DD841DB03BCD002720BD /* GoogleBooksService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleBooksService.swift; sourceTree = "<group>"; };
 		B9E07F351DA7FAC8002D782C /* Rating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
@@ -110,6 +110,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B99E972C1DCD35D9009DB968 /* UIImageColors.framework in Frameworks */,
+				B97F26291EA67FA500672718 /* SwiftyJSON.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,7 +163,6 @@
 				B948928E1D5CE5E800BC9BEB /* Controller */,
 				B9019F831CE229D500CAE744 /* LaunchScreen.storyboard */,
 				B9019F861CE229D500CAE744 /* Info.plist */,
-				B99E971C1DCD1AF3009DB968 /* SwiftyJSON.swift */,
 			);
 			path = Bookcase;
 			sourceTree = "<group>";
@@ -221,6 +221,7 @@
 		B9CB2CD51DB6EE11007CEFFD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B97F26281EA67FA500672718 /* SwiftyJSON.framework */,
 				B99E972B1DCD35D9009DB968 /* UIImageColors.framework */,
 			);
 			name = Frameworks;
@@ -423,7 +424,6 @@
 				B9C0DD851DB03BCD002720BD /* GoogleBooksService.swift in Sources */,
 				B9EADEAE1D4A7BE800F125F3 /* Book.swift in Sources */,
 				B9E07F381DA7FAC8002D782C /* Star.swift in Sources */,
-				B99E971D1DCD1AF3009DB968 /* SwiftyJSON.swift in Sources */,
 				B9EA83021DCD5EAC00F6A87B /* HelpPage3ViewController.swift in Sources */,
 				B99AC7171D5E57C300AE5861 /* TabBarController.swift in Sources */,
 				B94892871D5AB2C400BC9BEB /* BookCollectionViewCell.swift in Sources */,

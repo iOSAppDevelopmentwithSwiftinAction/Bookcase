@@ -14,10 +14,7 @@ private let sortOrderKey = "CollectionSortOrder"
 class BooksCollectionViewController: UICollectionViewController,Injectable {
   var booksManager:BooksManager!
   let searchController = UISearchController(searchResultsController: nil)
-  
   @IBOutlet weak var sortSegmentedControl: UISegmentedControl!
-  
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     //MARK: Search
@@ -25,6 +22,7 @@ class BooksCollectionViewController: UICollectionViewController,Injectable {
     searchController.obscuresBackgroundDuringPresentation = false
     definesPresentationContext = true
   }
+  
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     if let sortOrder = SortOrder(rawValue:UserDefaults.standard.integer(forKey: sortOrderKey)) {
@@ -33,22 +31,21 @@ class BooksCollectionViewController: UICollectionViewController,Injectable {
     }
     collectionView?.reloadData()
   }
+  func inject(data: BooksManager) {
+    self.booksManager = data
+  }
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
-  func inject(data:BooksManager) {
-    self.booksManager = data
-  }
+  
   // MARK: UICollectionViewDataSource
   
   override func numberOfSections(in collectionView: UICollectionView) -> Int {
-    // #warning Incomplete implementation, return the number of sections
-    return 1
+    return 2
   }
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    // #warning Incomplete implementation, return the number of items
-    return booksManager.bookCount
+    return section == 0 ? 0 : booksManager.bookCount
   }
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! BookCollectionViewCell
@@ -79,7 +76,9 @@ class BooksCollectionViewController: UICollectionViewController,Injectable {
   //MARK: Header
   override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
     let reusableView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "collectionHeader", for: indexPath)
-    reusableView.addSubview(searchController.searchBar)
+    if indexPath.section == 0 {
+      reusableView.addSubview(searchController.searchBar)
+    }
     return reusableView
   }
 }
@@ -96,6 +95,13 @@ extension BooksCollectionViewController:BookViewControllerDelegate {
   }
 }
 extension BooksCollectionViewController:UICollectionViewDelegateFlowLayout {
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+    if section == 0 {
+      return searchController.searchBar.bounds.size
+    } else {
+      return CGSize.zero
+    }
+  }
   public func collectionView(_ collectionView: UICollectionView,
                              layout collectionViewLayout: UICollectionViewLayout,
                              sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -109,6 +115,6 @@ extension BooksCollectionViewController:UISearchResultsUpdating {
   func updateSearchResults(for searchController: UISearchController) {
     guard let searchText = searchController.searchBar.text else { return }
     booksManager.searchFilter = searchText
-    collectionView?.reloadData()
+    collectionView?.reloadSections(NSIndexSet(index: 1) as IndexSet)
   }
 }

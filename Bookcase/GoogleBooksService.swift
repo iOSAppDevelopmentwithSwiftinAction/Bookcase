@@ -7,7 +7,7 @@
 //
 
 import UIKit
-//import SwiftyJSON
+import SwiftyJSON
 
 protocol BooksService {
     func getBook(with barcode:String, completionHandler: @escaping (Book?, Error?) -> Void)
@@ -103,4 +103,3 @@ class GoogleBooksService:NSObject, BooksService, URLSessionDelegate {
         task?.resume()
     }
 }
-
