@@ -236,16 +236,19 @@ extension BookViewController:BarcodeViewControllerDelegate {
         playBarcodeSound()
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         booksService.getBook(with: barcode) { (scannedBook, error) in
-            if let error = error {
-                //deal with error
-                return
-            } else if let scannedBook = scannedBook {
-                UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                self.receiveImage(image: scannedBook.cover)
-                self.titleTextField.text = scannedBook.title
-                self.authorTextField.text = scannedBook.author
-                self.saveButton.isEnabled = true
-            }
+          UIApplication.shared.isNetworkActivityIndicatorVisible = false
+          if error != nil {
+            //deal with error
+            return
+          } else if let scannedBook = scannedBook {
+            self.bookCover.image = scannedBook.cover
+            self.coverToSave = scannedBook.cover
+            self.titleTextField.text = scannedBook.title
+            self.authorTextField.text = scannedBook.author
+            self.saveButton.isEnabled = true
+          } else {
+            //deal with no error, no book!
+          }
         }
     }
 }
