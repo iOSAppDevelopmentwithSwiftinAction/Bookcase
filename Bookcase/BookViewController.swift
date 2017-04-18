@@ -184,7 +184,7 @@ extension BookViewController:BarcodeViewControllerDelegate {
         playBarcodeSound()
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         booksService.getBook(with: barcode) { (scannedBook, error) in
-            if let error = error {
+            if error != nil {
                 //deal with error
                 return
             } else if let scannedBook = scannedBook {
