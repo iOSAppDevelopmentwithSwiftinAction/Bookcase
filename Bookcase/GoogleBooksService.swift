@@ -41,7 +41,7 @@ class GoogleBooksService:NSObject, BooksService, URLSessionDelegate {
         
     }
     func cancel() {
-        task?.cancel()
+      task?.cancel()
     }
     //Parsing with JSONSerialization - replaced with SwiftyJSON method
     private func parseJSON(data:Data, completionHandler: @escaping (Book?, Error?) -> Void) {
