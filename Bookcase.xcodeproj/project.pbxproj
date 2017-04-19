@@ -18,6 +18,7 @@
 		B94892871D5AB2C400BC9BEB /* BookCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B94892861D5AB2C400BC9BEB /* BookCollectionViewCell.swift */; };
 		B975A6571D9D79B800791C42 /* BarcodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B975A6561D9D79B800791C42 /* BarcodeViewController.swift */; };
 		B97F265F1EA6D96200672718 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B97F265E1EA6D96200672718 /* SwiftyJSON.framework */; };
+		B97F266D1EA7C56100672718 /* UIImageColors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B99E972B1DCD35D9009DB968 /* UIImageColors.framework */; };
 		B99AC7171D5E57C300AE5861 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99AC7161D5E57C300AE5861 /* TabBarController.swift */; };
 		B99E972C1DCD35D9009DB968 /* UIImageColors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B99E972B1DCD35D9009DB968 /* UIImageColors.framework */; };
 		B99E972D1DCD35D9009DB968 /* UIImageColors.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B99E972B1DCD35D9009DB968 /* UIImageColors.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -87,7 +88,6 @@
 		B94892821D5A42D200BC9BEB /* BooksCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BooksCollectionViewController.swift; sourceTree = "<group>"; };
 		B94892861D5AB2C400BC9BEB /* BookCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookCollectionViewCell.swift; sourceTree = "<group>"; };
 		B975A6561D9D79B800791C42 /* BarcodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeViewController.swift; sourceTree = "<group>"; };
-		B97F265C1EA6D95900672718 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/watchOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 		B97F265E1EA6D96200672718 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 		B99AC7161D5E57C300AE5861 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		B99E972B1DCD35D9009DB968 /* UIImageColors.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIImageColors.framework; path = Carthage/Build/iOS/UIImageColors.framework; sourceTree = "<group>"; };
@@ -123,6 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B97F266D1EA7C56100672718 /* UIImageColors.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -229,7 +230,6 @@
 			isa = PBXGroup;
 			children = (
 				B97F265E1EA6D96200672718 /* SwiftyJSON.framework */,
-				B97F265C1EA6D95900672718 /* SwiftyJSON.framework */,
 				B99E972B1DCD35D9009DB968 /* UIImageColors.framework */,
 			);
 			name = Frameworks;

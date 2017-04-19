@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import UIImageColors
+
 class UIImageColorDetectionTests: XCTestCase {
     
     var image:UIImage!
