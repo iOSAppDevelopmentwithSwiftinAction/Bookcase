@@ -21,7 +21,7 @@ class BooksManager {
       sort(books:&books)
     }
   }
-  var searchFilter:String = "" {
+  var searchFilter = "" {
     didSet {
       filter()
     }
