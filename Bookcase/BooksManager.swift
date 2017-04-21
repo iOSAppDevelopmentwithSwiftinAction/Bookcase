@@ -23,9 +23,9 @@ class BooksManager {
     return searchFilter.isEmpty ? books.count : filteredBooks.count
   }
   var sortOrder = SortOrder.title
-  var searchFilter: String = "" {
-    didSet {			//#A
-      filter()		//#B
+  var searchFilter = "" {
+    didSet {
+      filter()
     }
   }
   var filteredBooks: [Book] = []
