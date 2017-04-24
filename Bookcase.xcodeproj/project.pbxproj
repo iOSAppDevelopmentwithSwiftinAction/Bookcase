@@ -16,9 +16,9 @@
 		B9019F9B1CE229D500CAE744 /* BookcaseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9019F9A1CE229D500CAE744 /* BookcaseUITests.swift */; };
 		B94892831D5A42D200BC9BEB /* BooksCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B94892821D5A42D200BC9BEB /* BooksCollectionViewController.swift */; };
 		B94892871D5AB2C400BC9BEB /* BookCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B94892861D5AB2C400BC9BEB /* BookCollectionViewCell.swift */; };
+		B968A48F1EAE623600E6C4C0 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B968A48E1EAE623600E6C4C0 /* SwiftyJSON.framework */; };
 		B975A6571D9D79B800791C42 /* BarcodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B975A6561D9D79B800791C42 /* BarcodeViewController.swift */; };
 		B99AC7171D5E57C300AE5861 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99AC7161D5E57C300AE5861 /* TabBarController.swift */; };
-		B99E971D1DCD1AF3009DB968 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99E971C1DCD1AF3009DB968 /* SwiftyJSON.swift */; };
 		B99E972C1DCD35D9009DB968 /* UIImageColors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B99E972B1DCD35D9009DB968 /* UIImageColors.framework */; };
 		B99E972D1DCD35D9009DB968 /* UIImageColors.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B99E972B1DCD35D9009DB968 /* UIImageColors.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B9C0DD851DB03BCD002720BD /* GoogleBooksService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C0DD841DB03BCD002720BD /* GoogleBooksService.swift */; };
@@ -86,9 +86,9 @@
 		B9019F9C1CE229D500CAE744 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B94892821D5A42D200BC9BEB /* BooksCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BooksCollectionViewController.swift; sourceTree = "<group>"; };
 		B94892861D5AB2C400BC9BEB /* BookCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookCollectionViewCell.swift; sourceTree = "<group>"; };
+		B968A48E1EAE623600E6C4C0 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 		B975A6561D9D79B800791C42 /* BarcodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeViewController.swift; sourceTree = "<group>"; };
 		B99AC7161D5E57C300AE5861 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
-		B99E971C1DCD1AF3009DB968 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		B99E972B1DCD35D9009DB968 /* UIImageColors.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIImageColors.framework; path = Carthage/Build/iOS/UIImageColors.framework; sourceTree = "<group>"; };
 		B9C0DD841DB03BCD002720BD /* GoogleBooksService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleBooksService.swift; sourceTree = "<group>"; };
 		B9E07F351DA7FAC8002D782C /* Rating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
@@ -113,6 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B968A48F1EAE623600E6C4C0 /* SwiftyJSON.framework in Frameworks */,
 				B99E972C1DCD35D9009DB968 /* UIImageColors.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -166,7 +167,6 @@
 				B948928E1D5CE5E800BC9BEB /* Controller */,
 				B9019F831CE229D500CAE744 /* LaunchScreen.storyboard */,
 				B9019F861CE229D500CAE744 /* Info.plist */,
-				B99E971C1DCD1AF3009DB968 /* SwiftyJSON.swift */,
 			);
 			path = Bookcase;
 			sourceTree = "<group>";
@@ -227,6 +227,7 @@
 		B9CB2CD51DB6EE11007CEFFD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B968A48E1EAE623600E6C4C0 /* SwiftyJSON.framework */,
 				B99E972B1DCD35D9009DB968 /* UIImageColors.framework */,
 			);
 			name = Frameworks;
@@ -273,6 +274,7 @@
 				B9019F731CE229D500CAE744 /* Sources */,
 				B9019F741CE229D500CAE744 /* Frameworks */,
 				B9019F751CE229D500CAE744 /* Resources */,
+				B968A4901EAE624800E6C4C0 /* ShellScript */,
 				B99E972E1DCD35D9009DB968 /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -400,6 +402,24 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		B968A4901EAE624800E6C4C0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/UIImageColors.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		B9019F731CE229D500CAE744 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -410,7 +430,6 @@
 				B9C0DD851DB03BCD002720BD /* GoogleBooksService.swift in Sources */,
 				B9EADEAE1D4A7BE800F125F3 /* Book.swift in Sources */,
 				B9E07F381DA7FAC8002D782C /* Star.swift in Sources */,
-				B99E971D1DCD1AF3009DB968 /* SwiftyJSON.swift in Sources */,
 				B9EA83021DCD5EAC00F6A87B /* HelpPage3ViewController.swift in Sources */,
 				B99AC7171D5E57C300AE5861 /* TabBarController.swift in Sources */,
 				B94892871D5AB2C400BC9BEB /* BookCollectionViewCell.swift in Sources */,
