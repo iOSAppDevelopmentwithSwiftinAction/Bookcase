@@ -16,11 +16,10 @@
 		B9019F9B1CE229D500CAE744 /* BookcaseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9019F9A1CE229D500CAE744 /* BookcaseUITests.swift */; };
 		B94892831D5A42D200BC9BEB /* BooksCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B94892821D5A42D200BC9BEB /* BooksCollectionViewController.swift */; };
 		B94892871D5AB2C400BC9BEB /* BookCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B94892861D5AB2C400BC9BEB /* BookCollectionViewCell.swift */; };
+		B968A4941EB02C5C00E6C4C0 /* UIImageColors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B99E972B1DCD35D9009DB968 /* UIImageColors.framework */; };
 		B975A6571D9D79B800791C42 /* BarcodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B975A6561D9D79B800791C42 /* BarcodeViewController.swift */; };
 		B97F265B1EA6D00800672718 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B97F265A1EA6D00800672718 /* SwiftyJSON.framework */; };
 		B99AC7171D5E57C300AE5861 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99AC7161D5E57C300AE5861 /* TabBarController.swift */; };
-		B99E972C1DCD35D9009DB968 /* UIImageColors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B99E972B1DCD35D9009DB968 /* UIImageColors.framework */; };
-		B99E972D1DCD35D9009DB968 /* UIImageColors.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B99E972B1DCD35D9009DB968 /* UIImageColors.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B9C0DD851DB03BCD002720BD /* GoogleBooksService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C0DD841DB03BCD002720BD /* GoogleBooksService.swift */; };
 		B9E07F371DA7FAC8002D782C /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E07F351DA7FAC8002D782C /* Rating.swift */; };
 		B9E07F381DA7FAC8002D782C /* Star.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E07F361DA7FAC8002D782C /* Star.swift */; };
@@ -53,20 +52,6 @@
 			remoteInfo = Bookcase;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		B99E972E1DCD35D9009DB968 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				B99E972D1DCD35D9009DB968 /* UIImageColors.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		B9019F771CE229D500CAE744 /* Bookcase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bookcase.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -109,8 +94,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B99E972C1DCD35D9009DB968 /* UIImageColors.framework in Frameworks */,
 				B97F265B1EA6D00800672718 /* SwiftyJSON.framework in Frameworks */,
+				B968A4941EB02C5C00E6C4C0 /* UIImageColors.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,7 +254,6 @@
 				B9019F741CE229D500CAE744 /* Frameworks */,
 				B9019F751CE229D500CAE744 /* Resources */,
 				B9C0DD861DB04183002720BD /* ShellScript */,
-				B99E972E1DCD35D9009DB968 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
