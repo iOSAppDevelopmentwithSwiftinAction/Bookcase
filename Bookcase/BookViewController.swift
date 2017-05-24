@@ -9,7 +9,7 @@
 import UIKit
 
 protocol BookViewControllerDelegate {
-    func saveBook(book:Book)
+    func saveBook(_ book:Book)
 }
 
 private let isbnKey = "ISBN"
@@ -109,7 +109,7 @@ class BookViewController: UIViewController {
                               notes: notesTextView.text!,
                               cover: coverToSave
         )
-        delegate?.saveBook(book: bookToSave)
+        delegate?.saveBook(bookToSave)
         dismissMe()
     }
     @IBAction func takePhoto(_ sender: AnyObject) {
