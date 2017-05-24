@@ -30,11 +30,11 @@ class BooksTableViewController: UITableViewController {
         return 1
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return booksManager.books.count
+        return booksManager.bookCount
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "bookCell", for: indexPath)
-        let book = booksManager.books[indexPath.row]
+        let book = booksManager.getBook(at:indexPath.row)
         cell.textLabel?.text = book.title
         cell.detailTextLabel?.text = book.author
         cell.imageView?.image = book.cover
@@ -102,10 +102,8 @@ class BooksTableViewController: UITableViewController {
 
 }
 extension BooksTableViewController:BookViewControllerDelegate {
-    func saveBook(book:Book) {
-        booksManager.addBook(book: book)
-        let numRows = tableView.numberOfRows(inSection: 0)
-        let newIndexPath = IndexPath(row: numRows, section: 0)
-        tableView.insertRows(at: [newIndexPath], with: .bottom)
+    func saveBook(_ book:Book) {
+      booksManager.addBook(book)
+      tableView.reloadData()
     }
 }
