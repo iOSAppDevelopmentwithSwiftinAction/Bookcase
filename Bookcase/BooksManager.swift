@@ -14,7 +14,7 @@ enum SortOrder:Int {
 }
 
 class BooksManager {
-    lazy var books:[Book] = self.loadBooks()
+    private lazy var books:[Book] = self.loadBooks()
     var filteredBooks:[Book] = []
     var sortOrder:SortOrder = .title {
         didSet {
@@ -34,10 +34,10 @@ class BooksManager {
     func getBook(at index:Int)->Book {
         return searchFilter.isEmpty ? books[index] : filteredBooks[index]
     }
-    func loadBooks()->[Book] {
+    private func loadBooks()->[Book] {
         return sampleBooks()
     }
-    func addBook(book:Book) {
+    func addBook(_ book:Book) {
         books.append(book)
         sort(books:&books)
     }
@@ -69,7 +69,7 @@ class BooksManager {
             filter()
         }
     }
-    func sampleBooks()->[Book] {
+    private func sampleBooks()->[Book] {
         var books = [
             Book(title: "Great Expectations", author: "Charles Dickens", rating: 5, isbn: "9780140817997", notes: "🎁 from Papa"),
             Book(title: "Don Quixote", author: "Miguel De Cervantes", rating: 4, isbn: "9788471890153", notes: ""),
