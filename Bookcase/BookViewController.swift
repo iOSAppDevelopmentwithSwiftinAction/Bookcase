@@ -9,7 +9,7 @@
 import UIKit
 
 protocol BookViewControllerDelegate {
-    func saveBook(book:Book)
+    func saveBook(_ book:Book)
 }
 
 class BookViewController: UIViewController {
@@ -97,7 +97,7 @@ class BookViewController: UIViewController {
                               isbn: isbnTextField.text!,
                               notes: notesTextView.text!
         )
-        delegate?.saveBook(book: bookToSave)
+        delegate?.saveBook(bookToSave)
         dismissMe()
     }
     func dismissMe() {
