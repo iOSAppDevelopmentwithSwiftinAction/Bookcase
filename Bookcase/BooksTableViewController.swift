@@ -150,7 +150,7 @@ extension BooksTableViewController:NSFetchedResultsControllerDelegate {
      */
 }
 extension BooksTableViewController:BookViewControllerDelegate {
-    func saveBook(book:Book) {
+    func saveBook(_ book:Book) {
         appDelegate.saveContext()
     }
 }

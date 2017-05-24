@@ -152,7 +152,7 @@ extension BooksCollectionViewController:NSFetchedResultsControllerDelegate {
 }
 
 extension BooksCollectionViewController:BookViewControllerDelegate {
-  func saveBook(book:Book) {
+  func saveBook(_ book:Book) {
     appDelegate.saveContext()
   }
 }
