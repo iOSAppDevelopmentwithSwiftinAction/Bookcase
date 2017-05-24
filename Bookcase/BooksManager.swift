@@ -8,15 +8,15 @@
 
 import Foundation
 class BooksManager {
-  lazy var books:[Book] = self.loadBooks()
+  private lazy var books:[Book] = self.loadBooks()
   var bookCount:Int {return books.count}
   func getBook(at index:Int)->Book {
     return books[index]
   }
-  func loadBooks()->[Book] {
+  private func loadBooks()->[Book] {
     return sampleBooks()
   }
-  func addBook(book:Book) {
+  func addBook(_ book:Book) {
     books.append(book)
   }
   func removeBook(at index:Int) {
@@ -25,7 +25,7 @@ class BooksManager {
   func updateBook(at index:Int, with book:Book) {
     books[index] = book
   }
-  func sampleBooks()->[Book] {
+  private func sampleBooks()->[Book] {
     return [
       Book(title: "Great Expectations", author: "Charles Dickens", rating: 5, isbn: "9780140817997", notes: "🎁 from Papa"),
       Book(title: "Don Quixote", author: "Miguel De Cervantes", rating: 4, isbn: "9788471890153", notes: ""),
