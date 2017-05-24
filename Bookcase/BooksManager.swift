@@ -42,7 +42,7 @@ private var booksFile:URL = {
 }()
 
 class BooksManager {
-    lazy var books:[Book] = self.loadBooks()
+    private lazy var books:[Book] = self.loadBooks()
     var filteredBooks:[Book] = []
     var sortOrder:SortOrder = .title {
         didSet {
@@ -62,10 +62,10 @@ class BooksManager {
     func getBook(at index:Int)->Book {
         return searchFilter.isEmpty ? books[index] : filteredBooks[index]
     }
-    func loadBooks()->[Book] {
+    private func loadBooks()->[Book] {
         return retrieveBooks() ?? []
     }
-    func addBook(book:Book) {
+    func addBook(_ book:Book) {
         books.append(book)
         sort(books:&books)
         SQLAddBook(book: book)
