@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="cdg-D8-bmj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="cdg-D8-bmj">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -324,7 +324,7 @@
                                             </stackView>
                                         </subviews>
                                         <edgeInsets key="layoutMargins" top="16" left="16" bottom="16" right="16"/>
-                                        <variation key="heightClass=compact" axis="horizontal"/>
+                                        <variation key="heightClass=compact" axis="horizontal" distribution="fillEqually"/>
                                     </stackView>
                                 </subviews>
                                 <constraints>
@@ -340,20 +340,13 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="9VK-99-pTo" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="FWE-6j-i6J"/>
-                            <constraint firstItem="7xl-eQ-ZGX" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.5" id="QMK-Uo-W0W"/>
                             <constraint firstItem="7xl-eQ-ZGX" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.3" id="QpJ-Cv-deu"/>
                             <constraint firstAttribute="bottom" secondItem="9VK-99-pTo" secondAttribute="bottom" id="Yjo-oD-Pho"/>
                             <constraint firstItem="9VK-99-pTo" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="qeF-2g-tTx"/>
                             <constraint firstAttribute="trailing" secondItem="9VK-99-pTo" secondAttribute="trailing" id="tbe-HH-zQM"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="QMK-Uo-W0W"/>
-                            </mask>
-                        </variation>
                         <variation key="heightClass=compact">
                             <mask key="constraints">
-                                <include reference="QMK-Uo-W0W"/>
                                 <exclude reference="QpJ-Cv-deu"/>
                             </mask>
                         </variation>
