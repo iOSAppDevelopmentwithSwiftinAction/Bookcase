@@ -11,7 +11,7 @@ import AVFoundation
 import UIImageColors
 
 protocol BookViewControllerDelegate {
-  func saveBook(book:Book)
+  func saveBook(_ book:Book)
 }
 
 private let isbnKey = "ISBN"
@@ -137,7 +137,7 @@ class BookViewController: UIViewController {
                           primaryColor: primaryColor,
                           detailColor: detailColor
     )
-    delegate?.saveBook(book: bookToSave)
+    delegate?.saveBook(bookToSave)
     dismissMe()
   }
   @IBAction func takePhoto(_ sender: AnyObject) {
