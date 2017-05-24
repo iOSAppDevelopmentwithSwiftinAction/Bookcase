@@ -20,7 +20,7 @@ struct Notifications {
 // MARK: Paths
 
 class BooksManager {
-  var books:[Book] = []
+  private var books:[Book] = []
   var booksRequireLoading = true
   var filteredBooks:[Book] = []
   var sortOrder:SortOrder = .title {
@@ -53,7 +53,7 @@ class BooksManager {
   func getBook(at index:Int)->Book {
     return searchFilter.isEmpty ? books[index] : filteredBooks[index]
   }
-  func addBook(book:Book) {
+  func addBook(_ book:Book) {
     books.append(book)
     sort(books:&books)
   }
@@ -120,7 +120,7 @@ class BooksManager {
           completion(error)
         } else {
           //Record saved to iCloud
-          self.addBook(book: book)
+          self.addBook(book)
           completion(nil)
         }
       }

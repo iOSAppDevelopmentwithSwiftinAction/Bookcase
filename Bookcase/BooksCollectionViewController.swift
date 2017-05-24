@@ -134,13 +134,13 @@ class BooksCollectionViewController: UICollectionViewController,Injectable {
   }
 }
 extension BooksCollectionViewController:BookViewControllerDelegate {
-  func saveBook(book:Book) {
+  func saveBook(_ book:Book) {
     if let selectedIndexPath = collectionView?.indexPathsForSelectedItems?.first {
       //Update book
       booksManager.updateBook(at: selectedIndexPath.row, with: book)
     } else {
       //Add book
-      booksManager.addBook(book: book)
+      booksManager.addBook(book)
     }
     collectionView?.reloadData()
   }

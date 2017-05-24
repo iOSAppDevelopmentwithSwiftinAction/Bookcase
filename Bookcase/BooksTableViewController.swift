@@ -152,7 +152,7 @@ class BooksTableViewController: UITableViewController, Injectable {
     }
 }
 extension BooksTableViewController:BookViewControllerDelegate {
-    func saveBook(book:Book) {
+    func saveBook(_ book:Book) {
         if let selectedIndexPath = tableView.indexPathForSelectedRow {
             //Update book
             cloudOperation(waiting:true)
