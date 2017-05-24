@@ -67,13 +67,13 @@ class BooksTableViewController: UITableViewController {
 
 }
 extension BooksTableViewController:BookViewControllerDelegate {
-    func saveBook(book:Book) {
+    func saveBook(_ book:Book) {
         if let selectedIndexPath = tableView.indexPathForSelectedRow {
             //Update book
             booksManager.updateBook(at: selectedIndexPath.row, with: book)
         } else {
             //Add book
-            booksManager.addBook(book: book)
+            booksManager.addBook(book)
         }
         tableView.reloadData()
     }
