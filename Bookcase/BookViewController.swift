@@ -178,11 +178,11 @@ class BookViewController: UIViewController {
   }
   //MARK:Colors
   func receiveColors(colors:UIImageColors) {
-    detailColor = colors.detailColor
-    book?.detailColor = colors.detailColor
-    book?.primaryColor = colors.primaryColor
-    book?.backgroundColor = colors.backgroundColor
-    drawColorsToView(backgroundColor: colors.backgroundColor, primaryColor: colors.primaryColor)
+    detailColor = colors.detail
+    book?.detailColor = colors.detail
+    book?.primaryColor = colors.primary
+    book?.backgroundColor = colors.background
+    drawColorsToView(backgroundColor: colors.background, primaryColor: colors.primary)
   }
   func drawColorsToView(backgroundColor:UIColor,primaryColor:UIColor) {
     UIView.animate(withDuration: 1) {
