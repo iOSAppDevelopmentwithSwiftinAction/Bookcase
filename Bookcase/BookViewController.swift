@@ -26,7 +26,7 @@ class BookViewController: UIViewController {
         super.viewDidAppear(animated)
         
     }
-    func toggleISBN() {
+    @objc func toggleISBN() {
         UIView.animate(withDuration: 0.5, animations: {
             self.isbnStackView.isHidden = !self.isbnStackView.isHidden
         })
