@@ -20,7 +20,7 @@ class BookViewController: UIViewController {
         infoButton.addTarget(self, action: #selector(toggleISBN), for: .touchUpInside)
         bookCover.addSubview(infoButton)
     }
-    func toggleISBN() {
+    @objc func toggleISBN() {
         UIView.animate(withDuration: 0.5, animations: {
             self.isbnStackView.isHidden = !self.isbnStackView.isHidden
         })
