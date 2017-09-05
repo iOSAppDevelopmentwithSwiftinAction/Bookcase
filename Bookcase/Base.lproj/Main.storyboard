@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Rug-kn-4rC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13189.4" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Rug-kn-4rC">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13165.3"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -74,7 +75,7 @@
                     <navigationItem key="navigationItem" title="Covers" id="a0P-GE-Ot6">
                         <barButtonItem key="leftBarButtonItem" id="f9I-KV-5qP">
                             <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="RP4-aa-CES">
-                                <rect key="frame" x="16" y="7" width="100" height="30"/>
+                                <rect key="frame" x="16" y="7" width="111" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="Title"/>
@@ -113,14 +114,14 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mRP-4Q-iCn">
-                                            <rect key="frame" x="15" y="5" width="33.5" height="20.5"/>
+                                            <rect key="frame" x="16" y="5" width="33.5" height="20.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="x3I-uJ-lFi">
-                                            <rect key="frame" x="15" y="25.5" width="44" height="14.5"/>
+                                            <rect key="frame" x="16" y="25.5" width="44" height="14.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -141,7 +142,7 @@
                     <navigationItem key="navigationItem" title="Books" id="jdH-a7-yfR">
                         <barButtonItem key="leftBarButtonItem" id="pCj-cx-2t9">
                             <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="04c-Op-yJK">
-                                <rect key="frame" x="16" y="7" width="100" height="30"/>
+                                <rect key="frame" x="16" y="7" width="111" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="Title"/>
@@ -163,14 +164,10 @@
             </objects>
             <point key="canvasLocation" x="4100" y="-300"/>
         </scene>
-        <!--Book View Controller-->
+        <!--Add book-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="BookViewController" customModule="Bookcase" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -235,16 +232,16 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="aOw-Pk-i0O" userLabel="ISBN Stack View">
-                                                        <rect key="frame" x="0.0" y="76" width="343" height="30"/>
+                                                        <rect key="frame" x="0.0" y="72" width="343" height="0.0"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="ISBN:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JFU-ko-BZH">
-                                                                <rect key="frame" x="0.0" y="0.0" width="56.5" height="30"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="56.5" height="0.0"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GaW-ni-xJJ" userLabel="ISBN Text Field">
-                                                                <rect key="frame" x="64.5" y="0.0" width="278.5" height="30"/>
+                                                                <rect key="frame" x="64.5" y="0.0" width="278.5" height="0.0"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
                                                                 <connections>
@@ -254,7 +251,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="LR2-ZW-kO9" userLabel="Notes Stack View">
-                                                        <rect key="frame" x="0.0" y="114" width="343" height="280"/>
+                                                        <rect key="frame" x="0.0" y="76" width="343" height="318"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Notes:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mmJ-3L-JDu">
                                                                 <rect key="frame" x="0.0" y="0.0" width="56.5" height="20.5"/>
@@ -263,7 +260,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="249" verticalCompressionResistancePriority="748" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="vSH-XD-HqM">
-                                                                <rect key="frame" x="64.5" y="0.0" width="278.5" height="280"/>
+                                                                <rect key="frame" x="64.5" y="0.0" width="278.5" height="318"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                 <connections>
@@ -302,16 +299,17 @@
                             <constraint firstItem="9VK-99-pTo" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="FWE-6j-i6J"/>
                             <constraint firstItem="7xl-eQ-ZGX" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.3" id="QpJ-Cv-deu"/>
                             <constraint firstAttribute="bottom" secondItem="9VK-99-pTo" secondAttribute="bottom" id="Yjo-oD-Pho"/>
-                            <constraint firstItem="9VK-99-pTo" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="qeF-2g-tTx"/>
-                            <constraint firstAttribute="trailing" secondItem="9VK-99-pTo" secondAttribute="trailing" id="tbe-HH-zQM"/>
+                            <constraint firstItem="9VK-99-pTo" firstAttribute="leading" secondItem="ubU-vP-bY6" secondAttribute="leading" id="qeF-2g-tTx"/>
+                            <constraint firstItem="ubU-vP-bY6" firstAttribute="trailing" secondItem="9VK-99-pTo" secondAttribute="trailing" id="tbe-HH-zQM"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="ubU-vP-bY6"/>
                         <variation key="heightClass=compact">
                             <mask key="constraints">
                                 <exclude reference="QpJ-Cv-deu"/>
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="ExO-7x-0FR">
+                    <navigationItem key="navigationItem" title="Add book" largeTitleDisplayMode="never" id="ExO-7x-0FR">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="ac2-SZ-E6x">
                             <connections>
                                 <action selector="touchCancel:" destination="BYZ-38-t0r" id="Lae-4s-c3Z"/>
@@ -345,8 +343,8 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="yCB-5y-Kwk" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Books" id="22R-vX-jUo"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="4eX-f3-5tA">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="4eX-f3-5tA">
+                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -365,7 +363,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="CcT-MV-nCJ"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hlv-RC-5wP">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -383,8 +381,8 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8Wq-Lb-LxR" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Covers" id="uk1-dI-dQK"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="mBV-ix-jsN">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="mBV-ix-jsN">
+                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -421,7 +419,7 @@
         <image name="ratings" width="150" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="MRK-VF-90I"/>
         <segue reference="D0o-Lb-6ES"/>
+        <segue reference="MRK-VF-90I"/>
     </inferredMetricsTieBreakers>
 </document>
