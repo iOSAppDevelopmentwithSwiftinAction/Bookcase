@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1UQ-Ut-UuR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13189.4" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1UQ-Ut-UuR">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13165.3"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Books Table View Controller-->
+        <!--Books-->
         <scene sceneID="cQV-mN-zbE">
             <objects>
                 <tableViewController id="SYg-hS-8r6" customClass="BooksTableViewController" customModule="Bookcase" customModuleProvider="target" sceneMemberID="viewController">
@@ -27,14 +28,14 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mRP-4Q-iCn">
-                                            <rect key="frame" x="15" y="5" width="33.333333333333336" height="20.333333333333332"/>
+                                            <rect key="frame" x="20.000000000000004" y="5" width="33.333333333333336" height="20.333333333333332"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="x3I-uJ-lFi">
-                                            <rect key="frame" x="14.999999999999996" y="25.333333333333332" width="43.666666666666664" height="14.333333333333334"/>
+                                            <rect key="frame" x="19.999999999999996" y="25.333333333333332" width="43.666666666666664" height="14.333333333333334"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -52,15 +53,14 @@
                             <outlet property="delegate" destination="SYg-hS-8r6" id="huj-9m-dMM"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="jdH-a7-yfR">
-                        <nil key="title"/>
+                    <navigationItem key="navigationItem" title="Books" id="jdH-a7-yfR">
                         <barButtonItem key="leftBarButtonItem" id="H2r-Ar-fxa">
                             <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="Rqj-Tn-CgI">
-                                <rect key="frame" x="20" y="7" width="83" height="30"/>
+                                <rect key="frame" x="20" y="7" width="106" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="Title" width="50"/>
-                                    <segment title="Author" width="50"/>
+                                    <segment title="Author"/>
                                 </segments>
                                 <connections>
                                     <action selector="changedSegment:" destination="SYg-hS-8r6" eventType="valueChanged" id="czd-KR-Llk"/>
@@ -142,14 +142,10 @@
             </objects>
             <point key="canvasLocation" x="3002.898550724638" y="-287.77173913043481"/>
         </scene>
-        <!--Book View Controller-->
+        <!--Add book-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="BookViewController" customModule="Bookcase" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -214,16 +210,16 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="aOw-Pk-i0O" userLabel="ISBN Stack View">
-                                                        <rect key="frame" x="0.0" y="76" width="382" height="30"/>
+                                                        <rect key="frame" x="0.0" y="72" width="382" height="0.0"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="ISBN:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JFU-ko-BZH">
-                                                                <rect key="frame" x="0.0" y="0.0" width="56.333333333333329" height="30"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="56.333333333333329" height="0.0"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GaW-ni-xJJ" userLabel="ISBN Text Field">
-                                                                <rect key="frame" x="64.333333333333343" y="0.0" width="317.66666666666663" height="30"/>
+                                                                <rect key="frame" x="64.333333333333343" y="0.0" width="317.66666666666663" height="0.0"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
                                                                 <connections>
@@ -233,7 +229,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="LR2-ZW-kO9" userLabel="Notes Stack View">
-                                                        <rect key="frame" x="0.0" y="114" width="382" height="328"/>
+                                                        <rect key="frame" x="0.0" y="76" width="382" height="366"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Notes:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mmJ-3L-JDu">
                                                                 <rect key="frame" x="0.0" y="0.0" width="56.333333333333329" height="20.333333333333314"/>
@@ -242,7 +238,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="249" verticalCompressionResistancePriority="748" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="vSH-XD-HqM">
-                                                                <rect key="frame" x="64.333333333333343" y="0.0" width="317.66666666666663" height="328"/>
+                                                                <rect key="frame" x="64.333333333333343" y="0.0" width="317.66666666666663" height="366"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                 <connections>
@@ -281,16 +277,17 @@
                             <constraint firstItem="9VK-99-pTo" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="FWE-6j-i6J"/>
                             <constraint firstItem="7xl-eQ-ZGX" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.3" id="QpJ-Cv-deu"/>
                             <constraint firstAttribute="bottom" secondItem="9VK-99-pTo" secondAttribute="bottom" id="Yjo-oD-Pho"/>
-                            <constraint firstItem="9VK-99-pTo" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="qeF-2g-tTx"/>
-                            <constraint firstAttribute="trailing" secondItem="9VK-99-pTo" secondAttribute="trailing" id="tbe-HH-zQM"/>
+                            <constraint firstItem="9VK-99-pTo" firstAttribute="leading" secondItem="fDL-vx-cJk" secondAttribute="leading" id="qeF-2g-tTx"/>
+                            <constraint firstItem="fDL-vx-cJk" firstAttribute="trailing" secondItem="9VK-99-pTo" secondAttribute="trailing" id="tbe-HH-zQM"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="fDL-vx-cJk"/>
                         <variation key="heightClass=compact">
                             <mask key="constraints">
                                 <exclude reference="QpJ-Cv-deu"/>
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="ExO-7x-0FR">
+                    <navigationItem key="navigationItem" title="Add book" largeTitleDisplayMode="never" id="ExO-7x-0FR">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="ac2-SZ-E6x">
                             <connections>
                                 <action selector="touchCancel:" destination="BYZ-38-t0r" id="Lae-4s-c3Z"/>
@@ -323,8 +320,8 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="yCB-5y-Kwk" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="4eX-f3-5tA">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="4eX-f3-5tA">
+                        <rect key="frame" x="0.0" y="20" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -343,7 +340,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="CcT-MV-nCJ"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hlv-RC-5wP">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

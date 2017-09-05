@@ -15,8 +15,12 @@ class BooksTableViewController: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     searchController.obscuresBackgroundDuringPresentation = false
-    tableView.tableHeaderView = searchController.searchBar
     searchController.searchResultsUpdater = self
+    if #available(iOS 11.0, *) {
+      self.navigationItem.searchController = searchController
+    } else {
+      tableView.tableHeaderView = searchController.searchBar
+    }
 
   }
   
@@ -126,9 +130,9 @@ extension BooksTableViewController:BookViewControllerDelegate {
 }
 extension BooksTableViewController: UISearchResultsUpdating {
   func updateSearchResults(for searchController: UISearchController) {
-    guard let searchText = 				//#A
-      searchController.searchBar.text else { return } //#A
-    booksManager.searchFilter = searchText	//#B
-    tableView.reloadData()			//#C
+    guard let searchText =
+      searchController.searchBar.text else { return }
+    booksManager.searchFilter = searchText
+    tableView.reloadData()
   }
 }
