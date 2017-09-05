@@ -55,12 +55,12 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Books" id="jdH-a7-yfR">
                         <barButtonItem key="leftBarButtonItem" id="H2r-Ar-fxa">
-                            <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="Rqj-Tn-CgI">
-                                <rect key="frame" x="20" y="7" width="101" height="30"/>
+                            <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="Rqj-Tn-CgI">
+                                <rect key="frame" x="20" y="7" width="0.0" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
-                                    <segment title="Title" width="50"/>
-                                    <segment title="Author" width="50"/>
+                                    <segment title="Title"/>
+                                    <segment title="Author"/>
                                 </segments>
                                 <connections>
                                     <action selector="changedSegment:" destination="SYg-hS-8r6" eventType="valueChanged" id="czd-KR-Llk"/>
