@@ -15,8 +15,12 @@ class BooksTableViewController: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     searchController.obscuresBackgroundDuringPresentation = false
-    tableView.tableHeaderView = searchController.searchBar
     searchController.searchResultsUpdater = self
+    if #available(iOS 11.0, *) {
+      self.navigationItem.searchController = searchController
+    } else {
+      tableView.tableHeaderView = searchController.searchBar
+    }
 
   }
   
