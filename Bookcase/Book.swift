@@ -22,7 +22,7 @@ struct Book {
       image = newValue
     }
   }
-  private var image:UIImage?
+  private var image:UIImage? = nil
   
   var hasCoverImage: Bool {
     return image != nil
