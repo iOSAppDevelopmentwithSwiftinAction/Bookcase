@@ -28,6 +28,7 @@ private var appSupportDirectory:URL = {
 }()
 private var booksFile:URL = {
     let filePath = appSupportDirectory.appendingPathComponent("Books").appendingPathExtension("db")
+  print(filePath)
     if !FileManager().fileExists(atPath: filePath.path) {
         if let bundleFilePath = Bundle.main.resourceURL?.appendingPathComponent("Books").appendingPathExtension("db") {
             do {
@@ -125,7 +126,7 @@ class BooksManager {
         var books:[Book] = []
         do {
             let rs = try db.executeQuery(
-                "SELECT * FROM Books", values: nil)
+                "SELECT *, ROWID FROM Books", values: nil)
             while rs.next() {
                 if let book = Book(rs: rs) {
                     books.append(book)
