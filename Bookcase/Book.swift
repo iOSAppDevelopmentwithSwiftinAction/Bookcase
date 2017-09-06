@@ -7,7 +7,7 @@
 //
 
 import UIKit
-class Book {
+struct Book {
     static let defaultCover = UIImage(named: "book.jpg")!
     var title:String
     var author:String
@@ -22,7 +22,7 @@ class Book {
             image = newValue
         }
     }
-    private var image:UIImage?
+    private var image:UIImage? = nil
     
     
     init(title:String,author:String,rating:Double,isbn:String,notes:String,cover:UIImage? = nil) {
