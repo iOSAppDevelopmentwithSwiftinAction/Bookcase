@@ -7,7 +7,7 @@
 //
 
 import UIKit
-class Book {
+struct Book {
     static let defaultCover = UIImage(named: "book.jpg")!
     var title:String
     var author:String
