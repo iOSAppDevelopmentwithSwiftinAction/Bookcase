@@ -19,7 +19,7 @@ struct Book {
             return image ?? Book.defaultCover
         }
     }
-    private var image:UIImage?
+    private var image:UIImage? = nil
     
     init(title:String,author:String,rating:Double,isbn:String,notes:String,cover:UIImage? = nil) {
         self.title = title
