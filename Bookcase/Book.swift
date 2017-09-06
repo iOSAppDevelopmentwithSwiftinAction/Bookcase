@@ -15,9 +15,12 @@ struct Book {
     var isbn:String
     var notes:String
     var cover:UIImage {
-        get {
-            return image ?? Book.defaultCover
-        }
+      get {
+        return image ?? Book.defaultCover
+      }
+      set {
+        image = newValue
+      }
     }
     private var image:UIImage? = nil
     
