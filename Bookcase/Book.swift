@@ -15,7 +15,7 @@ internal struct Key {
     static let notes = "notes"
 }
 
-class Book {
+struct Book {
     static let defaultCover = UIImage(named: "book.jpg")!
     var title:String
     var author:String
@@ -30,7 +30,7 @@ class Book {
     var hasCoverImage:Bool {
         return image != nil
     }
-    private var image:UIImage?
+    private var image:UIImage? = nil
     
     init(title:String,author:String,rating:Double,isbn:String,notes:String,cover:UIImage? = nil) {
         self.title = title
@@ -50,20 +50,20 @@ class Book {
         bookNode.addChild(name: Key.notes, value: self.notes)
         return bookNode
     }
-  convenience init?(book:XMLNode) {
-    guard let title = book[Key.title]?.text,
-            let author = book[Key.author]?.text,
-            let ratingString = book[Key.rating]?.text,
-            let rating = Double(ratingString),
-            let isbn = book[Key.isbn]?.text,
-            let notes = book[Key.notes]?.text
-            else {return nil}
-    self.init(title:title,
-            author:author,
-            rating:rating,
-            isbn:isbn,
-            notes:notes
-        )
+    init?(book:XMLNode) {
+      guard let title = book[Key.title]?.text,
+              let author = book[Key.author]?.text,
+              let ratingString = book[Key.rating]?.text,
+              let rating = Double(ratingString),
+              let isbn = book[Key.isbn]?.text,
+              let notes = book[Key.notes]?.text
+              else {return nil}
+      self.init(title:title,
+              author:author,
+              rating:rating,
+              isbn:isbn,
+              notes:notes
+          )
     }
 }
 extension Book:Equatable {}
