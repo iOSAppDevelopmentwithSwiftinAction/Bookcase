@@ -67,9 +67,10 @@ class BooksManager {
         return retrieveBooks() ?? []
     }
     func addBook(_ book:Book) {
+        var book = book
+        SQLAddBook(book: &book)
         books.append(book)
         sort(books:&books)
-        SQLAddBook(book: book)
     }
     func removeBook(at index:Int) {
         var bookToRemove:Book
@@ -138,7 +139,7 @@ class BooksManager {
         db.close()
         return books
     }
-    func SQLAddBook(book:Book) {
+    func SQLAddBook(book:inout Book) {
         guard let db = getOpenDB() else { return  }
         do {
             try db.executeUpdate(

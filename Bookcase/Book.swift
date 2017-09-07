@@ -15,7 +15,7 @@ internal struct Key {
     static let notes = "notes"
 }
 
-class Book {
+struct Book {
     static let defaultCover = UIImage(named: "book.jpg")!
     var title:String
     var author:String
@@ -31,7 +31,7 @@ class Book {
     var hasCoverImage:Bool {
         return image != nil
     }
-    private var image:UIImage?
+    private var image:UIImage? = nil
     
     init(title:String,author:String,rating:Double,isbn:String,notes:String,id:Int? = nil,cover:UIImage? = nil) {
         self.title = title
@@ -42,7 +42,7 @@ class Book {
         self.id = id ?? -1
         self.image = cover
     }
-    convenience init?(rs:FMResultSet) {
+    init?(rs:FMResultSet) {
         let rating = rs.double(forColumn: Key.rating)
         let id = rs.int(forColumn: "ROWID")
         guard let title = rs.string(forColumn: Key.title),
