@@ -46,18 +46,18 @@ class BookViewController: UIViewController {
             notesTextView.text = book.notes
         }
         saveButton.isEnabled = !titleTextField.text!.isEmpty
-        isbnStackView.isHidden = NSUbiquitousKeyValueStore.default().bool(forKey: isbnKey)
+        isbnStackView.isHidden = NSUbiquitousKeyValueStore.default.bool(forKey: isbnKey)
     }
 
     @IBAction func titleDidChange(_ sender: AnyObject) {
         saveButton.isEnabled = !titleTextField.text!.isEmpty
     }
     
-    func toggleISBN() {
+    @objc func toggleISBN() {
         UIView.animate(withDuration: 0.5, animations: {
             self.isbnStackView.isHidden = !self.isbnStackView.isHidden
         })
-        NSUbiquitousKeyValueStore.default().set(isbnStackView.isHidden, forKey: isbnKey)
+        NSUbiquitousKeyValueStore.default.set(isbnStackView.isHidden, forKey: isbnKey)
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -68,10 +68,10 @@ class BookViewController: UIViewController {
         super.viewDidDisappear(animated)
         NotificationCenter.default.removeObserver(self)
     }
-    func uKVSChanged(notification:Notification) {
-        isbnStackView.isHidden = NSUbiquitousKeyValueStore.default().bool(forKey: isbnKey)
+    @objc func uKVSChanged(notification:Notification) {
+        isbnStackView.isHidden = NSUbiquitousKeyValueStore.default.bool(forKey: isbnKey)
     }
-    func keyboardFrameChanges(notification:Notification) {
+    @objc func keyboardFrameChanges(notification:Notification) {
         //get keyboard height
         guard let userInfo = notification.userInfo,
             var keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey]
