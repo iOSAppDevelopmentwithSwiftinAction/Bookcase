@@ -36,7 +36,7 @@ class BooksCollectionViewController: UICollectionViewController,Injectable {
     NotificationCenter.default.addObserver(self, selector: #selector(loadCloud), name: Notifications.CloudKitReceived, object: nil)
   }
   
-  func loadCloud(reload:Bool = false) {
+  @objc func loadCloud() {
     cloudOperation(waiting: true)
     booksManager.loadBooksCloudKit(completion: { (error) in
       self.cloudErrors(error: error,buttonTitle:"Try again") {
@@ -52,11 +52,11 @@ class BooksCollectionViewController: UICollectionViewController,Injectable {
     super.viewDidDisappear(animated)
     NotificationCenter.default.removeObserver(self)
   }
-  func uKVSChanged(notification:Notification) {
+  @objc func uKVSChanged(notification:Notification) {
     updateSortOrderFromKVS()
   }
   func updateSortOrderFromKVS() {
-    if let sortOrder = SortOrder(rawValue:Int(NSUbiquitousKeyValueStore.default().longLong(forKey: sortOrderKey))) {
+    if let sortOrder = SortOrder(rawValue:Int(NSUbiquitousKeyValueStore.default.longLong(forKey: sortOrderKey))) {
       booksManager.sortOrder = sortOrder
       sortSegmentedControl.selectedSegmentIndex = booksManager.sortOrder.rawValue
       collectionView?.reloadData()
@@ -100,7 +100,7 @@ class BooksCollectionViewController: UICollectionViewController,Injectable {
   @IBAction func changedSegment(_ sender: UISegmentedControl) {
     guard let sortOrder = SortOrder(rawValue:sender.selectedSegmentIndex) else {return}
     booksManager.sortOrder = sortOrder
-    NSUbiquitousKeyValueStore.default().set(sortOrder.rawValue, forKey: sortOrderKey)
+    NSUbiquitousKeyValueStore.default.set(sortOrder.rawValue, forKey: sortOrderKey)
     collectionView?.reloadData()
   }
   //MARK: Header

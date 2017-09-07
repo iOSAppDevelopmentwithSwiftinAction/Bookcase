@@ -28,7 +28,11 @@ class BooksTableViewController: UITableViewController, Injectable {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         definesPresentationContext = true
-        tableView.tableHeaderView = searchController.searchBar
+        if #available(iOS 11.0, *) {
+          self.navigationItem.searchController = searchController
+        } else {
+          tableView.tableHeaderView = searchController.searchBar
+        }
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -49,7 +53,7 @@ class BooksTableViewController: UITableViewController, Injectable {
             object: nil)
     }
     
-    func loadCloud(reload:Bool = false) {
+    @objc func loadCloud() {
         cloudOperation(waiting: true)
         booksManager.loadBooksCloudKit(completion: { (error) in
             self.cloudErrors(error: error,buttonTitle:"Try again") {
@@ -67,11 +71,11 @@ class BooksTableViewController: UITableViewController, Injectable {
         NotificationCenter.default.removeObserver(self)
     }
 
-    func uKVSChanged(notification:Notification) {
+    @objc func uKVSChanged(notification:Notification) {
         updateSortOrderFromKVS()
     }
     func updateSortOrderFromKVS() {
-        if let sortOrder = SortOrder(rawValue:Int(NSUbiquitousKeyValueStore.default().longLong(forKey: sortOrderKey))) {
+        if let sortOrder = SortOrder(rawValue:Int(NSUbiquitousKeyValueStore.default.longLong(forKey: sortOrderKey))) {
             booksManager.sortOrder = sortOrder
             sortSegmentedControl.selectedSegmentIndex = booksManager.sortOrder.rawValue
             tableView.reloadData()
@@ -126,7 +130,7 @@ class BooksTableViewController: UITableViewController, Injectable {
     @IBAction func changedSegment(_ sender: UISegmentedControl) {
         guard let sortOrder = SortOrder(rawValue:sender.selectedSegmentIndex) else {return}
         booksManager.sortOrder = sortOrder
-        NSUbiquitousKeyValueStore.default().set(sortOrder.rawValue, forKey: sortOrderKey)
+        NSUbiquitousKeyValueStore.default.set(sortOrder.rawValue, forKey: sortOrderKey)
         tableView.reloadData()
     }
     //MARK: Cloudkit

@@ -133,6 +133,7 @@ class BooksManager {
           //Error occurred
           if error.code == .serverRecordChanged {
             if let serverRecord = error.userInfo[CKRecordChangedErrorServerRecordKey] as? CKRecord {
+              var book = book
               book.record = serverRecord
               self.updateBook(at: index, with: book)
             }

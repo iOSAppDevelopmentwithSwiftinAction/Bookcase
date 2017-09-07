@@ -17,7 +17,7 @@ internal struct Key {
     static let notes = "notes"
 }
 
-class Book {
+struct Book {
     static let defaultCover = UIImage(named: "book.jpg")!
     var record:CKRecord
     static let recordType = "Books"
@@ -50,7 +50,7 @@ class Book {
     var hasCoverImage:Bool {
         return image != nil
     }
-    private var image:UIImage?
+    private var image:UIImage? = nil
     
     init(record:CKRecord? = nil,title:String,author:String,rating:Double,isbn:String,notes:String,cover:UIImage? = nil) {
         if let record = record {
