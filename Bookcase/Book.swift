@@ -7,14 +7,6 @@
 //
 
 import UIKit
-internal struct Key {
-    static let title = "title"
-    static let author = "author"
-    static let rating = "rating"
-    static let isbn = "isbn"
-    static let notes = "notes"
-    static let cover = "cover"
-}
 
 struct Book: Codable {
     static let defaultCover = UIImage(named: "book.jpg")!
@@ -37,7 +29,7 @@ struct Book: Codable {
         return image != nil
     }
     private var image:UIImage? = nil
-    
+
     init(title:String,author:String,rating:Double,isbn:String,notes:String,cover:UIImage? = nil) {
         self.title = title
         self.author = author
@@ -53,8 +45,37 @@ struct Book: Codable {
       case rating
       case isbn
       case notes
+      case imageData
     }
-
+  
+    init(from decoder: Decoder) throws {
+      let container = try decoder.container(keyedBy: CodingKeys.self)
+      title = try container.decode(String.self, forKey: .title)
+      author = try container.decode(String.self, forKey: .author)
+      rating = try container.decode(Double.self, forKey: .rating)
+      isbn = try container.decode(String.self, forKey: .isbn)
+      notes = try container.decode(String.self, forKey: .notes)
+      if let imageData = try container.decodeIfPresent(Data.self, forKey: .imageData) {
+        image = NSKeyedUnarchiver.unarchiveObject(with: imageData) as? UIImage
+      } else {
+        image = nil
+      }
+    }
+  
+    func encode(to encoder: Encoder) throws {
+      var container = encoder.container(keyedBy: CodingKeys.self)
+      try container.encode(title, forKey: .title)
+      try container.encode(author, forKey: .author)
+      try container.encode(rating, forKey: .rating)
+      try container.encode(isbn, forKey: .isbn)
+      try container.encode(notes, forKey: .notes)
+      
+      if let image = image {
+        let imageData = NSKeyedArchiver.archivedData(withRootObject: image)
+        try container.encode(imageData, forKey: .imageData)
+      }
+    }
+ 
 }
 extension Book:Equatable {}
 func ==(lhs: Book, rhs: Book) -> Bool {
