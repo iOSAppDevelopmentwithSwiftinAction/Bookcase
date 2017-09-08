@@ -42,7 +42,7 @@ struct Book: Codable {
       case notes
     }
 }
-//extension Book:Equatable {}
+extension Book:Equatable {}
 func ==(lhs: Book, rhs: Book) -> Bool {
     return (
         lhs.title == rhs.title &&
