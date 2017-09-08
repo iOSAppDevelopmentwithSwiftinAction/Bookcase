@@ -127,14 +127,27 @@ class BooksManager {
             })
         }
     }
-    // MARK: NSCoding
-    func storeBooks() {
-        let success = NSKeyedArchiver.archiveRootObject(books, toFile: booksFile.path)
-        print(success ? "Successful save" : "Save Failed")
+  // MARK: Encoding
+  func storeBooks() {
+    do {
+      let encoder = PropertyListEncoder()
+      let data = try encoder.encode(books)
+      let success = NSKeyedArchiver.archiveRootObject(data, toFile: booksFile.path)
+      print(success ? "Successful save" : "Save Failed")
+    } catch {
+      print("Save Failed")
     }
-    
-    func retrieveBooks() -> [Book]? {
-        return NSKeyedUnarchiver.unarchiveObject(withFile: booksFile.path) as? [Book]
+  }
+  // MARK: Decoding
+  func retrieveBooks() -> [Book]? {
+    guard let data = NSKeyedUnarchiver.unarchiveObject(withFile: booksFile.path) as? Data else { return nil }
+    do {
+      let decoder = PropertyListDecoder()
+      let books = try decoder.decode([Book].self, from: data)
+      return books
+    } catch {
+      print("Retrieve Failed")
+      return nil
     }
-
+  }
 }
