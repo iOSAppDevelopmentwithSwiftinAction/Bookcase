@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="cdg-D8-bmj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13189.4" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="cdg-D8-bmj">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13165.3"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -75,7 +75,7 @@
                     <navigationItem key="navigationItem" title="Covers" id="a0P-GE-Ot6">
                         <barButtonItem key="leftBarButtonItem" id="f9I-KV-5qP">
                             <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="RP4-aa-CES">
-                                <rect key="frame" x="16" y="7" width="100" height="30"/>
+                                <rect key="frame" x="16" y="7" width="111" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="Title"/>
@@ -117,14 +117,14 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mRP-4Q-iCn">
-                                            <rect key="frame" x="15" y="5" width="33.5" height="20.5"/>
+                                            <rect key="frame" x="16" y="5" width="33.5" height="20.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="x3I-uJ-lFi">
-                                            <rect key="frame" x="15" y="25.5" width="44" height="14.5"/>
+                                            <rect key="frame" x="16" y="25.5" width="44" height="14.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -145,7 +145,7 @@
                     <navigationItem key="navigationItem" title="Books" id="jdH-a7-yfR">
                         <barButtonItem key="leftBarButtonItem" id="pCj-cx-2t9">
                             <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="04c-Op-yJK">
-                                <rect key="frame" x="16" y="7" width="100" height="30"/>
+                                <rect key="frame" x="16" y="7" width="111" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="Title"/>
@@ -170,7 +170,7 @@
             </objects>
             <point key="canvasLocation" x="2222" y="-300"/>
         </scene>
-        <!--Book View Controller-->
+        <!--Add book-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="BookViewController" customModule="Bookcase" customModuleProvider="target" sceneMemberID="viewController">
@@ -324,8 +324,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="ExO-7x-0FR">
-                        <nil key="title"/>
+                    <navigationItem key="navigationItem" title="Add book" largeTitleDisplayMode="never" id="ExO-7x-0FR">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="ac2-SZ-E6x">
                             <connections>
                                 <action selector="touchCancel:" destination="BYZ-38-t0r" id="Lae-4s-c3Z"/>
@@ -391,8 +390,8 @@
                 <navigationController restorationIdentifier="booksTableNC" automaticallyAdjustsScrollViewInsets="NO" id="yCB-5y-Kwk" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Books" image="literature" id="22R-vX-jUo"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="4eX-f3-5tA">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="4eX-f3-5tA">
+                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -411,7 +410,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="CcT-MV-nCJ"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hlv-RC-5wP">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -429,8 +428,8 @@
                 <navigationController restorationIdentifier="booksCollectionNC" automaticallyAdjustsScrollViewInsets="NO" id="8Wq-Lb-LxR" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Covers" image="cover" id="uk1-dI-dQK"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="mBV-ix-jsN">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="mBV-ix-jsN">
+                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
