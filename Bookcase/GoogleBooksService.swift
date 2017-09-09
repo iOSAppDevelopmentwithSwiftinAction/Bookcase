@@ -64,6 +64,18 @@ class GoogleBooksService:NSObject, BooksService, URLSessionDelegate {
             return
         }
     }
+    //Parsing with Decodable
+    private func parseJSONDecodable(data:Data, completionHandler: @escaping (Book?, Error?) -> Void) {
+      do {
+        let jsonDecoder = JSONDecoder()
+        let serverResponse = try jsonDecoder.decode(ServerResponse.self, from: data)
+        let book = serverResponse.book
+        completionHandler(book,nil)
+      } catch let error as NSError {
+        completionHandler(nil, error)
+        return
+      }
+    }
     //Parsing with SwiftyJSON
     private func parseSwiftyJSON(data:Data, barcode:String, completionHandler: @escaping (Book?, Error?) -> Void) {
         let dataAsJSON = JSON(data: data)
