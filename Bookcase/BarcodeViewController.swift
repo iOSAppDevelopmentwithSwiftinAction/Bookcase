@@ -22,10 +22,10 @@ class BarcodeViewController: UIViewController {
         super.viewDidLoad()
         
         //get video camera
-        let cameraDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
+        let cameraDevice = AVCaptureDevice.default(for: AVMediaType.video)
         
         guard let videoInput =
-            try? AVCaptureDeviceInput(device: cameraDevice)
+            try? AVCaptureDeviceInput(device: cameraDevice!)
             else {
                 failed()
                 return
@@ -43,7 +43,7 @@ class BarcodeViewController: UIViewController {
         } else {failed();return}
         
         //Customize metadata output
-        metadataOutput.metadataObjectTypes = [AVMetadataObjectTypeEAN13Code]
+        metadataOutput.metadataObjectTypes = [AVMetadataObject.ObjectType.ean13]
         metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
         
         captureSession.startRunning()
@@ -51,7 +51,7 @@ class BarcodeViewController: UIViewController {
         //Add preview
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         previewLayer.frame = view.layer.frame
-        previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
+        previewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
         view.layer.addSublayer(previewLayer)
     }
     override func didReceiveMemoryWarning() {
@@ -74,10 +74,10 @@ class BarcodeViewController: UIViewController {
     
 }
 extension BarcodeViewController:AVCaptureMetadataOutputObjectsDelegate {
-    func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
+    func metadataOutput(captureOutput: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         if let metadataObject = metadataObjects.first as? AVMetadataMachineReadableCodeObject {
             captureSession.stopRunning()
-            delegate?.foundBarcode(barcode: metadataObject.stringValue)
+            delegate?.foundBarcode(barcode: metadataObject.stringValue!)
             dismiss(animated: true, completion: nil)
         }
     }
