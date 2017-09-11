@@ -76,7 +76,7 @@ class BookViewController: UIViewController {
     saveButton.isEnabled = !titleTextField.text!.isEmpty
   }
   
-  func toggleISBN() {
+  @objc func toggleISBN() {
     UIView.animate(withDuration: 0.5, animations: {
       self.isbnStackView.isHidden = !self.isbnStackView.isHidden
     })
@@ -91,7 +91,7 @@ class BookViewController: UIViewController {
     NotificationCenter.default.removeObserver(self)
     booksService.cancel()
   }
-  func keyboardFrameChanges(notification:Notification) {
+  @objc func keyboardFrameChanges(notification:Notification) {
     //get keyboard height
     guard let userInfo = notification.userInfo,
       var keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey]
