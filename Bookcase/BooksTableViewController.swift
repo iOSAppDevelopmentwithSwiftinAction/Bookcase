@@ -21,7 +21,11 @@ class BooksTableViewController: UITableViewController,Injectable {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         definesPresentationContext = true
-        tableView.tableHeaderView = searchController.searchBar
+        if #available(iOS 11.0, *) {
+          self.navigationItem.searchController = searchController
+        } else {
+          tableView.tableHeaderView = searchController.searchBar
+        }
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)

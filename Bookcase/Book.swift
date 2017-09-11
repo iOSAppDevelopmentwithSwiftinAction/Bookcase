@@ -7,19 +7,9 @@
 //
 
 import UIKit
-internal struct Key {
-    static let title = "title"
-    static let author = "author"
-    static let rating = "rating"
-    static let isbn = "isbn"
-    static let notes = "notes"
-    static let cover = "cover"
-    static let backgroundColor = "backgroundColor"
-    static let primaryColor = "primaryColor"
-    static let detailColor = "detailColor"
-}
 
-class Book: NSObject, NSCoding {
+
+struct Book: Codable {
     static let defaultCover = UIImage(named: "book.jpg")!
     var title:String
     var author:String
@@ -37,7 +27,7 @@ class Book: NSObject, NSCoding {
     var hasCoverImage:Bool {
         return image != nil
     }
-    private var image:UIImage?
+    private var image:UIImage? = nil
     var backgroundColor:UIColor
     var primaryColor:UIColor
     var detailColor:UIColor
@@ -53,47 +43,63 @@ class Book: NSObject, NSCoding {
         self.primaryColor = primaryColor
         self.detailColor = detailColor
     }
-    // MARK: NSCoding
-    convenience required init?(coder aDecoder: NSCoder) {
-        let rating = aDecoder.decodeDouble(forKey: Key.rating)
-        guard let title = aDecoder.decodeObject(forKey: Key.title) as? String,
-            let author = aDecoder.decodeObject(forKey:Key.author) as? String,
-            let isbn = aDecoder.decodeObject(forKey:Key.isbn) as? String,
-            let notes = aDecoder.decodeObject(forKey:Key.notes) as? String,
-            let backgroundColor = aDecoder.decodeObject(forKey:Key.backgroundColor) as? UIColor,
-            let primaryColor = aDecoder.decodeObject(forKey:Key.primaryColor) as? UIColor,
-            let detailColor = aDecoder.decodeObject(forKey:Key.detailColor) as? UIColor
-            else { return nil }
-        let cover = aDecoder.decodeObject(forKey:Key.cover) as? UIImage
-        self.init(
-            title: title,
-            author: author,
-            rating: rating,
-            isbn: isbn,
-            notes: notes,
-            cover: cover,
-            backgroundColor: backgroundColor,
-            primaryColor: primaryColor,
-            detailColor: detailColor
-        )
+    // MARK: Codable
+    init(from decoder: Decoder) throws {
+      let container = try decoder.container(keyedBy: CodingKeys.self)
+      title = try container.decode(String.self, forKey: .title)
+      author = try container.decode(String.self, forKey: .author)
+      rating = try container.decode(Double.self, forKey: .rating)
+      isbn = try container.decode(String.self, forKey: .isbn)
+      notes = try container.decode(String.self, forKey: .notes)
+      
+      let backgroundColorData = try container.decode(Data.self, forKey: .backgroundColor)
+      self.backgroundColor = NSKeyedUnarchiver.unarchiveObject(with: backgroundColorData) as? UIColor ?? .white
+      
+      let primaryColorData = try container.decode(Data.self, forKey: .primaryColor)
+      self.primaryColor = NSKeyedUnarchiver.unarchiveObject(with: primaryColorData) as? UIColor ?? .black
+      
+      let detailColorData = try container.decode(Data.self, forKey: .detailColor)
+      self.detailColor = NSKeyedUnarchiver.unarchiveObject(with: detailColorData) as? UIColor ?? .black
+      
+      if let imageData = try container.decodeIfPresent(Data.self, forKey: .imageData) {
+        image = NSKeyedUnarchiver.unarchiveObject(with: imageData) as? UIImage
+      } else {
+        image = nil
+      }
     }
-    func encode(with aCoder: NSCoder) {
-        aCoder.encode(title, forKey: Key.title)
-        aCoder.encode(author, forKey: Key.author)
-        aCoder.encode(rating, forKey: Key.rating)
-        aCoder.encode(isbn, forKey: Key.isbn)
-        aCoder.encode(notes, forKey: Key.notes)
-        aCoder.encode(backgroundColor, forKey: Key.backgroundColor)
-        aCoder.encode(primaryColor, forKey: Key.primaryColor)
-        aCoder.encode(detailColor, forKey: Key.detailColor)
-        if let image = image {
-            aCoder.encode(image, forKey: Key.cover)
-        }
+    func encode(to encoder: Encoder) throws {
+      var container = encoder.container(keyedBy: CodingKeys.self)
+      try container.encode(title, forKey: .title)
+      try container.encode(author, forKey: .author)
+      try container.encode(rating, forKey: .rating)
+      try container.encode(isbn, forKey: .isbn)
+      try container.encode(notes, forKey: .notes)
+      
+      let backgroundColorData = NSKeyedArchiver.archivedData(withRootObject: backgroundColor)
+      try container.encode(backgroundColorData, forKey: .backgroundColor)
+      
+      let primaryColorData = NSKeyedArchiver.archivedData(withRootObject: primaryColor)
+      try container.encode(primaryColorData, forKey: .primaryColor)
+      
+      let detailColorData = NSKeyedArchiver.archivedData(withRootObject: detailColor)
+      try container.encode(detailColorData, forKey: .detailColor)
+      
+      if let image = image {
+        let imageData = NSKeyedArchiver.archivedData(withRootObject: image)
+        try container.encode(imageData, forKey: .imageData)
+      }
     }
-    override var description: String {
-        return "\(title) by \(author) : \(hasCoverImage ? "Has" : "No") cover image"
+    enum CodingKeys: String, CodingKey {
+      case title
+      case author
+      case rating
+      case isbn
+      case notes
+      case imageData
+      case backgroundColor
+      case primaryColor
+      case detailColor
     }
-    
 }
 //extension Book:Equatable {}
 func ==(lhs: Book, rhs: Book) -> Bool {
