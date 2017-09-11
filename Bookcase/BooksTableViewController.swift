@@ -32,7 +32,11 @@ class BooksTableViewController: UITableViewController,Injectable {
             booksManager.sortOrder = sortOrder
             sortSegmentedControl.selectedSegmentIndex = booksManager.sortOrder.rawValue
         }
-        tableView.reloadData()
+        if #available(iOS 11.0, *) {
+          self.navigationItem.searchController = searchController
+        } else {
+          tableView.tableHeaderView = searchController.searchBar
+        }
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

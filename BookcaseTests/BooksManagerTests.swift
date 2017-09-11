@@ -20,7 +20,9 @@ class BooksManagerTests: XCTestCase {
         bookGulliver = Book(title: "Gulliver's Travels", author: "Jonathan Swift", rating: 5, isbn: "", notes: "")
         bookOdyssey = Book(title: "The Odyssey", author: "Homer", rating: 5, isbn: "", notes: "")
         booksManager = BooksManager()
-        booksManager.books = [bookDaVinci,bookGulliver,bookOdyssey]
+        booksManager.addBook(bookDaVinci)
+        booksManager.addBook(bookGulliver)
+        booksManager.addBook(bookOdyssey)
     }
     
     override func tearDown() {
@@ -30,11 +32,15 @@ class BooksManagerTests: XCTestCase {
     
     func testSortTitle() {
         booksManager.sortOrder = .title
-        XCTAssert(booksManager.books == [bookGulliver,bookDaVinci,bookOdyssey])
+        XCTAssert(booksManager.getBook(at: 0) == bookGulliver)
+        XCTAssert(booksManager.getBook(at: 1) == bookDaVinci)
+        XCTAssert(booksManager.getBook(at: 2) == bookOdyssey)
     }
     func testSortAuthor() {
         booksManager.sortOrder = .author
-        XCTAssertEqual(booksManager.books,[bookDaVinci,bookOdyssey,bookGulliver])
+        XCTAssert(booksManager.getBook(at: 0) == bookDaVinci)
+        XCTAssert(booksManager.getBook(at: 1) == bookOdyssey)
+        XCTAssert(booksManager.getBook(at: 2) == bookGulliver)
     }
     func testSearch() {
         booksManager.searchFilter = "Vinci"
