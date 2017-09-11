@@ -30,17 +30,17 @@ struct Book: Codable {
     var backgroundColor:UIColor
     var primaryColor:UIColor
     var detailColor:UIColor
-    
+  
     init(title:String,author:String,rating:Double,isbn:String,notes:String,cover:UIImage? = nil,backgroundColor:UIColor = .white,primaryColor:UIColor = .black, detailColor:UIColor = .black) {
-        self.title = title
-        self.author = author
-        self.rating = rating
-        self.isbn = isbn
-        self.notes = notes
-        self.image = cover
-        self.backgroundColor = backgroundColor
-        self.primaryColor = primaryColor
-        self.detailColor = detailColor
+      self.title = title
+      self.author = author
+      self.rating = rating
+      self.isbn = isbn
+      self.notes = notes
+      self.image = cover
+      self.backgroundColor = backgroundColor
+      self.primaryColor = primaryColor
+      self.detailColor = detailColor
     }
     // MARK: Codable
     init(from decoder: Decoder) throws {
@@ -50,6 +50,15 @@ struct Book: Codable {
       rating = try container.decode(Double.self, forKey: .rating)
       isbn = try container.decode(String.self, forKey: .isbn)
       notes = try container.decode(String.self, forKey: .notes)
+      
+      let backgroundColorData = try container.decode(Data.self, forKey: .backgroundColor)
+      self.backgroundColor = NSKeyedUnarchiver.unarchiveObject(with: backgroundColorData) as? UIColor ?? .white
+      
+      let primaryColorData = try container.decode(Data.self, forKey: .primaryColor)
+      self.primaryColor = NSKeyedUnarchiver.unarchiveObject(with: primaryColorData) as? UIColor ?? .black
+      
+      let detailColorData = try container.decode(Data.self, forKey: .detailColor)
+      self.detailColor = NSKeyedUnarchiver.unarchiveObject(with: detailColorData) as? UIColor ?? .black
       
       if let imageData = try container.decodeIfPresent(Data.self, forKey: .imageData) {
         image = NSKeyedUnarchiver.unarchiveObject(with: imageData) as? UIImage
@@ -65,6 +74,15 @@ struct Book: Codable {
       try container.encode(isbn, forKey: .isbn)
       try container.encode(notes, forKey: .notes)
       
+      let backgroundColorData = NSKeyedArchiver.archivedData(withRootObject: backgroundColor)
+      try container.encode(backgroundColorData, forKey: .backgroundColor)
+      
+      let primaryColorData = NSKeyedArchiver.archivedData(withRootObject: primaryColor)
+      try container.encode(primaryColorData, forKey: .primaryColor)
+      
+      let detailColorData = NSKeyedArchiver.archivedData(withRootObject: detailColor)
+      try container.encode(detailColorData, forKey: .detailColor)
+      
       if let image = image {
         let imageData = NSKeyedArchiver.archivedData(withRootObject: image)
         try container.encode(imageData, forKey: .imageData)
@@ -77,9 +95,10 @@ struct Book: Codable {
       case isbn
       case notes
       case imageData
+      case backgroundColor
+      case primaryColor
+      case detailColor
     }
-
-    
 }
 extension Book:Equatable {}
 func ==(lhs: Book, rhs: Book) -> Bool {
