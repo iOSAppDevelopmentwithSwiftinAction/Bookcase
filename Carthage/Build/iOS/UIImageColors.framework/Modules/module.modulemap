@@ -7,4 +7,5 @@ framework module UIImageColors {
 
 module UIImageColors.Swift {
     header "UIImageColors-Swift.h"
+    requires objc
 }
