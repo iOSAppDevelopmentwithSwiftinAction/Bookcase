@@ -26,7 +26,7 @@ struct Book: Codable {
     var hasCoverImage:Bool {
         return image != nil
     }
-    private var image:UIImage?
+    private var image:UIImage? = nil
     var backgroundColor:UIColor
     var primaryColor:UIColor
     var detailColor:UIColor
