@@ -91,6 +91,7 @@ class GoogleBooksService:NSObject, BooksService, URLSessionDelegate {
   }
   //Download book cover image
   func loadCover(book:Book,thumbnailURL:String, completionHandler: @escaping (Book?, Error?) -> Void) {
+    var book = book
     guard let url = URL(string: thumbnailURL) else {return}
     task = session.downloadTask(with: url) { (tempURL, response, error) in
       if let tempURL = tempURL,
