@@ -101,7 +101,7 @@ struct Book: Codable {
       case detailColor
     }
 }
-//extension Book:Equatable {}
+extension Book:Equatable {}
 func ==(lhs: Book, rhs: Book) -> Bool {
     return (
         lhs.title == rhs.title &&
