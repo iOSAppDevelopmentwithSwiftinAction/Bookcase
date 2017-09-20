@@ -68,6 +68,9 @@ class BooksTableViewController: UITableViewController {
   }
   
   @IBAction func changedSegment(_ sender: UISegmentedControl) {
+    guard let sortOrder = SortOrder(rawValue:sender.selectedSegmentIndex) else {return}
+    booksManager.sortOrder = sortOrder
+    tableView.reloadData()
   }
   
   /*
