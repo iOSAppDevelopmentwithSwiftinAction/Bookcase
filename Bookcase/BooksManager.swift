@@ -22,7 +22,11 @@ class BooksManager {
   var bookCount: Int {
     return searchFilter.isEmpty ? books.count : filteredBooks.count
   }
-  var sortOrder = SortOrder.title
+  var sortOrder:SortOrder = .title {
+    didSet {
+      sort(books:&books)
+    }
+  }
   var searchFilter: String = "" {
     didSet {			//#A
       filter()		//#B
@@ -69,7 +73,7 @@ class BooksManager {
   }
 
   private func sampleBooks()->[Book] {
-    return [
+    var books = [
       Book(title: "Great Expectations", author: "Charles Dickens", rating: 5, isbn: "9780140817997", notes: "🎁 from Papa"),
       Book(title: "Don Quixote", author: "Miguel De Cervantes", rating: 4, isbn: "9788471890153", notes: ""),
       Book(title: "Robinson Crusoe", author: "Daniel Defoe", rating: 5, isbn: "", notes: ""),
@@ -85,16 +89,22 @@ class BooksManager {
       Book(title: "The Alchemist", author: "Paulo Coelho", rating: 5, isbn: "", notes: ""),
       Book(title: "Life of Pi", author: "Yann Martel", rating: 5, isbn: "", notes: ""),
       Book(title: "The Odyssey", author: "Homer", rating: 5, isbn: "", notes: ""),
-      
       //More books
     ]
+    sort(books: &books)
+    return books
   }
-  func sort(books: inout [Book]) {
-    books.sort(by: {
-      return ($0.title.localizedLowercase, $0.author.localizedLowercase) <
-        ($1.title.localizedLowercase, $1.author.localizedLowercase)
-      
-    })
+  func sort(books:inout [Book]) {
+    switch sortOrder {
+    case .title:
+      books.sort(by: {
+        return ($0.title.localizedLowercase,$0.author.localizedLowercase) < ($1.title.localizedLowercase,$1.author.localizedLowercase)
+      })
+    case .author:
+      books.sort(by: {
+        return ($0.author.localizedLowercase,$0.title.localizedLowercase) < ($1.author.localizedLowercase,$1.title.localizedLowercase)
+      })
+    }
   }
   func filter() {
     filteredBooks = books.filter { book in			//#A
