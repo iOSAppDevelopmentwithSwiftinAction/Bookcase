@@ -23,7 +23,9 @@ class BooksCollectionViewController: UICollectionViewController {
     definesPresentationContext = true
     
   }
-  
+  override func viewDidAppear(_ animated: Bool) {
+    collectionView?.reloadData()
+  }
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
@@ -45,7 +47,23 @@ class BooksCollectionViewController: UICollectionViewController {
     
     return cell
   }
-  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if let selectedIndexPath = collectionView?.indexPathsForSelectedItems?.first,
+      let viewController = segue.destination as? BookViewController {
+      //Editing
+      viewController.book = booksManager.getBook(at: selectedIndexPath.row)
+      viewController.delegate = self
+    } else if let navController = segue.destination as? UINavigationController,
+      let viewController = navController.topViewController as? BookViewController {
+      //Adding
+      viewController.delegate = self
+    }
+  }
+  @IBAction func changedSegment(_ sender: UISegmentedControl) {
+    guard let sortOrder = SortOrder(rawValue:sender.selectedSegmentIndex) else {return}
+    booksManager.sortOrder = sortOrder
+    collectionView?.reloadData()
+  }
   // MARK: Header
   override func collectionView(_ collectionView: UICollectionView,
                                viewForSupplementaryElementOfKind kind: String,
@@ -67,7 +85,18 @@ extension BooksCollectionViewController: UISearchResultsUpdating {
    collectionView?.reloadSections(NSIndexSet(index: 1) as IndexSet)
   }
 }
-
+extension BooksCollectionViewController:BookViewControllerDelegate {
+  func saveBook(_ book:Book) {
+    if let selectedIndexPath = collectionView?.indexPathsForSelectedItems?.first {
+      //Update book
+      booksManager.updateBook(at: selectedIndexPath.row, with: book)
+    } else {
+      //Add book
+      booksManager.addBook(book)
+    }
+    collectionView?.reloadData()
+  }
+}
 extension BooksCollectionViewController: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
     if section == 0 {

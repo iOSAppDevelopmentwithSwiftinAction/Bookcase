@@ -23,7 +23,10 @@ class BooksTableViewController: UITableViewController {
     }
 
   }
-  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    tableView?.reloadData()
+  }
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
@@ -68,6 +71,9 @@ class BooksTableViewController: UITableViewController {
   }
   
   @IBAction func changedSegment(_ sender: UISegmentedControl) {
+    guard let sortOrder = SortOrder(rawValue:sender.selectedSegmentIndex) else {return}
+    booksManager.sortOrder = sortOrder
+    tableView.reloadData()
   }
   
   /*
