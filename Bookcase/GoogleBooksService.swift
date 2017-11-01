@@ -46,10 +46,10 @@ class GoogleBooksService:NSObject, BooksService, URLSessionDelegate {
   //Parsing with JSONSerialization - replaced with SwiftyJSON method
   private func parseJSON(data:Data, completionHandler: @escaping (Book?, Error?) -> Void) {
     do {
-      if let dataAsJSON = try JSONSerialization.jsonObject(with: data, options: []) as? [String:AnyObject],
-        let items = dataAsJSON["items"] as? [AnyObject],
-        let volume = items[0] as? [String:AnyObject],
-        let volumeInfo = volume["volumeInfo"] as? [String:AnyObject],
+      if let dataAsJSON = try JSONSerialization.jsonObject(with: data, options: []) as? [String:Any],
+        let items = dataAsJSON["items"] as? [Any],
+        let volume = items[0] as? [String:Any],
+        let volumeInfo = volume["volumeInfo"] as? [String:Any],
         let title = volumeInfo["title"] as? String,
         let authors = volumeInfo["authors"] as? [String] {
         let book = Book(title: title,
