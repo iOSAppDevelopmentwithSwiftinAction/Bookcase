@@ -45,24 +45,24 @@ class GoogleBooksService:NSObject, BooksService, URLSessionDelegate {
     }
     //Parsing with JSONSerialization - replaced with SwiftyJSON method
     private func parseJSON(data:Data, completionHandler: @escaping (Book?, Error?) -> Void) {
-        do {
-            if let dataAsJSON = try JSONSerialization.jsonObject(with: data, options: []) as? [String:AnyObject],
-                let items = dataAsJSON["items"] as? [AnyObject],
-                let volume = items[0] as? [String:AnyObject],
-                let volumeInfo = volume["volumeInfo"] as? [String:AnyObject],
-                let title = volumeInfo["title"] as? String,
-                let authors = volumeInfo["authors"] as? [String] {
-                let book = Book(title: title,
-                                author: authors.joined(separator: ","),
-                                rating: 0, isbn: "0", notes: "")
-                completionHandler(book,nil)
-            } else {
-                completionHandler(nil, nil)
-            }
-        } catch let error as NSError {
-            completionHandler(nil, error)
-            return
+      do {
+        if let dataAsJSON = try JSONSerialization.jsonObject(with: data, options: []) as? [String:Any],
+          let items = dataAsJSON["items"] as? [Any],
+          let volume = items[0] as? [String:Any],
+          let volumeInfo = volume["volumeInfo"] as? [String:Any],
+          let title = volumeInfo["title"] as? String,
+          let authors = volumeInfo["authors"] as? [String] {
+          let book = Book(title: title,
+                          author: authors.joined(separator: ","),
+                          rating: 0, isbn: "0", notes: "")
+          completionHandler(book,nil)
+        } else {
+          completionHandler(nil, nil)
         }
+      } catch let error as NSError {
+        completionHandler(nil, error)
+        return
+      }
     }
     //Parsing with SwiftyJSON
     private func parseSwiftyJSON(data:Data, barcode:String, completionHandler: @escaping (Book?, Error?) -> Void) {
