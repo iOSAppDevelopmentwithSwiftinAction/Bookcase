@@ -387,7 +387,7 @@
                         <outlet property="saveButton" destination="z1w-BJ-J9w" id="u4X-Ba-Tou"/>
                         <outlet property="scrollView" destination="9VK-99-pTo" id="l0G-lu-iUX"/>
                         <outlet property="starRatings" destination="CtG-Dh-lkq" id="D51-vk-16J"/>
-                        <outlet property="titleL" destination="ceM-L4-Xq8" id="Y7k-pm-l0e"/>
+                        <outlet property="titleLabel" destination="ceM-L4-Xq8" id="Bui-gO-gAk"/>
                         <outlet property="titleTextField" destination="o4g-or-ufm" id="oaj-br-Skz"/>
                     </connections>
                 </viewController>
