@@ -66,26 +66,31 @@ class GoogleBooksService:NSObject, BooksService, URLSessionDelegate {
   }
   //Parsing with SwiftyJSON
   private func parseSwiftyJSON(data:Data, barcode:String, completionHandler: @escaping (Book?, Error?) -> Void) {
-    let dataAsJSON = JSON(data: data)
-    //loop through items (books)
-    for item in dataAsJSON["items"].arrayValue {
-      //loop through industry identifiers
-      for id in item["volumeInfo"]["industryIdentifiers"].arrayValue {
-        //check id is the ISBN we're looking for
-        if id["type"].string == "ISBN_13",
-          id["identifier"].string == barcode,
-          let title = item["volumeInfo"]["title"].string,
-          let authors = item["volumeInfo"]["authors"].array?.map({$0.string}) as? [String],
-          let thumbnailURL = item["volumeInfo"]["imageLinks"]["thumbnail"].string {
-          let book = Book(title: title,
-                          author: authors.joined(separator: ","),
-                          rating: 0, isbn: "0", notes: "")
-          loadCover(book: book,
-                    thumbnailURL: thumbnailURL,
-                    completionHandler: completionHandler)
-          return
+    do {
+        let dataAsJSON = try JSON(data: data)
+        //loop through items (books)
+        for item in dataAsJSON["items"].arrayValue {
+          //loop through industry identifiers
+          for id in item["volumeInfo"]["industryIdentifiers"].arrayValue {
+            //check id is the ISBN we're looking for
+            if id["type"].string == "ISBN_13",
+              id["identifier"].string == barcode,
+              let title = item["volumeInfo"]["title"].string,
+              let authors = item["volumeInfo"]["authors"].array?.map({$0.string}) as? [String],
+              let thumbnailURL = item["volumeInfo"]["imageLinks"]["thumbnail"].string {
+              let book = Book(title: title,
+                              author: authors.joined(separator: ","),
+                              rating: 0, isbn: "0", notes: "")
+              loadCover(book: book,
+                        thumbnailURL: thumbnailURL,
+                        completionHandler: completionHandler)
+              return
+            }
+          }
         }
-      }
+    } catch let error as NSError {
+        completionHandler(nil, error)
+        return
     }
     completionHandler(nil, nil)
   }
