@@ -16,11 +16,13 @@
 		B9019F9B1CE229D500CAE744 /* BookcaseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9019F9A1CE229D500CAE744 /* BookcaseUITests.swift */; };
 		B94892831D5A42D200BC9BEB /* BooksCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B94892821D5A42D200BC9BEB /* BooksCollectionViewController.swift */; };
 		B94892871D5AB2C400BC9BEB /* BookCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B94892861D5AB2C400BC9BEB /* BookCollectionViewCell.swift */; };
-		B968A48F1EAE623600E6C4C0 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B968A48E1EAE623600E6C4C0 /* SwiftyJSON.framework */; };
-		B968A4921EB02B2500E6C4C0 /* UIImageColors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B99E972B1DCD35D9009DB968 /* UIImageColors.framework */; };
 		B975A6571D9D79B800791C42 /* BarcodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B975A6561D9D79B800791C42 /* BarcodeViewController.swift */; };
 		B99AC7171D5E57C300AE5861 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99AC7161D5E57C300AE5861 /* TabBarController.swift */; };
 		B9C0DD851DB03BCD002720BD /* GoogleBooksService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C0DD841DB03BCD002720BD /* GoogleBooksService.swift */; };
+		B9D48E8320273CB0006F2FF4 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9D48E8220273CB0006F2FF4 /* SwiftyJSON.framework */; };
+		B9D48E8420273CB0006F2FF4 /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B9D48E8220273CB0006F2FF4 /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B9D48E8720273CB7006F2FF4 /* UIImageColors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9D48E8620273CB7006F2FF4 /* UIImageColors.framework */; };
+		B9D48E8820273CB7006F2FF4 /* UIImageColors.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B9D48E8620273CB7006F2FF4 /* UIImageColors.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B9E07F371DA7FAC8002D782C /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E07F351DA7FAC8002D782C /* Rating.swift */; };
 		B9E07F381DA7FAC8002D782C /* Star.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E07F361DA7FAC8002D782C /* Star.swift */; };
 		B9E07F461DA87C94002D782C /* scanner.aiff in Resources */ = {isa = PBXBuildFile; fileRef = B9E07F451DA87C94002D782C /* scanner.aiff */; };
@@ -55,6 +57,21 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		B9D48E8520273CB1006F2FF4 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				B9D48E8820273CB7006F2FF4 /* UIImageColors.framework in Embed Frameworks */,
+				B9D48E8420273CB0006F2FF4 /* SwiftyJSON.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		B9019F771CE229D500CAE744 /* Bookcase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bookcase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9019F7A1CE229D500CAE744 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -76,6 +93,8 @@
 		B99AC7161D5E57C300AE5861 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		B99E972B1DCD35D9009DB968 /* UIImageColors.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIImageColors.framework; path = Carthage/Build/iOS/UIImageColors.framework; sourceTree = "<group>"; };
 		B9C0DD841DB03BCD002720BD /* GoogleBooksService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleBooksService.swift; sourceTree = "<group>"; };
+		B9D48E8220273CB0006F2FF4 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
+		B9D48E8620273CB7006F2FF4 /* UIImageColors.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIImageColors.framework; path = Carthage/Build/iOS/UIImageColors.framework; sourceTree = "<group>"; };
 		B9E07F351DA7FAC8002D782C /* Rating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
 		B9E07F361DA7FAC8002D782C /* Star.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Star.swift; sourceTree = "<group>"; };
 		B9E07F451DA87C94002D782C /* scanner.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = scanner.aiff; sourceTree = "<group>"; };
@@ -98,8 +117,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B968A4921EB02B2500E6C4C0 /* UIImageColors.framework in Frameworks */,
-				B968A48F1EAE623600E6C4C0 /* SwiftyJSON.framework in Frameworks */,
+				B9D48E8720273CB7006F2FF4 /* UIImageColors.framework in Frameworks */,
+				B9D48E8320273CB0006F2FF4 /* SwiftyJSON.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,6 +142,8 @@
 		B9019F6E1CE229D500CAE744 = {
 			isa = PBXGroup;
 			children = (
+				B9D48E8620273CB7006F2FF4 /* UIImageColors.framework */,
+				B9D48E8220273CB0006F2FF4 /* SwiftyJSON.framework */,
 				B9019F791CE229D500CAE744 /* Bookcase */,
 				B9019F8E1CE229D500CAE744 /* BookcaseTests */,
 				B9019F991CE229D500CAE744 /* BookcaseUITests */,
@@ -259,6 +280,7 @@
 				B9019F731CE229D500CAE744 /* Sources */,
 				B9019F741CE229D500CAE744 /* Frameworks */,
 				B9019F751CE229D500CAE744 /* Resources */,
+				B9D48E8520273CB1006F2FF4 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
