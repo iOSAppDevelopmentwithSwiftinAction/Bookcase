@@ -16,6 +16,7 @@ class BooksTableViewController: UITableViewController {
     super.viewDidLoad()
     searchController.obscuresBackgroundDuringPresentation = false
     searchController.searchResultsUpdater = self
+    definesPresentationContext = true
     if #available(iOS 11.0, *) {
       self.navigationItem.searchController = searchController
     } else {
