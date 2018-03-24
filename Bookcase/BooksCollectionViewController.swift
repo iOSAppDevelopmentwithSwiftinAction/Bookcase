@@ -59,7 +59,8 @@ class BooksCollectionViewController: UICollectionViewController {
     if let selectedIndexPath = collectionView?.indexPathsForSelectedItems?.first,
       let viewController = segue.destination as? BookViewController {
       //Editing
-      viewController.book = self.fetchedResultsController.object(at: selectedIndexPath)
+      let updatedIndexPath = IndexPath(row: selectedIndexPath.row, section: 0)
+      viewController.book = self.fetchedResultsController.object(at: updatedIndexPath)
       viewController.context = context
       viewController.delegate = self
     } else if let navController = segue.destination as? UINavigationController,
