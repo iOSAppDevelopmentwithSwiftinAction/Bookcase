@@ -39,10 +39,9 @@ class BookViewController: UIViewController {
     @objc func keyboardFrameChanges(notification:Notification) {
         //get keyboard height
         guard let userInfo = notification.userInfo,
-            var keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey]
+            let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey]
                 as? NSValue)?.cgRectValue
             else { return }
-        keyboardFrame = self.view.convert(keyboardFrame, from: nil)
 
         guard let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? Double
             else { return }
