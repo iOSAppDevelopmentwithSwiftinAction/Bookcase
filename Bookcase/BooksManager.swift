@@ -146,7 +146,7 @@ class BooksManager {
                 "insert into Books (title, author, rating, isbn, notes) values (?, ?, ?, ?, ?)",
                 values: [book.title, book.author, book.rating, book.isbn, book.notes]
             )
-            book.id = Int(db.lastInsertRowId())
+            book.id = Int(db.lastInsertRowId)
         } catch {
             print("failed: \(error.localizedDescription)")
         }
@@ -176,10 +176,7 @@ class BooksManager {
         db.close()
     }
     func getOpenDB()->FMDatabase? {
-        guard let db = FMDatabase(path: booksFile.path) else {
-            print("unable to create database")
-            return nil
-        }
+        let db = FMDatabase(path: booksFile.path)
         guard db.open() else {
             print("Unable to open database")
             return nil
