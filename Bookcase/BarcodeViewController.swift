@@ -74,7 +74,7 @@ class BarcodeViewController: UIViewController {
     
 }
 extension BarcodeViewController:AVCaptureMetadataOutputObjectsDelegate {
-    func metadataOutput(captureOutput: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
+    func metadataOutput(_ captureOutput: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         if let metadataObject = metadataObjects.first as? AVMetadataMachineReadableCodeObject {
             captureSession.stopRunning()
             delegate?.foundBarcode(barcode: metadataObject.stringValue!)
