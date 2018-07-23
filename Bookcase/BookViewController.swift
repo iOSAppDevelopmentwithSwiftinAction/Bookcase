@@ -28,7 +28,6 @@ class BookViewController: UIViewController {
     @IBOutlet weak var notesTextView: UITextView!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
-    @IBOutlet weak var galleryButton: UIBarButtonItem!
   
     var delegate:BookViewControllerDelegate?
     var book:Book?
@@ -119,16 +118,6 @@ class BookViewController: UIViewController {
         
         imagePicker.delegate = self
     }
-    @IBAction func getPhotoFromLibrary(_ sender: AnyObject) {
-        let imagePicker = UIImagePickerController()
-        imagePicker.sourceType = .photoLibrary
-        imagePicker.modalPresentationStyle = .popover
-        imagePicker.popoverPresentationController?.barButtonItem = galleryButton
-        present(imagePicker, animated: true, completion: nil)
-        
-        imagePicker.delegate = self
-    }
-    
     
     func dismissMe() {
         if presentingViewController != nil {

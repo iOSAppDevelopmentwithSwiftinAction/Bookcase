@@ -337,18 +337,12 @@
                                     <action selector="takePhoto:" destination="BYZ-38-t0r" id="BgD-3B-c3j"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem image="gallery" id="hSM-vI-rga">
-                                <connections>
-                                    <action selector="getPhotoFromLibrary:" destination="BYZ-38-t0r" id="yg8-dK-Yhi"/>
-                                </connections>
-                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="authorTextField" destination="K59-gg-5ay" id="rqE-OS-Eca"/>
                         <outlet property="bookCover" destination="7xl-eQ-ZGX" id="GMh-dN-Jqw"/>
                         <outlet property="cameraButton" destination="NcL-pd-Do8" id="bWq-u4-cfJ"/>
-                        <outlet property="galleryButton" destination="hSM-vI-rga" id="8IZ-lp-TCw"/>
                         <outlet property="isbnStackView" destination="aOw-Pk-i0O" id="mzV-10-Fpc"/>
                         <outlet property="isbnTextField" destination="GaW-ni-xJJ" id="ZOr-B8-ES7"/>
                         <outlet property="notesTextView" destination="vSH-XD-HqM" id="Wa5-oI-NHz"/>
@@ -442,7 +436,6 @@
     <resources>
         <image name="book" width="450" height="413"/>
         <image name="cover" width="25" height="25"/>
-        <image name="gallery" width="22" height="22"/>
         <image name="literature" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
