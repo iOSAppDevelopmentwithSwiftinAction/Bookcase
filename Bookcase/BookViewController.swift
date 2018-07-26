@@ -190,6 +190,7 @@ extension BookViewController:BarcodeViewControllerDelegate {
                 self.coverToSave = scannedBook.cover
                 self.titleTextField.text = scannedBook.title
                 self.authorTextField.text = scannedBook.author
+                self.saveButton.isEnabled = true
             }
         }
     }
