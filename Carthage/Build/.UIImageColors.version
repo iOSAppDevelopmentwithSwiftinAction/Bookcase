@@ -1,18 +1,9 @@
 {
-  "Mac" : [
-
-  ],
-  "watchOS" : [
-
-  ],
-  "tvOS" : [
-
-  ],
-  "commitish" : "2.0.0",
+  "commitish" : "2.0.1",
   "iOS" : [
     {
       "name" : "UIImageColors",
-      "hash" : "4c78fa925b745d9828be92863e95edd27ea706009f78de3ac87ec32d7bf1dc4e"
+      "hash" : "a163436a4447b0ee5a53d582211b541389655d06c055cae623a4a9c272714b3c"
     }
   ]
 }
