@@ -14,7 +14,6 @@
 		B9019F851CE229D500CAE744 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9019F831CE229D500CAE744 /* LaunchScreen.storyboard */; };
 		B9019F901CE229D500CAE744 /* BookcaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9019F8F1CE229D500CAE744 /* BookcaseTests.swift */; };
 		B9019F9B1CE229D500CAE744 /* BookcaseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9019F9A1CE229D500CAE744 /* BookcaseUITests.swift */; };
-		B9019FAE1CE22C3200CAE744 /* CosmosDistrib.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9019FAD1CE22C3200CAE744 /* CosmosDistrib.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,7 +47,6 @@
 		B9019F961CE229D500CAE744 /* BookcaseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BookcaseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9019F9A1CE229D500CAE744 /* BookcaseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookcaseUITests.swift; sourceTree = "<group>"; };
 		B9019F9C1CE229D500CAE744 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B9019FAD1CE22C3200CAE744 /* CosmosDistrib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosmosDistrib.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,7 +103,6 @@
 				B9019F811CE229D500CAE744 /* Assets.xcassets */,
 				B9019F831CE229D500CAE744 /* LaunchScreen.storyboard */,
 				B9019F861CE229D500CAE744 /* Info.plist */,
-				B9019FAF1CE22C3500CAE744 /* Frameworks */,
 			);
 			path = Bookcase;
 			sourceTree = "<group>";
@@ -126,14 +123,6 @@
 				B9019F9C1CE229D500CAE744 /* Info.plist */,
 			);
 			path = BookcaseUITests;
-			sourceTree = "<group>";
-		};
-		B9019FAF1CE22C3500CAE744 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				B9019FAD1CE22C3200CAE744 /* CosmosDistrib.swift */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -204,16 +193,16 @@
 				TargetAttributes = {
 					B9019F761CE229D500CAE744 = {
 						CreatedOnToolsVersion = 7.3;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1000;
 					};
 					B9019F8A1CE229D500CAE744 = {
 						CreatedOnToolsVersion = 7.3;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1000;
 						TestTargetID = B9019F761CE229D500CAE744;
 					};
 					B9019F951CE229D500CAE744 = {
 						CreatedOnToolsVersion = 7.3;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1000;
 						TestTargetID = B9019F761CE229D500CAE744;
 					};
 				};
@@ -272,7 +261,6 @@
 			files = (
 				B9019F7D1CE229D500CAE744 /* BookViewController.swift in Sources */,
 				B9019F7B1CE229D500CAE744 /* AppDelegate.swift in Sources */,
-				B9019FAE1CE22C3200CAE744 /* CosmosDistrib.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,8 +428,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.interactivecoconut.Bookcase;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -454,8 +441,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.interactivecoconut.Bookcase;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -467,8 +453,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.interactivecoconut.BookcaseTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Bookcase.app/Bookcase";
 			};
 			name = Debug;
@@ -482,8 +467,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.interactivecoconut.BookcaseTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Bookcase.app/Bookcase";
 			};
 			name = Release;
@@ -495,8 +479,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.interactivecoconut.BookcaseUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_TARGET_NAME = Bookcase;
 			};
 			name = Debug;
@@ -509,8 +492,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.interactivecoconut.BookcaseUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_TARGET_NAME = Bookcase;
 			};
 			name = Release;
