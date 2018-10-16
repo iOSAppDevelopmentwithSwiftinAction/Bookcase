@@ -26,7 +26,7 @@ class BookViewController: UIViewController {
         super.viewDidAppear(animated)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(keyboardFrameChanges),
-                                               name: NSNotification.Name.UIKeyboardWillChangeFrame,
+                                               name: UIResponder.keyboardWillChangeFrameNotification,
                                                object: nil)
     }
     @objc func toggleISBN() {
@@ -41,14 +41,14 @@ class BookViewController: UIViewController {
     @objc func keyboardFrameChanges(notification:Notification) {
         //get keyboard height
         guard let userInfo = notification.userInfo,
-            let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey]
+            let keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey]
                 as? NSValue)?.cgRectValue
             else { return }
 
-        guard let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? Double
+        guard let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double
             else { return }
         
-        guard let curve = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? UInt
+        guard let curve = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt
             else { return }
         
         
