@@ -29,7 +29,7 @@ class BookViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardFrameChanges), name: Notification.Name.UIKeyboardWillChangeFrame, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardFrameChanges), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         
     }
     override func viewDidDisappear(_ animated: Bool) {
@@ -39,14 +39,14 @@ class BookViewController: UIViewController {
     @objc func keyboardFrameChanges(notification:Notification) {
         //get keyboard height
         guard let userInfo = notification.userInfo,
-            let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey]
+            let keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey]
                 as? NSValue)?.cgRectValue
             else { return }
 
-        guard let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? Double
+        guard let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double
             else { return }
         
-        guard let curve = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? UInt
+        guard let curve = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt
             else { return }
         
         
@@ -60,7 +60,7 @@ class BookViewController: UIViewController {
             }
         }
         
-        let options = UIViewAnimationOptions(rawValue: curve)
+        let options = UIView.AnimationOptions(rawValue: curve)
         UIView.animate(
             withDuration: duration,
             delay: 0,
