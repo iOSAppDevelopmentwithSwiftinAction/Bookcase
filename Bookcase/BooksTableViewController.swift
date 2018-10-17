@@ -64,7 +64,7 @@ class BooksTableViewController: UITableViewController,Injectable {
         cell.detailTextLabel?.textColor = book.detailColor
         return cell
     }
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             booksManager.removeBook(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
