@@ -204,7 +204,7 @@ class BooksManager {
                   .firesOnRecordUpdate]
       )
       
-      let notificationInfo = CKNotificationInfo()
+      let notificationInfo = CKSubscription.NotificationInfo()
       notificationInfo.shouldSendContentAvailable = true
       //notificationInfo.shouldBadge = true
       //notificationInfo.alertBody = "Your books have changed!"

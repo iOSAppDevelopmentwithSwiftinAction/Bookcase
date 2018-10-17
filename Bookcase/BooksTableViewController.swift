@@ -16,7 +16,7 @@ class BooksTableViewController: UITableViewController, Injectable {
     let searchController = UISearchController(searchResultsController: nil)
 
     lazy var activityIndicator:UIActivityIndicatorView = {
-        let indicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        let indicator = UIActivityIndicatorView(style: .gray)
             indicator.center = self.view.center
             self.view.addSubview(indicator)
         return indicator
@@ -104,7 +104,7 @@ class BooksTableViewController: UITableViewController, Injectable {
         cell.imageView?.image = book.cover
         return cell
     }
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let book = booksManager.getBook(at: indexPath.row)
             cloudOperation(waiting:true)

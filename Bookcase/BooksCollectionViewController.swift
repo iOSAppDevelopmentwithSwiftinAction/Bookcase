@@ -15,7 +15,7 @@ class BooksCollectionViewController: UICollectionViewController,Injectable {
   var booksManager:BooksManager!
   let searchController = UISearchController(searchResultsController: nil)
   lazy var activityIndicator:UIActivityIndicatorView = {
-    let indicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+    let indicator = UIActivityIndicatorView(style: .gray)
     indicator.center = self.view.center
     self.view.addSubview(indicator)
     return indicator
