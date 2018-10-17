@@ -80,7 +80,7 @@ class BookViewController: UIViewController {
   }
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    NotificationCenter.default.addObserver(self, selector: #selector(keyboardFrameChanges), name: Notification.Name.UIKeyboardWillChangeFrame, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(keyboardFrameChanges), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
   }
   override func viewDidDisappear(_ animated: Bool) {
     super.viewDidDisappear(animated)
@@ -90,7 +90,7 @@ class BookViewController: UIViewController {
   @objc func keyboardFrameChanges(notification:Notification) {
     //get keyboard height
     guard let userInfo = notification.userInfo,
-      var keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey]
+      var keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey]
         as? NSValue)?.cgRectValue
       else { return }
     keyboardFrame = self.view.convert(keyboardFrame, from: nil)
@@ -212,9 +212,9 @@ extension BookViewController:UITextFieldDelegate {
   }
 }
 extension BookViewController:UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
     dismiss(animated: true, completion: nil)
-    if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+    if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
       receiveImage(image: image)
     }
   }

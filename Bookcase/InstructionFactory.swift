@@ -10,7 +10,7 @@ import UIKit
 struct InstructionFactory {
     static func heading(text:String)->UILabel {
         let view = UILabel()
-        view.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.title1)
+        view.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.title1)
         view.textColor = UIColor.white
         view.textAlignment = .center
         view.text = text
@@ -20,7 +20,7 @@ struct InstructionFactory {
     }
     static func body(text:String,width:CGFloat)->UILabel {
         let view = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-        view.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
+        view.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
         view.textColor = UIColor.white
         view.textAlignment = .center
         view.text = text
