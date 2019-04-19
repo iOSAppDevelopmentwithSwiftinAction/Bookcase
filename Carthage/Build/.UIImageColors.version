@@ -1,9 +1,9 @@
 {
-  "commitish" : "2.0.1",
+  "commitish" : "2.1.0",
   "iOS" : [
     {
       "name" : "UIImageColors",
-      "hash" : "a163436a4447b0ee5a53d582211b541389655d06c055cae623a4a9c272714b3c"
+      "hash" : "3112c89628848c57809667fa061ea6c6eba52122a5df0a2060a7c016a73802eb"
     }
   ]
 }
