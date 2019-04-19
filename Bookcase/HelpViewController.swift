@@ -42,7 +42,7 @@ class HelpViewController: UIPageViewController, UIPageViewControllerDelegate, UI
         // Dispose of any resources that can be recreated.
     }
     public func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController?{
-        guard let viewControllerIndex = orderedViewControllers.index(of: viewController) else {return nil}
+        guard let viewControllerIndex = orderedViewControllers.firstIndex(of: viewController) else {return nil}
         let previousIndex = viewControllerIndex - 1
         if previousIndex < 0 {return nil}
         return orderedViewControllers[previousIndex]
@@ -50,7 +50,7 @@ class HelpViewController: UIPageViewController, UIPageViewControllerDelegate, UI
     
     
     public func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        guard let viewControllerIndex = orderedViewControllers.index(of: viewController) else {return nil}
+        guard let viewControllerIndex = orderedViewControllers.firstIndex(of: viewController) else {return nil}
         let nextIndex = viewControllerIndex + 1
         if nextIndex >= orderedViewControllers.count {return nil}
         return orderedViewControllers[nextIndex]
