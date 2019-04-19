@@ -45,7 +45,7 @@ class BooksManager {
     } else {
       //index is relevant to filteredBooks
       let removedBook = filteredBooks.remove(at: index)
-      guard let bookIndex = books.index(of: removedBook) else {
+      guard let bookIndex = books.firstIndex(of: removedBook) else {
         print("Error: book not found")
         return
       }
@@ -58,7 +58,7 @@ class BooksManager {
       sort(books:&books)
     } else {
       let bookToUpdate = filteredBooks[index]
-      guard let bookIndex = books.index(of: bookToUpdate) else {
+      guard let bookIndex = books.firstIndex(of: bookToUpdate) else {
         print("Error: book not found")
         return
       }
