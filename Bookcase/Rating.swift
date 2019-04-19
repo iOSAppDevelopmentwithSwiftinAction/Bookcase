@@ -32,7 +32,7 @@ import UIKit
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else {return}
         guard let star = touch.view as? Star else {return}
-        guard let starIndex = stars.index(of: star) else {return}
+        guard let starIndex = stars.firstIndex(of: star) else {return}
         rating = Double(starIndex) + 1
     }
     override var intrinsicContentSize: CGSize {
