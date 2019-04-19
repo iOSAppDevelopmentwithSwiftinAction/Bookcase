@@ -173,7 +173,8 @@ class BookViewController: UIViewController {
     }
   }
   //MARK:Colors
-  func receiveColors(colors:UIImageColors) {
+  func receiveColors(colors:UIImageColors?) {
+    let colors = colors ?? UIImageColors(background: .white, primary: .black, secondary: .black, detail: .black)
     detailColor = colors.detail
     book?.detailColor = colors.detail
     book?.primaryColor = colors.primary
