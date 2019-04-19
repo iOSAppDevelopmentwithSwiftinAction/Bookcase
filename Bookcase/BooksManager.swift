@@ -63,7 +63,7 @@ class BooksManager {
     } else {
       //index is relevant to filteredBooks
       let removedBook = filteredBooks.remove(at: index)
-      guard let bookIndex = books.index(of: removedBook) else {
+      guard let bookIndex = books.firstIndex(of: removedBook) else {
         print("Error: book not found")
         return
       }
@@ -76,7 +76,7 @@ class BooksManager {
       sort(books:&books)
     } else {
       let bookToUpdate = filteredBooks[index]
-      guard let bookIndex = books.index(of: bookToUpdate) else {
+      guard let bookIndex = books.firstIndex(of: bookToUpdate) else {
         print("Error: book not found")
         return
       }
@@ -199,9 +199,9 @@ class BooksManager {
         recordType: Book.recordType,
         predicate: NSPredicate(value: true),
         subscriptionID: "All Book updates",
-        options: [.firesOnRecordCreation,
-                  .firesOnRecordDeletion,
-                  .firesOnRecordUpdate]
+        options: [CKQuerySubscription.Options.firesOnRecordCreation,
+                  CKQuerySubscription.Options.firesOnRecordDeletion,
+                  CKQuerySubscription.Options.firesOnRecordUpdate]
       )
       
       let notificationInfo = CKSubscription.NotificationInfo()
